@@ -1,0 +1,104 @@
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+#navbar {
+    display: flex;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    position: fixed;
+    overflow: hidden;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 5.0em;
+    border-top-style: ridge;
+    border-top-color: #d3d3d3;
+    border-top-width: thin;
+    background-color: white;
+    border-color: #c7c7c7;
+    opacity: 0.9;
+}
+
+#navbar a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: "Helvetica Neue";
+    font-weight: bold;
+    margin-left: 1.3em;
+    cursor: pointer;
+}
+
+#navbar a:hover {
+    color: #A6ACAF;
+}
+
+#navbar a.active {
+    background-color: #4CAF50;
+    color: black;
+}
+
+.searchContainer {
+    justify-content: space-between;
+    position: absolute;
+    right: 0%;
+    width: 35%;
+    display: block;
+    margin: 0 auto;
+}
+
+#searchBar{
+    position: absolute;
+    top: 35%;
+    right: 27%;
+    margin: 0 auto;
+    width: 65%;
+    height: 40px;
+    padding: 0 20px;
+    font-size: 1rem;
+    border: 1px solid black;
+    border-radius: 25px;
+    font-family: "Helvetica Neue";
+    outline: none;
+}
+
+.searchIcon{
+    position: absolute;
+    top: 62%;
+    right: 30%;
+    width: 4%;
+    height: 70%;
+}
+
+#watch {
+    position: relative;
+    width: 55px;
+    height: 55px;
+    margin-left: 2px;
+}
+
+#logo {
+    font-size: 35px;
+    font-family: "Helvetica Neue";
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+}
+
+#cart {
+    width: 30px;
+    height: 30px;
+}
