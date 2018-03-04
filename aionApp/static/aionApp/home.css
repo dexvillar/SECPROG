@@ -266,6 +266,14 @@ html, body {
     color: white;
 }
 
+.aWatch:hover {
+    position: relative;
+    top: 33%;
+    text-align: center;
+    text-decoration: none;
+    color: grey;
+}
+
 footer {
     background-color: #1a1919;
     height: 12%;
