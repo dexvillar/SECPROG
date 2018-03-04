@@ -1,17 +1,17 @@
 <html>
     <head>
         {% load static %}
-        <title>Home Page</title>
+        <title>Shop Page</title>
         <link rel="icon" href="{% static 'aionApp/Images/watch.png' %}" type="image" sizes="16x16">
-        <link rel="stylesheet" type="text/css" href="{% static 'aionApp/home.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'aionApp/shop.css' %}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
-
+    
     <body>
         <div id="navbar">
-            <p id="logo" style="position: absolute; left: -3%;"> 
+            <p id="logo" style="position: absolute; left: -3%;">  
                 {% if currentUser.user_id > 0 %}
                 <a href="/aionApp/homePage/"><img src="{% static 'aionApp/Images/watch.png' %}" id="watch"></a>
                 {% else %}
@@ -28,51 +28,20 @@
             {% if currentUser.user_id > 0 %}
             <span style="position: absolute; left: 47%;">
                 <a href="#"><img src="{% static 'aionApp/Images/cart.png' %}" id="cart"></a>
-                <a href="/aionApp/shopPage/">SHOP</a>
+                <a href="#">SHOP</a>
                 <a href="/aionApp/exitSession/">SIGN OUT</a>    
             </span>
             
             {% else %}
             <span style="position: absolute; left: 55%;">
-                <a href="/aionApp/shopPage/">SHOP</a>
+                <a href="#">SHOP</a>
                 <a onclick="document.getElementById('loginModal').style.display='block'">LOG IN</a>
             </span>
                 {% endif %}
         </div>
-          
-        <div id="messageContainer">
-            <p id="bigMessageWelcome">WATCH YOUR ADVENTURE</p>
-            <p id="smallMessageWelcome">SHOP NOW</p>
-            <p id="buttonMessageWelcome"><a href="#banner"><img src="{% static 'aionApp/Images/arrow.png' %}" style="width:80px;height:80px;"></a></p>
-        </div>
-
-        <div id="banner">
-            <div class="inline-block" id="newArrivalsContainer">
-                <p id="bigMessageArrivals">NEW ARRIVALS</p>
-                <p id="smallMessageArrivals"><a href="#" id="aSmall">SHOP NOW</a></p>
-            </div>
-
-            <div class="inline-block" id="imageContainer">
-                <img src="{% static 'aionApp/Images/girl.jpg' %}">
-            </div>
-        </div>
-
-        <div id="watches">
-            <div class="inline-block" id="analogWatch">
-                <span class="watchText"><a href="#" class="aWatch">ANALOG WATCH</a></span>
-            </div>
-
-            <div class="inline-block" id="digitalWatch">
-                <span class="watchText"><a href="#" class="aWatch">DIGITAL WATCH</a></span>
-            </div>
-
-            <div class="inline-block" id="smartWatch">
-                <span class="watchText"><a href="#" class="aWatch">SMART WATCH</a></span>
-            </div>
-        </div>
         
         <div id="loginModal" class="modal">
-            <form class="modal-content animate" action="{% url 'aionApp:homeLogIn' %}" method = "post">
+            <form class="modal-content animate" action="{% url 'aionApp:shopLogIn' %}" method = "post">
                 {% csrf_token %}
                 <div class="imgcontainer">
                     <span onclick="document.getElementById('loginModal').style.display='none'" class="close" title="Close Modal">&times;</span>
@@ -95,8 +64,6 @@
                 </div>
             </form>
         </div>
-        
-        <footer>Copyright © 2018 Xcite Interactive. All Rights Reserved.</footer>
     </body>
     
     <script>
