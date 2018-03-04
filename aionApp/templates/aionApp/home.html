@@ -4,6 +4,9 @@
         <title>Home Page</title>
         <link rel="icon" href="{% static 'aionApp/Images/watch.png' %}" type="image" sizes="16x16">
         <link rel="stylesheet" type="text/css" href="{% static 'aionApp/home.css' %}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
 
     <body>
@@ -13,15 +16,24 @@
                  AION
             </p>
             
-            <span style="float:right">
-                <form class="searchContainer">
-                    <input type="text" id="searchBar" placeholder="SEARCH AION">
-                    <a href="#"><img class="searchIcon" src="{% static 'aionApp/Images/search.png' %}"></a>
-                </form>
-                <a href="#">SHOP</a>
-                <a onclick="document.getElementById('id01').style.display='block'">LOG IN</a>
+            <form class="searchContainer">
+                <input type="text" id="searchBar" placeholder="SEARCH AION">
+                <a href="#"><img class="searchIcon" src="{% static 'aionApp/Images/search.png' %}"></a>
+            </form>
+            
+            {% if currentUser.user_id > 0 %}
+            <span style="position: absolute; left: 47%;">
                 <a href="#"><img src="{% static 'aionApp/Images/cart.png' %}" id="cart"></a>
+                <a href="#">SHOP</a>
+                <a href="/aionApp/exitSession/">SIGN OUT</a>    
             </span>
+            
+            {% else %}
+            <span style="position: absolute; left: 55%;">
+                <a href="#">SHOP</a>
+                <a onclick="document.getElementById('loginModal').style.display='block'">LOG IN</a>
+            </span>
+                {% endif %}
         </div>
           
         <div id="messageContainer">
@@ -55,25 +67,26 @@
             </div>
         </div>
         
-        <div id="id01" class="loginModal">
+        <div id="loginModal" class="modal">
             <form class="modal-content animate" action="{% url 'aionApp:logIn' %}" method = "post">
                 {% csrf_token %}
                 <div class="imgcontainer">
-                    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    <span onclick="document.getElementById('loginModal').style.display='none'" class="close" title="Close Modal">&times;</span>
                 </div>
                 
                 <div class="loginContainer">
-                    <div class="spacer" style="margin-bottom: 2em;"> </div>
+                    <div class="spacer" style="margin-bottom: 1em;"> </div>
                     <input type="text" placeholder="EMAIL ADDRESS" name="userName" required>
                     <input type="password" placeholder="PASSWORD" name="userPassword" required>
                     <button type="submit" id="loginBtn">LOG IN</button>
 
                     {% if error %}
+                    <div class="spacer" style="margin-bottom: 1em;"> </div>
                     <p id="error">Invalid user name or password.</p>
                     {% endif %}
                 </div>
 
-                <div class="loginContainer" id="logIn" style="background-color:#f1f1f1; height: 5%;">
+                <div class="loginContainer" id="logIn" style="background-color:#f1f1f1; height: 10%;">
                     <span class="psw">Don't have an account? <a href="/aionApp/registerPage/" class="aLogin">Sign up now.</a></span>
                 </div>
             </form>
@@ -83,18 +96,10 @@
     </body>
     
     <script>
-        $('a[href*=#]').click(function(event){
-            $('html, body').animate({
-                scrollTop: $( $.attr(this, 'href') ).offset().top
-            }, 500);
-            event.preventDefault();
+        {% if error %}
+        $(document).ready(function() {
+            $('#loginModal').modal('show');
         });
-        
-        var loginModal = document.getElementById('id01');
-        
-        $(document).ready(function () {
-            $('#id01').modal('show');
-        });
-        
+        {% endif %}
     </script>
 </html>

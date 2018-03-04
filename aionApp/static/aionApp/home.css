@@ -16,7 +16,7 @@ html, body {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 5.0em;
+    height: 5.3em;
     border-top-style: ridge;
     border-top-color: #d3d3d3;
     border-top-width: thin;
@@ -49,9 +49,10 @@ html, body {
 }
 
 .searchContainer {
-    justify-content: space-between;
+    text-align: center;
     position: absolute;
-    right: 0%;
+    right: -25%;
+    bottom: 50%;
     width: 35%;
     display: block;
     margin: 0 auto;
@@ -65,7 +66,7 @@ html, body {
     width: 65%;
     height: 40px;
     padding: 0 20px;
-    font-size: 1rem;
+    font-size: 1.3rem;
     border: 1px solid black;
     border-radius: 25px;
     font-family: "Helvetica Neue";
@@ -118,7 +119,7 @@ html, body {
 
 #bigMessageWelcome {
     position: relative;
-    top: 75%;
+    top: 76%;
     transform: translateY(-50%); 
     text-align: center;
     font-family: "Helvetica Neue";
@@ -129,7 +130,7 @@ html, body {
 
 #smallMessageWelcome {
     position: relative;
-    top: 64%;
+    top: 69%;
     transform: translateY(-50%); 
     text-align: center;
     font-family: "Helvetica Neue";
@@ -139,10 +140,9 @@ html, body {
 
 #buttonMessageWelcome {
     position: relative;
-    top: 62%;
+    top: 68%;
     transform: translateY(-50%); 
-    text-align: center;
-    
+    text-align: center;  
 }
 
 #banner, #watches {
@@ -168,7 +168,7 @@ html, body {
 
 #bigMessageArrivals {
     position: relative;
-    top: 38%;
+    top: 42%;
     transform: translateY(-50%); 
     text-align: center;
     font-family: "Helvetica Neue";
@@ -179,7 +179,7 @@ html, body {
 
 #smallMessageArrivals {
     position: relative;
-    top: 28%;
+    top: 36%;
     transform: translateY(-50%); 
     text-align: center;
     font-family: "Helvetica Neue";
@@ -239,7 +239,7 @@ html, body {
     position: relative;
     display: block;
     width: 100%;
-    height: 55%;
+    height: 100%;
     padding: 4.5em 0;
     background: #1a1919;
     opacity: 0;
@@ -268,7 +268,7 @@ html, body {
 
 footer {
     background-color: #1a1919;
-    height: 7%;
+    height: 12%;
     display: block;
     padding-top: 30px;
     position: relative;
@@ -337,13 +337,13 @@ input[type=text], input[type=password] {
 span.psw {
     position: relative;
     top: 20%;
-    left: 3%;
+    left: 5%;
     padding-top: 10px;
     font-family: "Helvetica Neue";
 }
 
 /* The Modal (background) */
-.loginModal {
+.modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -375,8 +375,7 @@ span.psw {
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.close:hover {
     color: #4688F1;
     cursor: pointer;
 }
@@ -421,7 +420,7 @@ span.psw {
 
 #error {
     position: relative;
-    left: 12%;
+    left: 16%;
     font-family: "Helvetica Neue";
     color: #E8453C; 
 }

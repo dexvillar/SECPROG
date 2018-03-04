@@ -23,7 +23,7 @@ class review(models.Model):
         return self.reviews
     
 class user(models.Model):
-    user_id = models.IntegerField(default=0)
+    user_id = models.PositiveIntegerField(default=0)
     last_name = models.CharField(max_length=255)
     first_name = models.CharField(max_length=255)
     middle_initial = models.CharField(max_length=3)

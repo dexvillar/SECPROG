@@ -16,7 +16,7 @@ html, body {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 5.0em;
+    height: 5.3em;
     border-top-style: ridge;
     border-top-color: #d3d3d3;
     border-top-width: thin;
@@ -49,9 +49,10 @@ html, body {
 }
 
 .searchContainer {
-    justify-content: space-between;
+    text-align: center;
     position: absolute;
-    right: 0%;
+    right: -25%;
+    bottom: 50%;
     width: 35%;
     display: block;
     margin: 0 auto;
@@ -60,12 +61,12 @@ html, body {
 #searchBar{
     position: absolute;
     top: 35%;
-    right: 27%;
+    right: 75%;
     margin: 0 auto;
     width: 65%;
     height: 40px;
     padding: 0 20px;
-    font-size: 1rem;
+    font-size: 1.3rem;
     border: 1px solid black;
     border-radius: 25px;
     font-family: "Helvetica Neue";
@@ -75,7 +76,7 @@ html, body {
 .searchIcon{
     position: absolute;
     top: 62%;
-    right: 30%;
+    right: 78%;
     width: 4%;
     height: 70%;
 }
@@ -98,7 +99,3 @@ html, body {
     align-items: center;
 }
 
-#cart {
-    width: 30px;
-    height: 30px;
-}

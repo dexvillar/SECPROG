@@ -9,11 +9,20 @@
     <body>
         <div id="navbar">
             <p id="logo" style="text-align:left"> 
-                <a href="/aionApp/homePage/"><img src="{% static 'aionApp/Images/watch.png' %}" id="watch"></a>
+                <a href="/aionApp/exitSession/"><img src="{% static 'aionApp/Images/watch.png' %}" id="watch"></a>
                  AION
             </p>
+            
+            <form class="searchContainer">
+                <input type="text" id="searchBar" placeholder="SEARCH AION">
+                <a href="#"><img class="searchIcon" src="{% static 'aionApp/Images/search.png' %}"></a>
+            </form>
+            
+            <span style="position: absolute; left: 65%;">
+                <a href="#">SHOP</a>
+            </span>
         </div>
         
-        
+
     </body>
 </html>

@@ -7,9 +7,11 @@ from .models import watche, review, user, billing_addres, shipping_addres, check
 # Create your views here.
 
 def homePage(request):
-    context = {
-        
-    }
+    if request.session["user"] > 0:
+        currentUser = get_object_or_404(user, user_id = request.session["user"])
+        context = {
+            'currentUser': currentUser,
+        }
     return render(request, 'aionApp/home.html', context)
 
 def registerPage(request):
@@ -30,11 +32,15 @@ def logIn(request):
             }
             return render(request, 'aionApp/home.html', context)
         else:
-            error = True
-            request.session["user"] = -1
-            return render(request, 'aionApp/login.html', {'error': error})
+                error = True
+                request.session["user"] = -1
+                return render(request, 'aionApp/home.html', {'error': error})
     except ValueError:
         error = True
-        return render(request, 'aionApp/login.html', {'error': error})
+        return render(request, 'aionApp/home.html', {'error': error})
+
+def exitSession(request):
+    request.session['user'] = -1
+    return render(request, 'aionApp/home.html')
     
     
