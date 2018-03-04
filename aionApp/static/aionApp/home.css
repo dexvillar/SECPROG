@@ -343,7 +343,7 @@ span.psw {
 }
 
 /* The Modal (background) */
-.modal {
+.loginModal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -417,4 +417,11 @@ span.psw {
     text-decoration: none;
     color: #4688F1;
     font-family: "Helvetica Neue";
+}
+
+#error {
+    position: relative;
+    left: 12%;
+    font-family: "Helvetica Neue";
+    color: #E8453C; 
 }

@@ -6,4 +6,5 @@ app_name = 'aionApp'
 urlpatterns= [
     url(r'^homePage/$', views.homePage, name='homePage'),
     url(r'^registerPage/$', views.registerPage, name='registerPage'),
+    url(r'^logIn/$', views.logIn, name='logIn'),
 ]

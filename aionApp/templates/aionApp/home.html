@@ -55,20 +55,25 @@
             </div>
         </div>
         
-        <div id="id01" class="modal">
-            <form class="modal-content animate" action="/action_page.php">
+        <div id="id01" class="loginModal">
+            <form class="modal-content animate" action="{% url 'aionApp:logIn' %}" method = "post">
+                {% csrf_token %}
                 <div class="imgcontainer">
                     <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
                 </div>
                 
                 <div class="loginContainer">
                     <div class="spacer" style="margin-bottom: 2em;"> </div>
-                    <input type="text" placeholder="EMAIL ADDRESS" name="uname" required>
-                    <input type="password" placeholder="PASSWORD" name="psw" required>
+                    <input type="text" placeholder="EMAIL ADDRESS" name="userName" required>
+                    <input type="password" placeholder="PASSWORD" name="userPassword" required>
                     <button type="submit" id="loginBtn">LOG IN</button>
+
+                    {% if error %}
+                    <p id="error">Invalid user name or password.</p>
+                    {% endif %}
                 </div>
 
-                <div class="loginContainer" style="background-color:#f1f1f1; height: 5%;">
+                <div class="loginContainer" id="logIn" style="background-color:#f1f1f1; height: 5%;">
                     <span class="psw">Don't have an account? <a href="/aionApp/registerPage/" class="aLogin">Sign up now.</a></span>
                 </div>
             </form>
@@ -85,14 +90,11 @@
             event.preventDefault();
         });
         
-        // Get the modal
-        var modal = document.getElementById('id01');
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
+        var loginModal = document.getElementById('id01');
+        
+        $(document).ready(function () {
+            $('#id01').modal('show');
+        });
+        
     </script>
 </html>
