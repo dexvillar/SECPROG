@@ -5,9 +5,16 @@ from django.db import models
 # Create your models here.
 
 watch_choices = {
-    ('0', 'Analog'),
-    ('1', 'Digital'),
-    ('2', 'Smart'),
+    ('0', 'Analog Watch'),
+    ('1', 'Digital Watch'),
+    ('2', 'Smart Watch'),
+}
+
+role_choices = {
+    ('0', 'Product Manager'),
+    ('1', 'Accounting Manager'),
+    ('2', 'Administrator'),
+    ('3', 'User'),
 }
 
 class watche(models.Model):
@@ -15,10 +22,10 @@ class watche(models.Model):
     description = models.CharField(max_length=255, default=0) 
     quantity = models.PositiveIntegerField(default=0)
     stock = models.PositiveIntegerField(default=0)
-    watch_type = models. CharField(max_length=16, choices=watch_choices, default='0')
+    watch_type = models.CharField(max_length=16, choices=watch_choices, default='0')
     price = models.FloatField(default=0)
     watch_id = models.IntegerField(default = 0)
-#    picture = models.ImageField(blank=True, null=True, upload_to = 'userPhotos/')
+    picture = models.ImageField(blank=True, null=True, upload_to = 'watchPictures/')
 
     def __str__(self):
         return self.name
@@ -38,6 +45,7 @@ class user(models.Model):
     user_name = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
+    role_type = models.CharField(max_length=16, choices=role_choices, default='3')
     
     def __str__(self):
         return self.last_name
@@ -75,13 +83,6 @@ class checkout(models.Model):
     
     def __str__(self):
         return self.card_number
-    
-class role(models.Model):
-    user_id = models.IntegerField(default=0)
-    role_type = models.IntegerField(default=0)
-    
-    def __str__(self):
-        return self.role_type
     
 class sale(models.Model):
     watch_id = models.IntegerField(default = 0)

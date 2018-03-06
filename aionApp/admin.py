@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.contrib import admin
-from .models import watche, review, user, billing_addres, shipping_addres, checkout, role, sale
+from .models import watche, review, user, billing_addres, shipping_addres, checkout, sale
 # Register your models here.
 
 admin.site.register(watche)
@@ -10,5 +10,4 @@ admin.site.register(user)
 admin.site.register(billing_addres)
 admin.site.register(shipping_addres)
 admin.site.register(checkout)
-admin.site.register(role)
 admin.site.register(sale)

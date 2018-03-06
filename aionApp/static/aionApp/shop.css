@@ -155,7 +155,7 @@ input[type=text], input[type=password] {
     position: relative;
 }
 
-.loginContainer, .watchModalContainer {
+.loginContainer, .watchModalContainer, .addProductContainer {
     padding: 16px;
 }
 
@@ -195,7 +195,15 @@ span.psw {
     margin: 1% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
     border: 1px solid #E8E2E2;
     width: 75%; /* Could be more or less, depending on screen size */
-    height: 75%;
+    height: 80%;
+}
+
+.addProductModal-content {
+    background-color: #fefefe;
+    margin: 1% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #E8E2E2;
+    width: 30%; /* Could be more or less, depending on screen size */
+    height: 88%;
 }
 
 /* The Close Button (x) */
@@ -348,8 +356,7 @@ span.psw {
     background-repeat: no-repeat;
     width: 20%; 
     height: 30%;
-    display: inline-block;
-   
+    display: inline-block; 
 }
 
 #analogWatch1 span, #analogWatch2 span, #analogWatch3 span {
@@ -391,6 +398,79 @@ span.psw {
     color: #A6ACAF;
 }
 
+.addProductBigText {
+    font-family: "Helvetica Neue";
+    color: black;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.addProductSmallText {
+    font-family: "Helvetica Neue";
+    color: black;
+    font-size: 16px;
+}
+
+#nameInput {
+    width: 79%;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    font-family: "Helvetica Neue";
+}
+
+#descriptionInput {
+    margin: -5px 0;
+    width: 95.5%;
+    height: 20%;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    border: 1px solid #CCCCCC;
+    font-family: "Helvetica Neue";
+}
+
+#stockInput {
+    width: 50%;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    font-family: "Helvetica Neue";
+}
+
+#priceInput {
+    width: 61.5%;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    font-family: "Helvetica Neue";
+}
+
+#watchTypeText {
+    display: inline-block;
+}
+
+.dropDown {
+    left: -3%;
+    display: inline-block;
+    font-size: 14px;
+    margin-left: 5%;
+    margin-top: 1em;
+    color: black;
+    font-family: "Helvetica Neue";
+    font-weight: bold;
+}
+
+#submitButton {
+    background-color: black;
+    color: white;
+    font-family: "Helvetica Neue";
+    font-weight: bold;
+    padding: 14px 140px;
+    font-size: 16px;
+}
+
+#submitButton:hover {
+    background-color: #4688F1;
+}
+
 #watchImg {
     height: 60%; 
     width: 70%; 
@@ -407,6 +487,8 @@ span.psw {
     font-family: "Helvetica Neue";
     color: #424242;
     font-size: 14px;
+    margin-right: 10%;
+    text-align: justify;
 }
 
 #price {
@@ -425,7 +507,23 @@ span.psw {
     font-style: italic;
 }
 
+#quantity {
+    width: 20%;
+    padding: 12px 20px;
+    margin: -5px 0;
+    box-sizing: border-box;
+    font-family: "Helvetica Neue";
+}
 
 #addToCart {
+    background-color: white;
+    color: black;
     font-family: "Helvetica Neue";
+    font-weight: bold;
+    padding: 14px 140px;
+    font-size: 16px;
+}
+
+#addToCart:hover {
+    background-color: #B3B3B3;
 }

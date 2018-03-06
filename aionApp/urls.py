@@ -10,4 +10,5 @@ urlpatterns= [
     url(r'^shopLogIn/$', views.shopLogIn, name='shopLogIn'),
     url(r'^exitSession/$', views.exitSession, name='exitSession'),
     url(r'^shopPage/$', views.shopPage, name='shopPage'),
+    url(r'^addProduct/$', views.addProduct, name='addProduct'),
 ]

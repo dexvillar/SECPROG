@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from .models import watche, review, user, billing_addres, shipping_addres, checkout, role, sale
+from .models import watche, review, user, billing_addres, shipping_addres, checkout, sale
 
 # Create your views here.
 
@@ -75,5 +75,11 @@ def shopPage(request):
     
     else:
         return render(request, 'aionApp/shop.html')
+    
+def addProduct(request):    
+    addingProduct = watche(name = request.POST['productName'], description = request.POST['productDescription'], stock = request.POST['productStock'], price = request.POST['productPrice'], watch_type = request.POST['watchType'], picture = request.POST['productPicture'])
+    addingProduct.save()
+    return render(request, 'aionApp/shop.html')
+    
     
     
