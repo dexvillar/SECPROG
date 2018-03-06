@@ -64,6 +64,108 @@
                 </div>
             </form>
         </div>
+        
+        <div id="shopContainer">
+            <p id="bigMessage">ALL  WATCHES</p>
+            
+            <div id="watchRow1">
+                 <div class="inline-block" id="analogWatch1">
+                    <span class="watchText"><a href="#" class="aWatch" onclick="document.getElementById('watchModal1').style.display='block'">QUICK VIEW</a></span>
+                </div>
+                <div class="inline-block" style="margin-right: 5em;"> </div>
+                
+                <div class="inline-block" id="analogWatch2">
+                    <span class="watchText"><a href="#" class="aWatch" onclick="document.getElementById('watchModal2').style.display='block'">QUICK VIEW</a></span>
+                </div>
+                <div class="inline-block" style="margin-right: 5em;"> </div>
+                
+                <div class="inline-block" id="analogWatch3">
+                    <span class="watchText"><a href="#" class="aWatch" onclick="document.getElementById('watchModal3').style.display='block'">QUICK VIEW</a></span>
+                </div>
+                <div class="inline-block" style="margin-right: 5em;"> </div>
+            </div>
+        </div>
+        
+        <!-- MODAL 1 FOR FIRST IMAGE -->
+        <div id="watchModal1" class="modal">
+            <form class="watchModal-content animate" method = "post">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('watchModal1').style.display='none'" class="watchShop" title="Close Modal">&times;</span>
+                </div>
+                
+                <div class="watchModalContainer">
+                    <div class="spacer" style="margin-bottom: 1em;"> </div>
+                    <div class="col-md-6">
+                        <img src="{% static 'aionApp/Images/analogShop1.jpg' %}" id="watchImg">
+                    </div>
+                    <div class="col-md-6">
+                        <p id="productName">I'M A WATCHIE</p>
+                        <p id="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <p id="price">$1,299</p>&nbsp;
+                        <p id="stock">Only 1 left!</p>
+                        <p id="quantityText">QUANTITY</p>
+                        <input type="number" value="1" name="quantity" min="1"/>
+                        <br/>
+                        <br/>
+                        <button id="addToCart" href="#">ADD TO CART</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <!-- MODAL 2 FOR SECOND IMAGE -->
+        <div id="watchModal2" class="modal">
+            <form class="watchModal-content animate" method = "post">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('watchModal2').style.display='none'" class="watchShop" title="Close Modal">&times;</span>
+                </div>
+                
+                <div class="watchModalContainer">
+                    <div class="spacer" style="margin-bottom: 1em;"> </div>
+                    <div class="col-md-6">
+                        <img src="{% static 'aionApp/Images/analogShop2.jpg' %}" id="watchImg">
+                    </div>
+                    <div class="col-md-6">
+                        <p id="productName">I'M A WATCHIE</p>
+                        <p id="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <p id="price">$1,299</p>&nbsp;
+                        <p id="stock">Only 1 left!</p>
+                        <p id="quantityText">QUANTITY</p>
+                        <input type="number" value="1" name="quantity" min="1"/>
+                        <br/>
+                        <br/>
+                        <button id="addToCart" href="#">ADD TO CART</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <!-- MODAL 3 FOR THIRD IMAGE -->
+        <div id="watchModal3" class="modal">
+            <form class="watchModal-content animate" method = "post">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('watchModal3').style.display='none'" class="watchShop" title="Close Modal">&times;</span>
+                </div>
+                
+                <div class="watchModalContainer">
+                    <div class="spacer" style="margin-bottom: 1em;"> </div>
+                    <div class="col-md-6">
+                        <img src="{% static 'aionApp/Images/analogShop3.jpg' %}" id="watchImg">
+                    </div>
+                    <div class="col-md-6">
+                        <p id="productName">I'M A WATCHIE</p>
+                        <p id="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <p id="price">$1,299</p>&nbsp;
+                        <p id="stock">Only 1 left!</p>
+                        <p id="quantityText">QUANTITY</p>
+                        <input type="number" value="1" name="quantity" min="1"/>
+                        <br/>
+                        <br/>
+                        <button id="addToCart" href="#">ADD TO CART</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </body>
     
     <script>

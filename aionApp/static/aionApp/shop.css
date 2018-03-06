@@ -155,7 +155,7 @@ input[type=text], input[type=password] {
     position: relative;
 }
 
-.loginContainer {
+.loginContainer, .watchModalContainer {
     padding: 16px;
 }
 
@@ -190,6 +190,14 @@ span.psw {
     width: 25%; /* Could be more or less, depending on screen size */
 }
 
+.watchModal-content {
+    background-color: #020202;
+    margin: 1% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #E8E2E2;
+    width: 75%; /* Could be more or less, depending on screen size */
+    height: 75%;
+}
+
 /* The Close Button (x) */
 .close {
     position: absolute;
@@ -202,6 +210,20 @@ span.psw {
 
 .close:hover {
     color: #4688F1;
+    cursor: pointer;
+}
+
+.watchShop {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #A1A1A1;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.watchShop:hover {
+    color: #373737;
     cursor: pointer;
 }
 
@@ -248,4 +270,162 @@ span.psw {
     left: 16%;
     font-family: "Helvetica Neue";
     color: #E8453C; 
+}
+
+#shopContainer {
+    background-color: #020202;
+    text-align: center;
+    color: white;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+#bigMessage {
+    position: relative;
+    top: 20%;
+    transform: translateY(-50%); 
+    text-align: center;
+    font-family: "Helvetica Neue";
+    font-size: 40px;
+    color: white;
+    font-weight: bold;
+}
+
+#watches {
+    overflow: hidden; 
+    display: flex;
+    margin: 0;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+#watchRow1 {
+    position: relative;
+    top: 20%;
+    
+}
+
+#analogWatch1 {
+    background-image: url("/static/aionApp/Images/analogShop1.jpg");
+    text-align: center;
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 20%; 
+    height: 30%;
+    display: inline-block;
+}
+
+#analogWatch2 {
+    background-image: url("/static/aionApp/Images/analogShop2.jpg");
+    text-align: center;
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 20%; 
+    height: 30%;
+    display: inline-block;
+}
+
+#analogWatch3 {
+    background-image: url("/static/aionApp/Images/analogShop3.jpg");
+    text-align: center;
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 20%; 
+    height: 30%;
+    display: inline-block;
+   
+}
+
+#analogWatch1 span, #analogWatch2 span, #analogWatch3 span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 4.5em 0;
+    background: #1a1919;
+    opacity: 0;
+    transition: all 0.8s ease;
+}
+
+#analogWatch1 span:hover, #analogWatch2 span:hover, #analogWatch3 span:hover {
+    opacity: 0.9;
+}
+
+.watchText {
+    position: relative;
+    text-align: center;
+    font-family: "Helvetica Neue";
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.aWatch {
+    position: relative;
+    top: 20%;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+}
+
+.aWatch:hover {
+    position: relative;
+    top: 20%;
+    text-align: center;
+    text-decoration: none;
+    color: #A6ACAF;
+}
+
+#watchImg {
+    height: 60%; 
+    width: 70%; 
+}
+
+#productName {
+    color: #A29C97;
+    font-family: "Helvetica Neue";
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#description, #quantityText {
+    font-family: "Helvetica Neue";
+    color: #424242;
+    font-size: 14px;
+}
+
+#price {
+    color: #A29C97;
+    font-family: "Helvetica Neue";
+    font-size: 18px;
+    font-weight: bold;
+    display:inline-block
+}
+
+#stock {
+    font-family: "Helvetica Neue";
+    color: #424242;
+    font-size: 14px;
+    display:inline-block;
+    font-style: italic;
+}
+
+
+#addToCart {
+    font-family: "Helvetica Neue";
 }

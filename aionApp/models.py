@@ -3,12 +3,20 @@ from __future__ import unicode_literals
 from django.db import models
 
 # Create your models here.
+
+watch_choices = {
+    ('0', 'Analog'),
+    ('1', 'Digital'),
+    ('2', 'Smart'),
+}
+
 class watche(models.Model):
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=255, default=0) 
     quantity = models.PositiveIntegerField(default=0)
+    stock = models.PositiveIntegerField(default=0)
+    watch_type = models. CharField(max_length=16, choices=watch_choices, default='0')
     price = models.FloatField(default=0)
-    use = models.IntegerField(default=0) 
     watch_id = models.IntegerField(default = 0)
 #    picture = models.ImageField(blank=True, null=True, upload_to = 'userPhotos/')
 
