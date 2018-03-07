@@ -162,7 +162,7 @@ input[type=text], input[type=password] {
 span.psw {
     position: relative;
     top: 20%;
-    left: 5%;
+    left: 8%;
     padding-top: 10px;
     font-family: "Helvetica Neue";
 }
