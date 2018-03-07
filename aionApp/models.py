@@ -26,6 +26,7 @@ class watche(models.Model):
     price = models.FloatField(default=0)
     watch_id = models.IntegerField(default = 0)
     picture = models.ImageField(blank=True, null=True, upload_to = 'watchPictures/')
+    user_id = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.name

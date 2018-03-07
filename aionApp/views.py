@@ -76,10 +76,25 @@ def shopPage(request):
     else:
         return render(request, 'aionApp/shop.html')
     
-def addProduct(request):    
-    addingProduct = watche(name = request.POST['productName'], description = request.POST['productDescription'], stock = request.POST['productStock'], price = request.POST['productPrice'], watch_type = request.POST['watchType'], picture = request.POST['productPicture'])
+def addProduct(request):
+    currentUser = get_object_or_404(user, user_id=request.session["user"])
+    addedProducts = watche.objects.all()
+    context = {
+        'currentUser': currentUser,
+        'addedProducts': addedProducts
+    }
+    addingProduct = watche(name = request.POST['productName'], description = request.POST['productDescription'], stock = request.POST['productStock'], price = request.POST['productPrice'], watch_type = request.POST['watchType'], picture = request.POST['productPicture'], user_id = request.session["user"])
     addingProduct.save()
-    return render(request, 'aionApp/shop.html')
+    return render(request, 'aionApp/shop.html', context)
     
-    
+def addToCart(request):
+    currentUser = get_object_or_404(user, user_id=request.session["user"])
+    addedWatches = watche.objects.all()
+    context = {
+        'currentUser': currentUser,
+        'addedWatches': addedWatches
+    }
+    addingWatch = watche(quantity = request.POST['productQuantity'], user_id = request.POST['user'])
+    addingWatch.save()
+    return render(request, 'aionApp/shop.html', context)
     

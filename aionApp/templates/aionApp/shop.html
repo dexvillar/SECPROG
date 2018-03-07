@@ -57,7 +57,7 @@
                 
                 <div class="loginContainer">
                     <div class="spacer" style="margin-bottom: 1em;"> </div>
-                    <input type="text" placeholder="EMAIL ADDRESS" name="userName" required>
+                    <input type="text" placeholder="USERNAME" name="userName" required>
                     <input type="password" placeholder="PASSWORD" name="userPassword" required>
                     <button type="submit" id="loginBtn">LOG IN</button>
 
@@ -74,8 +74,7 @@
         </div>
         
         <div id="addProductModal" class="modal">
-            <form action="{% url 'aionApp:addProduct' %}" class="addProductmodal-content animate" method = "post">
-                {% csrf_token %}
+            <form class="addProductmodal-content animate" method = "post">
                 <div class="imgcontainer">
                     <span onclick="document.getElementById('addProductModal').style.display='none'" class="close" title="Close Modal">&times;</span>
                 </div>

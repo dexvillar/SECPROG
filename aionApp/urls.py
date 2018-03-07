@@ -11,4 +11,5 @@ urlpatterns= [
     url(r'^exitSession/$', views.exitSession, name='exitSession'),
     url(r'^shopPage/$', views.shopPage, name='shopPage'),
     url(r'^addProduct/$', views.addProduct, name='addProduct'),
+    url(r'^addToCart/$', views.addToCart, name='addToCart'),
 ]
