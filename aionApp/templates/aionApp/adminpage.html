@@ -31,22 +31,24 @@
 				</div>
 				<br>
 				<span class="fontUP">Last Name:</span> 
-                <input type="text" class="inputRegister" name="last_name">
+                <div id="align"> <input type="text" class="inputRegister" name="last_name"> </div>
                 <br> <br>
                 <span class="fontUP">First Name:</span>
-                <input type="text" class="inputRegister" name="first_name">
+                <div id="align"> <input type="text" class="inputRegister" name="first_name"> </div>
                 <br> <br>
                 <span class="fontUP">Middle Initial:</span>
-                <input type="text" class="inputRegister" name="middle_initial" pattern=".{1,3}">
+                <div id="align"> <input type="text" class="inputRegister" name="middle_initial" pattern=".{1,3}"> </div>
                 <br> <br>
                 <span class="fontUP">E-mail Address:</span>
-                <input type="email" class="inputRegister" name="email">
+                <div id="align"> <input type="email" class="inputRegister" name="email"> </div>
                 <br> <br>
 				<span class="fontUP">Role: </span>
-				<select class="dropDown"> ROLE TYPE 
-                    <option> PRODUCT MANAGER </option>
-                    <option> ACCOUNTING MANAGER </option>
-				</select>
+				<div id="alignDropdown">
+                    <select class="dropDown"> ROLE TYPE 
+                        <option> PRODUCT MANAGER </option>
+                        <option> ACCOUNTING MANAGER </option>
+				    </select>
+                </div>
 				<br> <br>
 				
 				<div id="accountinfo">
@@ -54,14 +56,14 @@
 				</div>
 				<br>
 				<span class="fontUP">Username:</span>
-				<input type="text" class="inputRegister" name="user_name"> 
-				<br> <br>
-				<span class="fontUP">Password:</span>
-				<input type="password" class="inputRegister" name="password1"> 
-				<br> <br>
-				<span class="fontUP">Re-type password:</span>
-				<input type="password" class="inputRegister" name="password2"> 
-				<br> <br>
+                <div id="align"> <input type="text" class="inputRegister" name="user_name"> </div>
+                <br> <br>
+                <span class="fontUP">Password:</span>
+                <div id="align"><input type="password" class="inputRegister" name="password1"> </div>
+                <br> <br>
+                <span class="fontUP">Confirm password:</span>
+                <div id="align"> <input type="password" class="inputRegister" name="password2"> </div>
+                <br> <br>
 			</div>
         </div>
         <button id="submitButton" href="#">SUBMIT</button>	

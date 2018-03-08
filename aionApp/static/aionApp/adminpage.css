@@ -103,8 +103,8 @@ footer {
     text-align: center;
     color: white;
     width: 100%;
-    height: 120%;
-    max-height: 120%;
+    height: 110%;
+    max-height: 110%;
     margin: 0;
     padding: 0;
     background-size: 100% 100%;
@@ -125,23 +125,39 @@ footer {
 #container1 { 
 	background-color: white;
 	width: 45%;
-	height: 75%;
+	height: 65%;
 	position: absolute;
 	left: 28%;
 	top: 27%;
 }
 
 .fontUP{
-	font-family: "ChunkFive Roman", Arial; 
+	font-family: "Helvetica Neue"; 
 	color: #7D7D7D;
 	font-size: 15px;
-	padding-left: 3%;
+	padding-right: 60%;
+}
+
+#align {
+	width: 70%;
+	height: 30%;
+	position: absolute;
+	left: 20%;
+	margin-top: 1%;
+}
+
+#alignDropdown {
+    width: 70%;
+	height: 30%;
+	position: absolute;
+	left: 15%;
+	top: 45%;
 }
 
 #personalinfo {
     background-color: #1a1919;
 	width: 100%;
-	height: 7%;
+	height: 9%;
 	font-family: "Helvetica Neue"; 
 	font-size: 13pt;
 	padding-top: 1.5%;
@@ -152,7 +168,7 @@ footer {
 #accountinfo {
 	background-color: #1a1919;
 	width: 100%;
-	height: 8%;
+	height: 9%;
 	font-family: "Helvetica Neue"; 
 	font-size: 13pt;
 	padding-top: 1.5%;
@@ -199,6 +215,6 @@ footer {
     padding: 14px 140px;
     font-size: 16px;
     position: absolute;
-    top: 107%;
+    top: 97%;
     left: 37%;
 }
