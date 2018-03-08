@@ -12,4 +12,5 @@ urlpatterns= [
     url(r'^shopPage/$', views.shopPage, name='shopPage'),
     url(r'^addProduct/$', views.addProduct, name='addProduct'),
     url(r'^addToCart/$', views.addToCart, name='addToCart'),
+    url(r'^signingUp/$', views.signingUp, name='signingUp'),
 ]

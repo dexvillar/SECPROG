@@ -98,3 +98,14 @@ def addToCart(request):
     addingWatch.save()
     return render(request, 'aionApp/shop.html', context)
     
+def signingUp(request):
+    addingUser = user(last_name = request.POST['last_name'], first_name = request.POST['first_name'], middle_initial = request.POST['middle_initial'], email = request.POST['email'], user_name = request.POST['user_name'], password = request.POST['password1'])
+    
+    addingBAddress = billing_addres(house_number = request.POST['bHouseNum'], street = request.POST['bStreet'], subdivision = request.POST['bSubdivision'], city = request.POST['bCity'], postal_code = request.POST['bPostal'], country = request.POST['bCountry'])
+    
+    addingSAddress = shipping_addres(house_number = request.POST['sHouseNum'], street = request.POST['sStreet'], subdivision = request.POST['sSubdivision'], city = request.POST['sCity'], postal_code = request.POST['sPostal'], country = request.POST['sCountry'])
+    
+    addingUser.save()
+    addingBAddress.save()
+    addingSAddress.save()
+    return render(request, 'aionApp/home.html')

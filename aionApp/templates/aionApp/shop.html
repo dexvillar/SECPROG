@@ -74,7 +74,8 @@
         </div>
         
         <div id="addProductModal" class="modal">
-            <form class="addProductmodal-content animate" method = "post">
+            <form class="addProductmodal-content animate"  action="{% url 'aionApp:addProduct' %}"method = "post">
+                {% csrf_token %}
                 <div class="imgcontainer">
                     <span onclick="document.getElementById('addProductModal').style.display='none'" class="close" title="Close Modal">&times;</span>
                 </div>

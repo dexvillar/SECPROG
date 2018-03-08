@@ -19,7 +19,7 @@ role_choices = {
 
 class watche(models.Model):
     name = models.CharField(max_length=255)
-    description = models.CharField(max_length=255, default=0) 
+    description = models.CharField(max_length=2048, default=0) 
     quantity = models.PositiveIntegerField(default=0)
     stock = models.PositiveIntegerField(default=0)
     watch_type = models.CharField(max_length=16, choices=watch_choices, default='0')
@@ -52,28 +52,26 @@ class user(models.Model):
         return self.last_name
     
 class billing_addres(models.Model):
-    user_id = models.IntegerField(default=0)
     house_number=models.IntegerField(default=0)
     street = models.CharField(max_length=255)
     subdivision = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
-    postal_code =models.IntegerField(default=0)
+    postal_code = models.CharField(max_length=255)
     country = models.CharField(max_length=255)
     
     def __str__(self):
-        return self.user_id
+        return self.city
     
 class shipping_addres(models.Model):
-    user_id = models.IntegerField(default=0)
     house_number = models.IntegerField(default=0)
     street = models.CharField(max_length=255)
     subdivision = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
-    postal_code =models.IntegerField(default=0)
+    postal_code = models.CharField(max_length=255)
     country = models.CharField(max_length=255)
     
     def __str__(self):
-        return self.user_id
+        return self.city
     
 class checkout(models.Model):
     user_id = models.IntegerField(default=0)

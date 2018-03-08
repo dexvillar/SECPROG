@@ -230,3 +230,15 @@ html, body {
 	left: 40%;
 	margin-top: 1%;
 }
+
+#submitButton {
+    background-color: white;
+    color: black;
+    font-family: "Helvetica Neue";
+    font-weight: bold;
+    padding: 14px 140px;
+    font-size: 16px;
+    position: absolute;
+    top: 111%;
+    left: 37%;
+}

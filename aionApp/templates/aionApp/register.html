@@ -25,92 +25,93 @@
         
         <div id="registerContainer">
             <p id="bigMessage">REGISTER</p>
+            <form class="addProductmodal-content animate"  action="{% url 'aionApp:signingUp' %}"method = "post">
+                {% csrf_token %}
+                <div id="container1">
+                    <div id="info">
+                        <div id="personalinfo">
+                            Personal Information
+                        </div>
+                        <br>
+                        <span class="fontUP">Last Name:</span> 
+                        <div id="align"> <input type="text" class="inputRegister" name="last_name"> </div>
+                        <br> <br>
+                        <span class="fontUP">First Name:</span>
+                        <div id="align"> <input type="text" class="inputRegister" name="first_name"> </div>
+                        <br> <br>
+                        <span class="fontUP">Middle Initial:</span>
+                        <div id="align"> <input type="text" class="inputRegister" name="middle_initial"> </div>
+                        <br> <br>
+                        <span class="fontUP">E-mail Address:</span>
+                        <div id="align"> <input type="email" class="inputRegister" name="email"> </div>
+                        <br> <br>
 
-            <div id="container1">
-                <div id="info">
-                    <div id="personalinfo">
-                        Personal Information
+                        <div id="billingaddress">
+                            Billing Address
+                        </div>
+                        <br>
+                        <span class="fontUP">House No.:</span>
+                        <div id="align"> <input type="number" class="inputRegister" name="bHouseNum" min="1"> </div>
+                        <br> <br>
+                        <span class="fontUP">Street:</span>
+                        <div id="align"> <input type="text" class="inputRegister" name="bStreet"> </div>
+                        <br> <br>
+                        <span class="fontUP">Subdivision:</span>
+                        <div id="align"> <input type="text" class="inputRegister" name="bSubdivision"> </div>
+                        <br> <br>
+                        <span class="fontUP">City:</span>
+                        <div id="align"> <input type="text" class="inputRegister" name="bCity"> </div>
+                        <br> <br>
+                        <span class="fontUP">Postal Code:</span>
+                        <div id="align"> <input type="text" class="inputRegister" name="bPostal"> </div>
+                        <br> <br>
+                        <span class="fontUP">Country:</span>
+                        <div id="align"> <input type="text" class="inputRegister" name="bCountry"> </div>
+                        <br> <br>
                     </div>
-                    <br>
-                    <span class="fontUP">Last Name:</span> 
-                    <div id="align"> <input type="text" class="inputRegister"> </div>
-                    <br> <br>
-                    <span class="fontUP">First Name:</span>
-                    <div id="align"> <input type="text" class="inputRegister"> </div>
-                    <br> <br>
-                    <span class="fontUP">Middle Initial:</span>
-                    <div id="align"> <input type="text" class="inputRegister"> </div>
-                    <br> <br>
-                    <span class="fontUP">E-mail Address:</span>
-                    <div id="align"> <input type="text" class="inputRegister"> </div>
-                    <br> <br>
+                </div>
 
-                    <div id="billingaddress">
-                        Billing Address
+                <div id="container2">
+                    <div id="accountinfo">
+                        Account Information
                     </div>
-                    <br>
-                    <span class="fontUP">House No.:</span>
-                    <div id="align"> <input type="text" class="inputRegister"> </div>
-                    <br> <br>
-                    <span class="fontUP">Street:</span>
-                    <div id="align"> <input type="text" class="inputRegister"> </div>
-                    <br> <br>
-                    <span class="fontUP">Subdivision:</span>
-                    <div id="align"> <input type="text" class="inputRegister"> </div>
-                    <br> <br>
-                    <span class="fontUP">City:</span>
-                    <div id="align"> <input type="text" class="inputRegister"> </div>
-                    <br> <br>
-                    <span class="fontUP">Postal Code:</span>
-                    <div id="align"> <input type="text" class="inputRegister"> </div>
-                    <br> <br>
-                    <span class="fontUP">Country:</span>
-                    <div id="align"> <input type="text" class="inputRegister"> </div>
-                    <br> <br>
+                        <br>
+                        <span class="fontUP">Username:</span>
+                        <div id="align2"> <input type="text" class="inputRegister" name="user_name"> </div>
+                        <br> <br>
+                        <span class="fontUP">Password:</span>
+                        <div id="align2"><input type="password" class="inputRegister" name="password1"> </div>
+                        <br> <br>
+                        <span class="fontUP">Confirm password:</span>
+                        <div id="align2"> <input type="password" class="inputRegister" name="password2"> </div>
+                        <br> <br>
                 </div>
-            </div>
 
-            <div id="container2">
-                <div id="accountinfo">
-                    Account Information
+                <div id="container3">
+                    <div id="shippingaddress">
+                        Shipping Address
+                    </div>
+                        <br>
+                        <span class="fontUP">House No.: </span>
+                        <div id="align2"> <input type="number" class="inputRegister" name="sHouseNum" min="1"> </div>
+                        <br> <br>
+                        <span class="fontUP">Street:</span>
+                        <div id="align2"> <input type="text" class="inputRegister" name="sStreet"> </div>
+                        <br> <br>
+                        <span class="fontUP">Subdivision:</span>
+                        <div id="align2"> <input type="text" class="inputRegister" name="sSubdivision"> </div>
+                        <br> <br>
+                        <span class="fontUP">City:</span>
+                        <div id="align2"> <input type="text" class="inputRegister" name="sCity"> </div>
+                        <br> <br>
+                        <span class="fontUP">Postal Code:</span>
+                        <div id="align2"> <input type="text" class="inputRegister" name="sPostal"> </div>
+                        <br> <br>
+                        <span class="fontUP">Country:</span>
+                        <div id="align2"> <input type="text" class="inputRegister" name="sCountry"> </div>
                 </div>
-                    <br>
-                    <span class="fontUP">Username:</span>
-                    <div id="align2"> <input type="text" class="inputRegister"> </div>
-                    <br> <br>
-                    <span class="fontUP">Password:</span>
-                    <div id="align2"><input type="text" class="inputRegister"> </div>
-                    <br> <br>
-                    <span class="fontUP">Confirm password:</span>
-                    <div id="align2"> <input type="text" class="inputRegister"> </div>
-                    <br> <br>
-            </div>
-            
-            <div id="container3">
-                <div id="shippingaddress">
-                    Shipping Address
-                </div>
-                    <br>
-                    <span class="fontUP">House No.: </span>
-                    <div id="align2"> <input type="text" class="inputRegister"> </div>
-                    <br> <br>
-                    <span class="fontUP">Street:</span>
-                    <div id="align2"> <input type="text" class="inputRegister"> </div>
-                    <br> <br>
-                    <span class="fontUP">Subdivision:</span>
-                    <div id="align2"> <input type="text" class="inputRegister"> </div>
-                    <br> <br>
-                    <span class="fontUP">City:</span>
-                    <div id="align2"> <input type="text" class="inputRegister"> </div>
-                    <br> <br>
-                    <span class="fontUP">Postal Code:</span>
-                    <div id="align2"> <input type="text" class="inputRegister"> </div>
-                    <br> <br>
-                    <span class="fontUP">Country:</span>
-                    <div id="align2"> <input type="text" class="inputRegister"> </div>
-            </div>
+                <button id="submitButton" href="#">SUBMIT</button>
+            </form>
         </div>
-        
-
     </body>
 </html>
