@@ -1,0 +1,203 @@
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+#navbar {
+    display: flex;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    position: fixed;
+    overflow: hidden;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 5.3em;
+    border-top-style: ridge;
+    border-top-color: #d3d3d3;
+    border-top-width: thin;
+    background-color: white;
+    border-color: #c7c7c7;
+    opacity: 0.9;
+}
+
+#navbar a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: "Helvetica Neue";
+    font-weight: bold;
+    margin-left: 1.3em;
+    cursor: pointer;
+}
+
+#navbar a:hover {
+    color: #A6ACAF;
+}
+
+#navbar a.active {
+    background-color: #4CAF50;
+    color: black;
+}
+
+#watch {
+    position: relative;
+    width: 55px;
+    height: 55px;
+    margin-left: 2px;
+}
+
+#logo {
+    font-size: 35px;
+    font-family: "Helvetica Neue";
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+}
+
+footer {
+    background-color: #1a1919;
+    height: 12%;
+    display: block;
+    padding-top: 30px;
+    position: relative;
+    text-align: center;
+    font-family: "Helvetica Neue";
+    font-size: 15px;
+    position: relative;
+    color: white;
+}
+.blueblock{
+	background-color: black;
+    height: 8%;
+	width: 100%;
+}
+
+#title{
+	font-size: 18pt;
+	color: white;
+	padding-top: 0.75%;
+	padding-left: 1%;
+	font-family: "Helvetica Neue"; 
+}
+
+#text{
+	position: absolute;
+	top: 3%;
+	left: 5%;
+}
+
+#adminContainer{
+	background-color: #020202;
+    text-align: center;
+    color: white;
+    width: 100%;
+    height: 120%;
+    max-height: 120%;
+    margin: 0;
+    padding: 0;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+#bigMessage {
+    position: relative;
+    top: 15%;
+    transform: translateY(-50%); 
+    text-align: center;
+    font-family: "Helvetica Neue";
+    font-size: 40px;
+    color: white;
+    font-weight: bold;
+}
+
+#container1 { 
+	background-color: white;
+	width: 45%;
+	height: 75%;
+	position: absolute;
+	left: 28%;
+	top: 27%;
+}
+
+.fontUP{
+	font-family: "ChunkFive Roman", Arial; 
+	color: #7D7D7D;
+	font-size: 15px;
+	padding-left: 3%;
+}
+
+#personalinfo {
+    background-color: #1a1919;
+	width: 100%;
+	height: 10%;
+	font-family: "Helvetica Neue"; 
+	font-size: 13pt;
+	padding-top: 1.5%;
+	color: white;
+}
+
+#accountinfo {
+	background-color: #1a1919;
+	width: 100%;
+	height: 10%;
+	font-family: "Helvetica Neue"; 
+	font-size: 13pt;
+	padding-top: 1.5%;
+	color: white;
+}
+
+#logo {
+    font-size: 35px;
+    font-family: "Helvetica Neue";
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.inputRegister {
+    width: 65%;
+    height: 5%;
+    padding: 10px 15px;
+    background-color: #A29C97;
+    border: 0;
+    outline: none;
+	margin-top: -7%;
+}
+
+.dropDown {
+    left: -3%;
+    display: inline-block;
+    font-size: 14px;
+    margin-left: 5%;
+    margin-top: 1em;
+    color: black;
+    font-family: "Helvetica Neue";
+    font-weight: bold;
+}
+
+#submitButton {
+    background-color: white;
+    color: black;
+    font-family: "Helvetica Neue";
+    font-weight: bold;
+    padding: 14px 140px;
+    font-size: 16px;
+    position: absolute;
+    top: 107%;
+    left: 37%;
+}

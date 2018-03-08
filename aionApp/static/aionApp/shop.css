@@ -104,6 +104,19 @@ html, body {
     height: 30px;
 }
 
+footer {
+    background-color: #1a1919;
+    height: 12%;
+    display: block;
+    padding-top: 30px;
+    position: relative;
+    text-align: center;
+    font-family: "Helvetica Neue";
+    font-size: 15px;
+    position: relative;
+    color: white;
+}
+
 /* Full-width input fields */
 input[type=text], input[type=password] {
     width: 100%;

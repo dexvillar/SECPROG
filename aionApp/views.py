@@ -108,4 +108,22 @@ def signingUp(request):
     addingUser.save()
     addingBAddress.save()
     addingSAddress.save()
-    return render(request, 'aionApp/home.html')
+    
+    if userTry.user_name == str(request.POST['user_name']):
+        if userTry.password == str(request.POST['password1']):
+            request.session["user"] = userTry.user_id
+        currentUser = get_object_or_404(user, user_id = request.session["user"])
+        context = {
+            'currentUser': currentUser,
+        }
+        return render(request, 'aionApp/home.html', context)
+    
+def adminPage(request):
+    if request.session["user"]>0:
+        currentUser = get_object_or_404(user, user_id = request.session["user"])
+        context = {
+            'currentUser': currentUser,
+        }
+        return render(request, 'aionApp/adminpage.html', context)
+    else:
+        return render(request, 'aionApp/adminpage.html')

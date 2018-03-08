@@ -32,12 +32,12 @@
                     <span style="position: absolute; left: 47%;">
                         <a href="#"><img src="{% static 'aionApp/Images/cart.png' %}" id="cart"></a>
                         <a href="#">SHOP</a>
-                        <a href="/aionApp/exitSession/">SIGN OUT</a>    
+                        <a href="/aionApp/exitSession/">LOG OUT</a>    
                     </span>
                 {% else %}
                     <span style="position: absolute; left: 70%;">
                         <a onclick="document.getElementById('addProductModal').style.display='block'">ADD PRODUCT</a>
-                        <a href="/aionApp/exitSession/">SIGN OUT</a>    
+                        <a href="/aionApp/exitSession/">LOG OUT</a>    
                     </span>
                 {% endif %}
             {% else %}
@@ -223,6 +223,7 @@
                 </div>
             </form>
         </div>
+        <footer>Copyright © 2018 Xcite Interactive. All Rights Reserved.</footer>
     </body>
     
     <script>

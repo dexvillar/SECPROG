@@ -99,7 +99,20 @@ html, body {
     align-items: center;
 }
 
-#text{
+footer {
+    background-color: #1a1919;
+    height: 7%;
+    display: block;
+    padding-top: 30px;
+    position: relative;
+    text-align: center;
+    font-family: "Helvetica Neue";
+    font-size: 15px;
+    position: relative;
+    color: white;
+}
+
+#text {
 	position: absolute;
 	top: 3%;
 	left: 5%;
