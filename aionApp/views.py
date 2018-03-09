@@ -17,6 +17,21 @@ def homePage(request):
 def registerPage(request):
     return render(request, 'aionApp/register.html')
 
+def adminPage(request):
+
+    
+    if request.session["user"]>0:
+        currentUser = get_object_or_404(user, user_id = request.session["user"])
+        context = {
+            'currentUser': currentUser,
+        }
+        
+        addingUser = user(last_name = request.POST.get('last_name', False), first_name = request.POST.get('first_name', False), middle_initial =request.POST.get('middle_initial', False), email = request.POST.get('email', False), user_name = request.POST.get('user_name', False), password = request.POST.get('password1', False), role_type=request.POST.get('role_type.value', False))
+        addingUser.save()
+        return render(request, 'aionApp/adminpage.html', context)
+    else:
+        return render(request, 'aionApp/adminpage.html')
+
 def homeLogIn(request):
     userList = user.objects.all()
     error = False
@@ -25,12 +40,17 @@ def homeLogIn(request):
             if userTry.user_name == str(request.POST['userName']):
                 if userTry.password == str(request.POST['userPassword']):
                     request.session["user"] = userTry.user_id
+                    choice= userTry.role_type
         if request.session["user"] >= 0:
             currentUser = get_object_or_404(user, user_id = request.session["user"])
             context = {
                 'currentUser': currentUser,
             }
-            return render(request, 'aionApp/home.html', context)
+            
+            if choice == "2":
+                return adminPage(request)
+            else:
+                return render(request, 'aionApp/home.html', context)
         else:
                 error = True
                 request.session["user"] = -1
@@ -47,12 +67,18 @@ def shopLogIn(request):
             if userTry.user_name == str(request.POST['userName']):
                 if userTry.password == str(request.POST['userPassword']):
                     request.session["user"] = userTry.user_id
+                    choice= userTry.role_type
         if request.session["user"] >= 0:
             currentUser = get_object_or_404(user, user_id = request.session["user"])
             context = {
                 'currentUser': currentUser,
             }
-            return render(request, 'aionApp/shop.html', context)
+            
+            if choice == "2":
+                return adminPage(request)
+            else:
+                return render(request, 'aionApp/home.html', context)
+            
         else:
                 error = True
                 request.session["user"] = -1
@@ -118,12 +144,3 @@ def signingUp(request):
         }
         return render(request, 'aionApp/home.html', context)
     
-def adminPage(request):
-    if request.session["user"]>0:
-        currentUser = get_object_or_404(user, user_id = request.session["user"])
-        context = {
-            'currentUser': currentUser,
-        }
-        return render(request, 'aionApp/adminpage.html', context)
-    else:
-        return render(request, 'aionApp/adminpage.html')
