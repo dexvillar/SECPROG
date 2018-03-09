@@ -49,8 +49,10 @@ def shopLogIn(request):
                     request.session["user"] = userTry.user_id
         if request.session["user"] >= 0:
             currentUser = get_object_or_404(user, user_id = request.session["user"])
+            addedProducts = watche.objects.all()
             context = {
                 'currentUser': currentUser,
+                'addedProducts': addedProducts,
             }
             return render(request, 'aionApp/shop.html', context)
         else:
@@ -68,13 +70,19 @@ def exitSession(request):
 def shopPage(request):
     if request.session["user"] > 0:
         currentUser = get_object_or_404(user, user_id = request.session["user"])
+        addedProducts = watche.objects.all()
         context = {
             'currentUser': currentUser,
+            'addedProducts': addedProducts,
         }
         return render(request, 'aionApp/shop.html', context)
     
     else:
-        return render(request, 'aionApp/shop.html')
+        addedProducts = watche.objects.all()
+        context = {
+            'addedProducts': addedProducts,
+        }
+        return render(request, 'aionApp/shop.html', context)
     
 def addProduct(request):
     currentUser = get_object_or_404(user, user_id=request.session["user"])
@@ -83,16 +91,16 @@ def addProduct(request):
         'currentUser': currentUser,
         'addedProducts': addedProducts
     }
-    addingProduct = watche(name = request.POST['productName'], description = request.POST['productDescription'], stock = request.POST['productStock'], price = request.POST['productPrice'], watch_type = request.POST['watchType'], picture = request.POST['productPicture'], user_id = request.session["user"])
+    addingProduct = watche(name = request.POST['productName'], description = request.POST['productDescription'], stock = request.POST['productStock'], price = request.POST['productPrice'], watch_type = request.POST['watchType'], picture = "watchPictures/" + request.POST['productPicture'], user_id = request.session["user"])
     addingProduct.save()
     return render(request, 'aionApp/shop.html', context)
     
 def addToCart(request):
     currentUser = get_object_or_404(user, user_id=request.session["user"])
-    addedWatches = watche.objects.all()
+    addedProducts = watche.objects.all()
     context = {
         'currentUser': currentUser,
-        'addedWatches': addedWatches
+        'addedProducts': addedProducts,
     }
     addingWatch = watche(quantity = request.POST['productQuantity'], user_id = request.POST['user'])
     addingWatch.save()
@@ -109,17 +117,14 @@ def signingUp(request):
     addingBAddress.save()
     addingSAddress.save()
     
-    if userTry.user_name == str(request.POST['user_name']):
-        if userTry.password == str(request.POST['password1']):
-            request.session["user"] = userTry.user_id
-        currentUser = get_object_or_404(user, user_id = request.session["user"])
-        context = {
-            'currentUser': currentUser,
-        }
-        return render(request, 'aionApp/home.html', context)
+    currentUser = get_object_or_404(user, user_id = request.session["user"])
+    context = {
+        'currentUser': currentUser,
+    }
+    return render(request, 'aionApp/home.html', context)
     
 def adminPage(request):
-    if request.session["user"]>0:
+    if request.session["user"] > 0:
         currentUser = get_object_or_404(user, user_id = request.session["user"])
         context = {
             'currentUser': currentUser,
@@ -127,3 +132,4 @@ def adminPage(request):
         return render(request, 'aionApp/adminpage.html', context)
     else:
         return render(request, 'aionApp/adminpage.html')
+    

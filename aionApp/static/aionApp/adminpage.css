@@ -78,25 +78,6 @@ footer {
     position: relative;
     color: white;
 }
-.blueblock{
-	background-color: black;
-    height: 8%;
-	width: 100%;
-}
-
-#title{
-	font-size: 18pt;
-	color: white;
-	padding-top: 0.75%;
-	padding-left: 1%;
-	font-family: "Helvetica Neue"; 
-}
-
-#text{
-	position: absolute;
-	top: 3%;
-	left: 5%;
-}
 
 #adminContainer{
 	background-color: #020202;
@@ -113,7 +94,7 @@ footer {
 
 #bigMessage {
     position: relative;
-    top: 15%;
+    top: 17%;
     transform: translateY(-50%); 
     text-align: center;
     font-family: "Helvetica Neue";
@@ -125,7 +106,7 @@ footer {
 #container1 { 
 	background-color: white;
 	width: 45%;
-	height: 65%;
+	height: 67%;
 	position: absolute;
 	left: 28%;
 	top: 27%;
@@ -151,7 +132,7 @@ footer {
 	height: 30%;
 	position: absolute;
 	left: 15%;
-	top: 45%;
+	top: 46%;
 }
 
 #personalinfo {
@@ -215,6 +196,6 @@ footer {
     padding: 14px 140px;
     font-size: 16px;
     position: absolute;
-    top: 97%;
+    top: 98%;
     left: 37%;
 }

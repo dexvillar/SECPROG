@@ -327,14 +327,13 @@ span.psw {
     display: inline-block;
 }
 
-#watchRow1 {
+#watchRow {
     position: relative;
     top: 20%;
-    
+/*    max-width: 80%;*/
 }
 
-#analogWatch1 {
-    background-image: url("/static/aionApp/Images/analogShop1.jpg");
+#analogWatch {
     text-align: center;
     max-height: 100%;
     margin: 0;
@@ -346,33 +345,7 @@ span.psw {
     display: inline-block;
 }
 
-#analogWatch2 {
-    background-image: url("/static/aionApp/Images/analogShop2.jpg");
-    text-align: center;
-    max-height: 100%;
-    margin: 0;
-    padding: 0;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    width: 20%; 
-    height: 30%;
-    display: inline-block;
-}
-
-#analogWatch3 {
-    background-image: url("/static/aionApp/Images/analogShop3.jpg");
-    text-align: center;
-    max-height: 100%;
-    margin: 0;
-    padding: 0;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    width: 20%; 
-    height: 30%;
-    display: inline-block; 
-}
-
-#analogWatch1 span, #analogWatch2 span, #analogWatch3 span {
+#analogWatch span {
     position: relative;
     display: block;
     width: 100%;
@@ -383,7 +356,7 @@ span.psw {
     transition: all 0.8s ease;
 }
 
-#analogWatch1 span:hover, #analogWatch2 span:hover, #analogWatch3 span:hover {
+#analogWatch span:hover {
     opacity: 0.9;
 }
 
