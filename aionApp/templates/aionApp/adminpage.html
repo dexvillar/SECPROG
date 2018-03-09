@@ -24,7 +24,9 @@
 
 	<div id="adminContainer">
 		<p id="bigMessage">REGISTER AN ACCOUNT</p>
-		<div id="container1">
+		<form class="addProductmodal-content animate"  action="{% url 'aionApp:adminPage' %}"method = "post">
+        {% csrf_token %}
+        <div id="container1">
 			<div id="info">
 				<div id="personalinfo">
 					Personal Information
@@ -44,9 +46,9 @@
                 <br> <br>
 				<span class="fontUP">Role: </span>
 				<div id="alignDropdown">
-                    <select class="dropDown"> ROLE TYPE 
-                        <option> PRODUCT MANAGER </option>
-                        <option> ACCOUNTING MANAGER </option>
+                    <select class="dropDown", name="role_type"> ROLE TYPE 
+                        <option vlaue='0'> PRODUCT MANAGER </option>
+                        <option value='1'> ACCOUNTING MANAGER </option>
 				    </select>
                 </div>
 				<br> <br>
@@ -66,7 +68,8 @@
                 <br> <br>
 			</div>
         </div>
-        <button id="submitButton" href="#">SUBMIT</button>	
+        <button id="submitButton" href="#">SUBMIT</button>
+        </form>
 	</div>
     <footer>Copyright © 2018 Xcite Interactive. All Rights Reserved.</footer>
 </body>

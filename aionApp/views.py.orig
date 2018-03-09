@@ -149,3 +149,16 @@ def signingUp(request):
     }
     return render(request, 'aionApp/home.html', context)
     
+<<<<<<< HEAD
+def adminPage(request):
+    if request.session["user"] > 0:
+        currentUser = get_object_or_404(user, user_id = request.session["user"])
+        context = {
+            'currentUser': currentUser,
+        }
+        return render(request, 'aionApp/adminpage.html', context)
+    else:
+        return render(request, 'aionApp/adminpage.html')
+    
+=======
+>>>>>>> 6f30618d02ccc54f3823f1b8142f30ade0b264d3
