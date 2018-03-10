@@ -185,19 +185,19 @@
                     <div class="spacer" style="margin-bottom: 1em;"> </div>
                     <p class="addProductBigText">EDIT A PRODUCT</p>
                     
-                    <p class="addProductSmallText">NAME: <input id="nameInput" type="text" name="productName"/></p>
+                    <p class="addProductSmallText">NAME: <input id="nameInput" type="text" name="productName" value="{{watches.name}}"/></p>
                     
                     <p class="addProductSmallText">DESCRIPTION:</p>
-                    <textarea id="descriptionInput" name="productDescription"></textarea>
+                    <textarea id="descriptionInput" name="productDescription">{{watches.description}}</textarea>
                     <br/>
                     <br/>
                     
                     <div class="col-md-6">
-                        <p class="addProductSmallText">STOCK: <input id="stockInput" type="number" name="productStock" min="0"/></p>
+                        <p class="addProductSmallText">STOCK: <input id="stockInput" type="number" name="productStock" min="0" value="{{watches.stock}}"/></p>
                     </div>
                     
                     <div class="col-md-6">
-                        <p class="addProductSmallText">PRICE: <input id="priceInput" type="number" name="productPrice" min="1"/></p>
+                        <p class="addProductSmallText">PRICE: <input id="priceInput" type="number" name="productPrice" min="1" value="{{watches.price}}"/></p>
                     </div>
                     
                     <p class="addProductSmallText" id="watchTypeText">WATCH TYPE: </p>
