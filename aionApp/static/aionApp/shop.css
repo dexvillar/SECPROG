@@ -330,7 +330,8 @@ span.psw {
 #watchRow {
     position: relative;
     top: 20%;
-/*    max-width: 80%;*/
+    left: 2.5%;
+    max-width: 95%;
 }
 
 #analogWatch {
@@ -366,6 +367,12 @@ span.psw {
     font-family: "Helvetica Neue";
     font-size: 20px;
     font-weight: bold;
+}
+
+#alignWatchText {
+    position: relative;
+    top: 30%;
+    display: inline-block;
 }
 
 .aWatch {

@@ -17,29 +17,8 @@ role_choices = {
     ('3', 'User'),
 }
 
-class watche(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.CharField(max_length=2048, default=0) 
-    quantity = models.PositiveIntegerField(default=0)
-    stock = models.PositiveIntegerField(default=0)
-    watch_type = models.CharField(max_length=16, choices=watch_choices, default='0')
-    price = models.FloatField(default=0)
-    watch_id = models.IntegerField(default = 0)
-    picture = models.ImageField(upload_to = 'watchPictures/', default = 'media/no-img.jpg')
-    user_id = models.PositiveIntegerField(default=0)
-
-    def __str__(self):
-        return self.name
-    
-class review(models.Model):
-    watch_id = models.IntegerField(default = 0)
-    reviews= models.CharField(max_length=255)
-    
-    def __str__(self):
-        return self.reviews
-    
 class user(models.Model):
-    user_id = models.PositiveIntegerField(default=0)
+    user_id = models.AutoField(primary_key=True)
     last_name = models.CharField(max_length=255)
     first_name = models.CharField(max_length=255)
     middle_initial = models.CharField(max_length=3)
@@ -50,9 +29,30 @@ class user(models.Model):
     
     def __str__(self):
         return self.last_name
+
+class watche(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.CharField(max_length=2048, default=0) 
+    quantity = models.PositiveIntegerField(default=0)
+    stock = models.PositiveIntegerField(default=0)
+    watch_type = models.CharField(max_length=16, choices=watch_choices, default='0')
+    price = models.FloatField(default=0)
+    watch_id = models.AutoField(primary_key=True)
+    picture = models.ImageField(upload_to = 'watchPictures/', default = 'media/no-img.jpg')
+    user_id = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.name
+    
+class review(models.Model):
+    reviews = models.CharField(max_length=255)
+    watch_id = models.PositiveIntegerField(default=0)
+    
+    def __str__(self):
+        return self.reviews
     
 class billing_addres(models.Model):
-    house_number=models.IntegerField(default=0)
+    house_number = models.IntegerField(default=0)
     street = models.CharField(max_length=255)
     subdivision = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
@@ -74,20 +74,20 @@ class shipping_addres(models.Model):
         return self.city
     
 class checkout(models.Model):
-    user_id = models.IntegerField(default=0)
     card_number = models.IntegerField()
     security_number = models.IntegerField()
 #    expiration_date = models.DateField(auto_now=False)
     total = models.FloatField(default=0)
+    user_id = models.PositiveIntegerField(default=0)
     
     def __str__(self):
         return self.card_number
     
 class sale(models.Model):
-    watch_id = models.IntegerField(default = 0)
     total_sales = models.FloatField(default=0)
     product_type = models.FloatField(default=0)
     product = models.FloatField(default=0)
+    watch_id = models.PositiveIntegerField(default=0)
     
     def __str__(self):
         return self.product

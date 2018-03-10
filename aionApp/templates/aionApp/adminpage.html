@@ -12,7 +12,7 @@
 <body>
     <div id="navbar">
         <p id="logo" style="position: absolute; left: -3%;"> 
-            <a href="/aionApp/exitSession/"><img src="{% static 'aionApp/Images/watch.png' %}" id="watch"></a>
+            <a href="/aionApp/adminPage/"><img src="{% static 'aionApp/Images/watch.png' %}" id="watch"></a>
              AION
         </p>
 
@@ -24,7 +24,7 @@
 
 	<div id="adminContainer">
 		<p id="bigMessage">REGISTER AN ACCOUNT</p>
-		<form class="addProductmodal-content animate"  action="{% url 'aionApp:adminPage' %}"method = "post">
+		<form class="addProductmodal-content animate"  action="{% url 'aionApp:addingAdmin' %}"method = "post">
         {% csrf_token %}
         <div id="container1">
 			<div id="info">
@@ -47,8 +47,8 @@
 				<span class="fontUP">Role: </span>
 				<div id="alignDropdown">
                     <select class="dropDown", name="role_type"> ROLE TYPE 
-                        <option vlaue='0'> PRODUCT MANAGER </option>
-                        <option value='1'> ACCOUNTING MANAGER </option>
+                        <option value="0" selected> PRODUCT MANAGER </option>
+                        <option value="1"> ACCOUNTING MANAGER </option>
 				    </select>
                 </div>
 				<br> <br>

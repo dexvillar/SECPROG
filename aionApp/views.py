@@ -18,19 +18,17 @@ def registerPage(request):
     return render(request, 'aionApp/register.html')
 
 def adminPage(request):
-
-    
-    if request.session["user"]>0:
-        currentUser = get_object_or_404(user, user_id = request.session["user"])
-        context = {
-            'currentUser': currentUser,
-        }
-        
-        addingUser = user(last_name = request.POST.get('last_name', False), first_name = request.POST.get('first_name', False), middle_initial =request.POST.get('middle_initial', False), email = request.POST.get('email', False), user_name = request.POST.get('user_name', False), password = request.POST.get('password1', False), role_type=request.POST.get('role_type.value', False))
-        addingUser.save()
-        return render(request, 'aionApp/adminpage.html', context)
-    else:
-        return render(request, 'aionApp/adminpage.html')
+#    if request.session["user"] > 0:
+#        currentUser = get_object_or_404(user, user_id = request.session["user"])
+#        context = {
+#            'currentUser': currentUser,
+#        }
+#        
+#        addingUser = user(last_name = request.POST.get('last_name', False), first_name = request.POST.get('first_name', False), middle_initial =request.POST.get('middle_initial', False), email = request.POST.get('email', False), user_name = request.POST.get('user_name', False), password = request.POST.get('password1', False), role_type=request.POST.get('role_type.value', False))
+#        addingUser.save()
+#        return render(request, 'aionApp/adminpage.html', context)
+#    else:
+    return render(request, 'aionApp/adminpage.html')
 
 def homeLogIn(request):
     userList = user.objects.all()
@@ -47,7 +45,9 @@ def homeLogIn(request):
                 'currentUser': currentUser,
             }
             
-            if choice == "2":
+            if choice == "0":
+                return shopPage(request)
+            elif choice == "2":
                 return adminPage(request)
             else:
                 return render(request, 'aionApp/home.html', context)
@@ -79,7 +79,7 @@ def shopLogIn(request):
             if choice == "2":
                 return adminPage(request)
             else:
-                return render(request, 'aionApp/home.html', context)
+                return render(request, 'aionApp/shop.html', context)
             
         else:
                 error = True
@@ -128,7 +128,7 @@ def addToCart(request):
         'currentUser': currentUser,
         'addedProducts': addedProducts,
     }
-    addingWatch = watche(quantity = request.POST['productQuantity'], user_id = request.POST['user'])
+    addingWatch = watche(quantity = request.POST['productQuantity'], user_id = request.session["user"])
     addingWatch.save()
     return render(request, 'aionApp/shop.html', context)
     
@@ -149,3 +149,7 @@ def signingUp(request):
     }
     return render(request, 'aionApp/home.html', context)
     
+def addingAdmin(request):
+    addingAdmin = user(last_name = request.POST['last_name'], first_name = request.POST['first_name'], middle_initial = request.POST['middle_initial'], email = request.POST['email'], role_type = request.POST['role_type'], user_name = request.POST['user_name'], password = request.POST['password1'])
+    addingAdmin.save()
+    return render(request, 'aionApp/adminpage.html')
