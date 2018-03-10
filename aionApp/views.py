@@ -139,7 +139,34 @@ def signingUp(request):
     }
     return render(request, 'aionApp/home.html', context)
     
-def addingAdmin(request):
+def addAdmin(request):
     addingAdmin = user(last_name = request.POST['last_name'], first_name = request.POST['first_name'], middle_initial = request.POST['middle_initial'], email = request.POST['email'], role_type = request.POST['role_type'], user_name = request.POST['user_name'], password = request.POST['password1'])
     addingAdmin.save()
     return render(request, 'aionApp/adminpage.html')
+
+def deleteProduct(request, id):
+    selectedProducts = get_object_or_404(watche, id=id)
+    selectedProducts.delete()
+
+    currentUser = get_object_or_404(user, user_id=request.session["user"])
+    addedProducts = watche.objects.all()
+    context = {
+        'currentUser': currentUser,
+        'addedProducts': addedProducts,
+    }
+    return render(request, 'aionApp/shop.html', context)
+
+def editProduct(request, id):
+    selectedProducts = get_object_or_404(watche, id=id)
+    selectedProducts.delete()
+
+    currentUser = get_object_or_404(user, user_id=request.session["user"])
+    addedProducts = watche.objects.all()
+    context = {
+        'currentUser': currentUser,
+        'addedProducts': addedProducts,
+    }
+    addingProduct = watche(name = request.POST['productName'], description = request.POST['productDescription'], stock = request.POST['productStock'], price = request.POST['productPrice'], watch_type = request.POST['watchType'], picture = "watchPictures/" + request.POST['productPicture'], user_id = request.session["user"])
+    addingProduct.save()
+    return render(request, 'aionApp/shop.html', context)
+    

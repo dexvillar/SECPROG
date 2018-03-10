@@ -14,5 +14,7 @@ urlpatterns= [
     url(r'^addProduct/$', views.addProduct, name='addProduct'),
     url(r'^addToCart/$', views.addToCart, name='addToCart'),
     url(r'^signingUp/$', views.signingUp, name='signingUp'),
-    url(r'^addingAdmin/$', views.addingAdmin, name='addingAdmin'),
+    url(r'^addAdmin/$', views.addAdmin, name='addAdmin'),
+    url(r'^deleteProduct/(?P<id>[\w\-]+)$', views.deleteProduct, name='deleteProduct'),
+    url(r'^editProduct/(?P<id>[\w\-]+)$', views.editProduct, name='editProduct'),
 ]
