@@ -31,22 +31,22 @@ class user(models.Model):
         return self.last_name
 
 class watche(models.Model):
+    watch_id = models.PositiveIntegerField(default=0)
+    user_id = models.PositiveIntegerField(default=0)
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=2048, default=0) 
     quantity = models.PositiveIntegerField(default=0)
     stock = models.PositiveIntegerField(default=0)
     watch_type = models.CharField(max_length=16, choices=watch_choices, default='0')
     price = models.FloatField(default=0)
-    watch_id = models.AutoField(primary_key=True)
     picture = models.ImageField(upload_to = 'watchPictures/', default = 'media/no-img.jpg')
-    user_id = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.name
     
 class review(models.Model):
-    reviews = models.CharField(max_length=255)
-    watch_id = models.PositiveIntegerField(default=0)
+    watch_id = models.IntegerField(default = 0)
+    reviews= models.CharField(max_length=255)
     
     def __str__(self):
         return self.reviews
@@ -74,20 +74,20 @@ class shipping_addres(models.Model):
         return self.city
     
 class checkout(models.Model):
+    user_id = models.PositiveIntegerField(default=0)
     card_number = models.IntegerField()
     security_number = models.IntegerField()
 #    expiration_date = models.DateField(auto_now=False)
     total = models.FloatField(default=0)
-    user_id = models.PositiveIntegerField(default=0)
     
     def __str__(self):
         return self.card_number
     
 class sale(models.Model):
+    watch_id = models.PositiveIntegerField(default=0)
     total_sales = models.FloatField(default=0)
     product_type = models.FloatField(default=0)
     product = models.FloatField(default=0)
-    watch_id = models.PositiveIntegerField(default=0)
     
     def __str__(self):
         return self.product

@@ -101,9 +101,9 @@
                     
                     <p class="addProductSmallText" id="watchTypeText">WATCH TYPE: </p>
                     <select name="watchType" class="dropDown">
-                        <option value="analog" selected>ANALOG WATCH</option>
-                        <option value="digital">DIGITAL WATCH</option>    
-                        <option value="smart">SMART WATCH</option>
+                        <option value="0">ANALOG WATCH</option>
+                        <option value="1">DIGITAL WATCH</option>    
+                        <option value="2">SMART WATCH</option>
                     </select>
                     
                     <div class="spacer" style="margin-bottom: 0.4em;"> </div>
@@ -128,10 +128,6 @@
                      <div class="inline-block" id="analogWatch" style="background-image: url({{ MEDIA_URL }}{{ watches.picture.url }})">
                         <span class="watchText"><a href="#" class="aWatch" onclick="openModal{{watches.id}}()">QUICK VIEW</a></span>
                     </div>
-<!--
-                    <p class="watchText" id ="alignWatchText">{{watches.name}}</p>
-                        <p class="watchText" id="alignWatchText">${{watches.price}}</p>
--->
                     <div class="inline-block" style="margin-right: 5em;"> </div>
                 {% endfor %}
                 </div>

@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from .models import watche, review, user, billing_addres, shipping_addres, checkout, sale
+from .models import user, watche, review, billing_addres, shipping_addres, checkout, sale
 
 # Create your views here.
 
@@ -18,16 +18,6 @@ def registerPage(request):
     return render(request, 'aionApp/register.html')
 
 def adminPage(request):
-#    if request.session["user"] > 0:
-#        currentUser = get_object_or_404(user, user_id = request.session["user"])
-#        context = {
-#            'currentUser': currentUser,
-#        }
-#        
-#        addingUser = user(last_name = request.POST.get('last_name', False), first_name = request.POST.get('first_name', False), middle_initial =request.POST.get('middle_initial', False), email = request.POST.get('email', False), user_name = request.POST.get('user_name', False), password = request.POST.get('password1', False), role_type=request.POST.get('role_type.value', False))
-#        addingUser.save()
-#        return render(request, 'aionApp/adminpage.html', context)
-#    else:
     return render(request, 'aionApp/adminpage.html')
 
 def homeLogIn(request):
