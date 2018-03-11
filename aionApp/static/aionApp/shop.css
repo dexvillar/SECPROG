@@ -520,7 +520,24 @@ span.psw {
     font-family: "Helvetica Neue";
     font-size: 18px;
     font-weight: bold;
-    display:inline-block
+    display:inline-block;
+}
+
+#checkReviewsText {
+    color: #A29C97;
+    font-family: "Helvetica Neue";
+    font-size: 18px;
+    font-weight: bold;
+    display:inline-block;
+    text-decoration: none;
+    position: relative;
+    left: 33%;
+}
+
+#checkReviewsText:hover {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
 }
 
 #stock {
