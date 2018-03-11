@@ -1,0 +1,115 @@
+<html>
+    <head>
+        {% load static %}
+        <title>Edit Profile</title>
+        <link rel="icon" href="{% static 'aionApp/Images/watch.png' %}" type="image" sizes="16x16">
+        <link rel="stylesheet" type="text/css" href="{% static 'aionApp/editprofile.css' %}">
+    </head>
+    
+    <body>
+        <div id="navbar">
+            <p id="logo" style="position: absolute; left: -3%; bottom: -33%;">  
+                <a href="/aionApp/exitSession/"><img src="{% static 'aionApp/Images/watch.png' %}" id="watch"></a>
+                 AION
+            </p>
+            
+            <form class="searchContainer">
+                <input type="text" id="searchBar" placeholder="SEARCH AION">
+                <a href="#"><img class="searchIcon" src="{% static 'aionApp/Images/search.png' %}"></a>
+            </form>
+            
+            <span style="position: absolute; left: 65%;">
+                <a href="/aionApp/shopPage/">SHOP</a>
+            </span>
+        </div>
+        
+        <div id="registerContainer">
+            <p id="bigMessage">EDIT PROFILE</p>
+            <form class="addProductmodal-content animate"  action="{% url 'aionApp:signingUp' %}"method = "post">
+                {% csrf_token %}
+                <div id="container1">
+                    <div id="info">
+                        <div id="personalinfo">
+                            PERSONAL INFORMATION
+                        </div>
+                        <br>
+                        <span class="fontUP">Last Name: {{currentUser.last_name}}</span> 
+                        <div id="align"> <input type="text" class="inputRegister" name="last_name" value={{currentUser.last_name}}> </div>
+                        <br> <br>
+                        <span class="fontUP">First Name:</span>
+                        <div id="align"> <input type="text" class="inputRegister" name="first_name" value={{currentUser.first_name}}> </div>
+                        <br> <br>
+                        <span class="fontUP">Middle Initial:</span>
+                        <div id="align"> <input type="text" class="inputRegister" name="middle_initial" pattern=".{1,3}" value={{currentUser.middle_initial}}> </div>
+                        <br> <br>
+                        <span class="fontUP">E-mail Address:</span>
+                        <div id="align"> <input type="email" class="inputRegister" name="email" value={{currentUser.email}}> </div>
+                        <br> <br>
+
+                        <div id="billingaddress">
+                            BILLING ADDRESS
+                        </div>
+                        <br>
+                        <span class="fontUP">House No.:</span>
+                        <div id="align"> <input type="number" class="inputRegister" name="bHouseNum" min="1" value={{currentUser.billing_add.house_number}}> </div>
+                        <br> <br>
+                        <span class="fontUP">Street:</span>
+                        <div id="align"> <input type="text" class="inputRegister" name="bStreet" value={{currentUser.billing_add.street}}> </div>
+                        <br> <br>
+                        <span class="fontUP">Subdivision:</span>
+                        <div id="align"> <input type="text" class="inputRegister" name="bSubdivision" value={{currentUser.billing_add.subdivision}}> </div>
+                        <br> <br>
+                        <span class="fontUP">City:</span>
+                        <div id="align"> <input type="text" class="inputRegister" name="bCity" value={{currentUser.billing_add.city}}> </div>
+                        <br> <br>
+                        <span class="fontUP">Postal Code:</span>
+                        <div id="align"> <input type="text" class="inputRegister" name="bPostal" value={{currentUser.billing_add.postal_code}}> </div>
+                        <br> <br>
+                        <span class="fontUP">Country:</span>
+                        <div id="align"> <input type="text" class="inputRegister" name="bCountry" value={{currentUser.billing_add.country}}> </div>
+                        <br> <br>
+                    </div>
+                </div>
+
+                <div id="container2">
+                    <div id="accountinfo">
+                        ACCOUNT INFORMATION
+                    </div>
+                        <br>
+                        <span class="fontUP">Username:</span>
+                        <div id="align2"> <input type="text" class="inputRegister" name="user_name" value={{currentUser.user_name}}> </div>
+                        <br> <br>
+                        <span class="fontUP">Password:</span>
+                        <span><button><a href="http://google.com" class="button">Change Password</a></button></span> 
+                        <br> <br>
+                </div>
+
+                <div id="container3">
+                    <div id="shippingaddress">
+                        SHIPPING ADDRESS
+                    </div>
+                        <br>
+                        <span class="fontUP">House No.: </span>
+                        <div id="align2"> <input type="number" class="inputRegister" name="sHouseNum" min="1" value={{currentUser.billing_add.house_number}}> </div>
+                        <br> <br>
+                        <span class="fontUP">Street:</span>
+                        <div id="align2"> <input type="text" class="inputRegister" name="sStreet" value={{currentUser.billing_add.street}}> </div>
+                        <br> <br>
+                        <span class="fontUP">Subdivision:</span>
+                        <div id="align2"> <input type="text" class="inputRegister" name="sSubdivision" value={{currentUser.billing_add.subdivision}}> </div>
+                        <br> <br>
+                        <span class="fontUP">City:</span>
+                        <div id="align2"> <input type="text" class="inputRegister" name="sCity"value={{currentUser.billing_add.city}}> </div>
+                        <br> <br>
+                        <span class="fontUP">Postal Code:</span>
+                        <div id="align2"> <input type="text" class="inputRegister" name="sPostal" value={{currentUser.billing_add.postal_code}}> </div>
+                        <br> <br>
+                        <span class="fontUP">Country:</span>
+                        <div id="align2"> <input type="text" class="inputRegister" name="sCountry" value={{currentUser.billing_add.country}}> </div>
+                </div>
+                <button id="submitButton" href="#">UPDATE</button>
+            </form>
+        </div>
+        <footer>Copyright © 2018 Xcite Interactive. All Rights Reserved.</footer>
+    </body>
+</html>

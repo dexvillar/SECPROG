@@ -1,0 +1,180 @@
+<html>
+<head>
+    {% load static %}
+	<title> Profile </title>
+	<link rel="icon" href="{% static 'aionApp/Images/watch.png' %}" type="image" sizes="16x16">
+	<link rel="stylesheet" type="text/css" href="{% static 'aionApp/purchasepage.css' %}">
+</head>
+<body>
+	<div id="logocontainer">
+		<img src="{% static 'aionApp/Images/watch.png' %}" height="60px" width="60px">
+		<div id="text"> AION </div>
+	</div>
+	
+	<div class="tab">
+	  <button class="tablinks" onclick="openCity(event, 'maincontainer1')">Profile</button>
+	  <button class="tablinks" onclick="openCity(event, 'maincontainer2')">Purchase History</button>
+	</div>
+
+	<div id="maincontainer1" class="tabcontent">
+	    <div class="blueblock">
+			<div id="title">My Profile </div>
+					<li style="float: right;" class="smalltext" onclick="uploadFile();">
+						<div class="bar-title-box"> <button class="buttondesign" id = "changepw"> Change Password </button> </div>
+					</li>
+					<li style="float: right;" class="smalltext" onclick=";">
+						<div class="bar-title-box"> <button class="buttondesign" id="editprof"> Edit Profile </button> </div>
+					</li>
+				
+		</div>
+		
+	<div id="container1">
+		<div id="info">
+			<div id="personalinfo">
+				Personal Information
+			</div>
+			<br>
+			<span class="fontUP">Last Name:</span>
+			<br> <br>
+			<span class="fontUP">First Name:</span>
+			<br> <br>
+			<span class="fontUP">Middle Initial:</span>
+			<br> <br>
+			<span class="fontUP">E-mail Address:</span>
+			<br> <br>
+			
+			<div id="billingaddress">
+				Billing Address
+			</div>
+			<br>
+			<span class="fontUP">House No.:</span>
+			<br> <br>
+			<span class="fontUP">Street:</span>
+			<br> <br>
+			<span class="fontUP">Subdivision:</span>
+			<br> <br>
+			<span class="fontUP">City:</span>
+			<br> <br>
+			<span class="fontUP">Postal Code:</span>
+			<br> <br>
+			<span class="fontUP">Country:</span>
+			<br> <br>
+			
+			
+		</div>
+	</div>
+	
+	<div id="container2">
+		<div id="accountinfo">
+			Account Information
+		</div>
+			<br>
+			<span class="fontUP">Username:</span>
+			<br> <br>
+			<span class="fontUP">Password:</span>
+			<br> <br>
+			
+		<div id="shippingaddress">
+			Shipping Address
+		</div>
+			<br>
+			<span class="fontUP">House No.:</span>
+			<br> <br>
+			<span class="fontUP">Street:</span>
+			<br> <br>
+			<span class="fontUP">Subdivision:</span>
+			<br> <br>
+			<span class="fontUP">City:</span>
+			<br> <br>
+			<span class="fontUP">Postal Code:</span>
+			<br> <br>
+			<span class="fontUP">Country:</span>
+			<br> <br>
+		
+		
+	</div>
+			
+	</div>
+</div>
+
+<div id="maincontainer2" class="tabcontent">
+	
+  <div id="watchcontainer" align="middle">
+			<img src="watch1.png" width="200px" height="200px">
+			<div id="watchinfo">
+			<div id="watchname"> *insert watchname here* </div>
+			<button id="View info" class="buttondesign2" onclick="viewInfo()"> View Info </button>
+			<button id="Leave a review" class="buttondesign2" onclick="leavereview()"> Leave a review </button>
+			</div>
+		</div>
+		
+		<div id="watchcontainer" align="middle">
+			<img src="watch2.png" width="200px" height="200px">
+			<div id="watchinfo">
+			<div id="watchname"> *insert watchname here* </div>
+			<button id="viewInfo" class="buttondesign2" onclick="viewInfo()"> View Info </button>
+			<button id="addReview" class="buttondesign2" onclick="leavereview()"> Leave a review </button>
+			</div>
+		</div>
+		
+		<div id="overlay">
+			<div id="reviewOverlay">
+				<div id="textarea">
+					Leave a review
+					<div id="close" onclick="off()"> X </div>
+					<textarea rows="7" cols="50"> </textarea>
+				</div>
+				<button class="buttondesign2" id="reviewbutton"> Add review </button>
+			</div>
+		</div>
+		
+		<div id="overlay2">
+			<div id="infoOverlay">
+				<div id="producttitle"> <b> Product Details </b> </div>
+				<div id="close2" onclick="off()"> X </div>
+		 		<div id="photo"> <img src="watch1.png" height="175px" width="175px"> </div>
+				<div id="wInfo">
+					<div id="info3">Product name: <br> </div>
+					<div id="info3">Description: <br> </div>
+					<div id="info3">Quantity: <br> </div>
+					<div id="info3"> Price: <br> </div>
+				</div>
+			</div>
+		</div>
+
+<script>
+	function openCity(evt, cityName) {
+		var i, tabcontent, tablinks;
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		}
+		tablinks = document.getElementsByClassName("tablinks");
+		for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
+		}
+		document.getElementById(cityName).style.display = "block";
+		evt.currentTarget.className += " active";
+	}
+	
+	function leavereview(){
+		document.getElementById("reviewOverlay").style.display = "block";
+		document.getElementById("overlay").style.display = "block";
+	}
+	
+	function viewInfo(){
+		document.getElementById("infoOverlay").style.display = "block";
+		document.getElementById("overlay2").style.display = "block";
+	}
+	
+	function off(){
+		document.getElementById("reviewOverlay").style.display = "none";
+		document.getElementById("overlay").style.display = "none";
+		document.getElementById("overlay2").style.display = "none";
+		document.getElementById("infoOverlay").style.display = "none";
+		
+	}
+</script>
+     
+</body>
+</html> 
