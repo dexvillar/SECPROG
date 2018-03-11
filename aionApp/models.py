@@ -17,6 +17,30 @@ role_choices = {
     ('3', 'User'),
 }
 
+class billing_addres(models.Model):
+    #user=models.ForeignKey(user, on_delete=models.CASCADE)
+    house_number = models.IntegerField(default=0)
+    street = models.CharField(max_length=255)
+    subdivision = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    postal_code = models.CharField(max_length=255)
+    country = models.CharField(max_length=255)
+    
+    def __str__(self):
+        return self.city
+    
+class shipping_addres(models.Model):
+    #user=models.ForeignKey(user, on_delete=models.CASCADE)
+    house_number = models.IntegerField(default=0)
+    street = models.CharField(max_length=255)
+    subdivision = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    postal_code = models.CharField(max_length=255)
+    country = models.CharField(max_length=255)
+    
+    def __str__(self):
+        return self.city
+
 class user(models.Model):
     user_id = models.AutoField(primary_key=True)
     last_name = models.CharField(max_length=255)
@@ -26,6 +50,8 @@ class user(models.Model):
     password = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     role_type = models.CharField(max_length=16, choices=role_choices, default='3')
+    billing_add=models.ForeignKey(billing_addres)
+    shipping_add=models.ForeignKey(shipping_addres)
     
     def __str__(self):
         return self.last_name
@@ -51,27 +77,7 @@ class review(models.Model):
     def __str__(self):
         return self.reviews
     
-class billing_addres(models.Model):
-    house_number = models.IntegerField(default=0)
-    street = models.CharField(max_length=255)
-    subdivision = models.CharField(max_length=255)
-    city = models.CharField(max_length=255)
-    postal_code = models.CharField(max_length=255)
-    country = models.CharField(max_length=255)
-    
-    def __str__(self):
-        return self.city
-    
-class shipping_addres(models.Model):
-    house_number = models.IntegerField(default=0)
-    street = models.CharField(max_length=255)
-    subdivision = models.CharField(max_length=255)
-    city = models.CharField(max_length=255)
-    postal_code = models.CharField(max_length=255)
-    country = models.CharField(max_length=255)
-    
-    def __str__(self):
-        return self.city
+
     
 class checkout(models.Model):
     user_id = models.PositiveIntegerField(default=0)

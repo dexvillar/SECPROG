@@ -17,4 +17,5 @@ urlpatterns= [
     url(r'^addAdmin/$', views.addAdmin, name='addAdmin'),
     url(r'^deleteProduct/(?P<id>[\w\-]+)$', views.deleteProduct, name='deleteProduct'),
     url(r'^editProduct/(?P<id>[\w\-]+)$', views.editProduct, name='editProduct'),
+    url(r'^profilePage/$', views.profilePage, name='profilePage'),
 ]
