@@ -20,6 +20,14 @@ def registerPage(request):
 def adminPage(request):
     return render(request, 'aionApp/adminpage.html')
 
+def profilePage(request):
+    if request.session["user"] > 0:
+        currentUser = get_object_or_404(user, user_id = request.session["user"])
+    context = {
+            'currentUser': currentUser,
+        }
+    return render(request, 'aionApp/profile.html', context)
+
 def homeLogIn(request):
     userList = user.objects.all()
     error = False
