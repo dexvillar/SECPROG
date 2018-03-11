@@ -30,7 +30,7 @@
             {% if currentUser.user_id > 0 %}
                 {% if currentUser.role_type != "0" %}
                     <span style="position: absolute; left: 47%;">
-                        <a href="#"><img src="{% static 'aionApp/Images/cart.png' %}" id="cart"></a>
+                        <a href="/aionApp/profilePage/"><img src="{% static 'aionApp/Images/profile.png' %}" id="profile"></a>
                         <a href="#">SHOP</a>
                         <a href="/aionApp/exitSession/">LOG OUT</a>    
                     </span>
@@ -164,7 +164,7 @@
                             <br/>
                             <br/>
                             {% if currentUser.user_id > 0 %}
-                                <button id="addToCart" href="#">ADD TO CART</button>
+                                <button id="addToCart" href="#">BUY</button>
                             {% endif %}
                         </div>
                     </div>

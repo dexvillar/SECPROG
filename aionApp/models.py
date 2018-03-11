@@ -50,8 +50,6 @@ class user(models.Model):
     password = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     role_type = models.CharField(max_length=16, choices=role_choices, default='3')
-    billing_add=models.ForeignKey(billing_addres)
-    shipping_add=models.ForeignKey(shipping_addres)
     
     def __str__(self):
         return self.last_name
@@ -76,9 +74,7 @@ class review(models.Model):
     
     def __str__(self):
         return self.reviews
-    
 
-    
 class checkout(models.Model):
     user_id = models.PositiveIntegerField(default=0)
     card_number = models.IntegerField()
