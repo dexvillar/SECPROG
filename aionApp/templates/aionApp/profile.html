@@ -1,0 +1,121 @@
+<html>
+    <head>
+        {% load static %}
+        <title>Register Page</title>
+        <link rel="icon" href="{% static 'aionApp/Images/watch.png' %}" type="image" sizes="16x16">
+        <link rel="stylesheet" type="text/css" href="{% static 'aionApp/profile.css' %}">
+    </head>
+    
+    <body>
+        <div id="navbar">
+            <p id="logo" style="position: absolute; left: -3%; bottom: -33%;">  
+                <a href="/aionApp/homePage/"><img src="{% static 'aionApp/Images/watch.png' %}" id="watch"></a>
+                 AION
+            </p>
+            
+            <form class="searchContainer">
+                <input type="text" id="searchBar" placeholder="SEARCH AION">
+                <a href="#"><img class="searchIcon" src="{% static 'aionApp/Images/search.png' %}"></a>
+            </form>
+            
+            <span style="position: absolute; left: 27%;">
+                <a href="/aionApp/shopPage/">SHOP</a>
+                <a href="/aionApp/purchasePage/">PURCHASES</a>
+                <a href="/aionApp/editProfilePage/">EDIT PROFILE</a>
+                <a href="/aionApp/exitSession/">LOG OUT</a>
+            </span>
+        </div>
+        
+        <div id="registerContainer">
+            <p id="bigMessage">PROFILE</p>
+            <form class="addProductmodal-content animate"  action="{% url 'aionApp:signingUp' %}"method = "post">
+                {% csrf_token %}
+                <div id="container1">
+                    <div id="info">
+                        <div id="personalinfo">
+                            PERSONAL INFORMATION
+                        </div>
+                        <br>
+                        <span class="fontUP">Last Name:</span> 
+                        <span  class="fontUP" name="last_name">{{currentUser.last_name}} </span>
+                        <br> <br>
+                        <span class="fontUP">First Name:</span>
+                        <span  class="fontUP" name="first_name">{{currentUser.first_name}} </span>
+                        <br> <br>
+                        <span class="fontUP">Middle Initial:</span>
+                        <span  class="fontUP" name="middle_initial">{{currentUser.middle_initial}} </span>
+                        <br> <br>
+                        <span class="fontUP">E-mail Address:</span>
+                        <span  class="fontUP" name="email">{{currentUser.email}} </span>
+                        <br> <br>
+
+                        <div id="billingaddress">
+                            BILLING ADDRESS
+                        </div>
+                        <br>
+                        <span class="fontUP">House No.:</span>
+                        <span  class="fontUP" name="bHouseNum">{{currentUser.billing_add.house_number}} </span>
+                        <br> <br>
+                        <span class="fontUP">Street:</span>
+                        <span  class="fontUP" name="bStreet">{{currentUser.billing_add.street}} </span>
+                        <br> <br>
+                        <span class="fontUP">Subdivision:</span>
+                        <span  class="fontUP" name="bSubdivision">{{currentUser.billing_add.subdivision}}</span>
+                        <br> <br>
+                        <span class="fontUP">City:</span>
+                        <span  class="fontUP" name="bCity">{{currentUser.billing_add.city}}</span>
+                        <br> <br>
+                        <span class="fontUP">Postal Code:</span>
+                        <span  class="fontUP" name="bPostal">{{currentUser.billing_add.postal_code}} </span>
+                        <br> <br>
+                        <span class="fontUP">Country:</span>
+                        <span  class="fontUP" name="bCountry">{{currentUser.billing_add.country}} </span>
+                        <br> <br>
+                    </div>
+                </div>
+
+                <div id="container2">
+                    <div id="accountinfo">
+                        ACCOUNT INFORMATION
+                    </div>
+                        <br>
+                        <span class="fontUP">Username:</span>
+                        <span  class="fontUP" name="username"> </span>
+                        <br> <br>
+                        <span class="fontUP">Password:</span>
+                       <span  class="fontUP" name="password1"> </span>
+                        <br> <br>
+                        <span class="fontUP">Confirm password:</span>
+                        <span  class="fontUP" name="password2"> </span>
+                        <br> <br>
+                </div>
+
+                <div id="container3">
+                    <div id="shippingaddress">
+                        SHIPPING ADDRESS
+                    </div>
+                        <br>
+                        <span class="fontUP">House No.: </span>
+                        <span  class="fontUP" name="sHouseNum">{{currentUser.shipping_add.house_number}} </span>
+                        <br> <br>
+                        <span class="fontUP">Street:</span>
+                        <span  class="fontUP" name="sStreet">{{currentUser.shipping_add.street}} </span>
+                        <br> <br>
+                        <span class="fontUP">Subdivision:</span>
+                        <span  class="fontUP" name="sSubdivision">{{currentUser.shipping_add.subdivision}} </span>
+                        <br> <br>
+                        <span class="fontUP">City:</span>
+                        <span  class="fontUP" name="sCity"> {{currentUser.shipping_add.city}}</span>
+                        <br> <br>
+                        <span class="fontUP">Postal Code:</span>
+                        <span  class="fontUP" name="sPostal"> {{currentUser.shipping_add.postal_code}}</span>
+                        <br> <br>
+                        <span class="fontUP">Country:</span>
+                        <span  class="fontUP" name="sCountry"> {{currentUser.shipping_add.country}}</span>
+                </div>
+                <button id="submitButton" href="#">SUBMIT</button>
+            </form>
+        </div>
+        <footer>Copyright © 2018 Xcite Interactive. All Rights Reserved.</footer>
+    </body>
+</html>
