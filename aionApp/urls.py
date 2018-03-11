@@ -18,4 +18,6 @@ urlpatterns= [
     url(r'^deleteProduct/(?P<id>[\w\-]+)$', views.deleteProduct, name='deleteProduct'),
     url(r'^editProduct/(?P<id>[\w\-]+)$', views.editProduct, name='editProduct'),
     url(r'^profilePage/$', views.profilePage, name='profilePage'),
+    url(r'^purchasePage/$', views.purchasePage, name='purchasePage'),
+    url(r'^editProfilePage/$', views.editProfilePage, name='editProfilePage'),
 ]
