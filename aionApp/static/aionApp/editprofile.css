@@ -1,0 +1,258 @@
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+#navbar {
+    display: flex;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    position: fixed;
+    overflow: hidden;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 5.3em;
+    border-top-style: ridge;
+    border-top-color: #d3d3d3;
+    border-top-width: thin;
+    background-color: white;
+    border-color: #c7c7c7;
+    opacity: 0.9;
+}
+
+#navbar a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: "Helvetica Neue";
+    font-weight: bold;
+    margin-left: 1.3em;
+    cursor: pointer;
+}
+
+#navbar a:hover {
+    color: #A6ACAF;
+}
+
+#navbar a.active {
+    background-color: #4CAF50;
+    color: black;
+}
+
+.searchContainer {
+    text-align: center;
+    position: absolute;
+    right: -25%;
+    bottom: 50%;
+    width: 35%;
+    display: block;
+    margin: 0 auto;
+}
+
+#searchBar{
+    position: absolute;
+    top: 35%;
+    right: 75%;
+    margin: 0 auto;
+    width: 65%;
+    height: 40px;
+    padding: 0 20px;
+    font-size: 1.3rem;
+    border: 1px solid black;
+    border-radius: 25px;
+    font-family: "Helvetica Neue";
+    outline: none;
+}
+
+.searchIcon{
+    position: absolute;
+    top: 62%;
+    right: 78%;
+    width: 4%;
+    height: 70%;
+}
+
+#watch {
+    position: relative;
+    width: 55px;
+    height: 55px;
+    margin-left: 2px;
+}
+
+#logo {
+    font-size: 35px;
+    font-family: "Helvetica Neue";
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+}
+
+footer {
+    background-color: #1a1919;
+    height: 7%;
+    display: block;
+    padding-top: 30px;
+    position: relative;
+    text-align: center;
+    font-family: "Helvetica Neue";
+    font-size: 15px;
+    position: relative;
+    color: white;
+}
+
+#text {
+	position: absolute;
+	top: 3%;
+	left: 5%;
+}
+
+#registerContainer{
+	background-color: #020202;
+    width: 100%;
+    height: 125%;
+    max-height: 125%;
+    margin: 0;
+    padding: 0;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+#bigMessage {
+    position: relative;
+    top: 19%;
+    transform: translateY(-50%); 
+    text-align: center;
+    font-family: "Helvetica Neue";
+    font-size: 40px;
+    color: white;
+    font-weight: bold;
+}
+
+#container1{
+	background-color: white;
+	width: 45%;
+	height: 70%;
+	position: absolute;
+	left: 2.5%;
+	top: 35%;
+}
+
+#container2{
+	background-color: white;
+	left: 52.5%;
+	width: 45%;
+	height: 63%;
+	position: absolute;
+	top: 35%;
+}
+
+#container3 {
+	background-color: white;
+	left: 52.5%;
+	width: 45%;
+	height: 41%;
+	position: absolute;
+	top: 64%;
+}
+
+.fontUP{
+	font-family: "Helvetica Neue"; 
+	color: black;
+	font-size: 15px;
+	padding-left: 15%;
+}
+
+#personalinfo {
+	background-color: #1a1919;
+	width: 100%;
+	height: 7%;
+	font-family: "Helvetica Neue"; 
+	font-size: 13pt;
+	padding-top: 1.5%;
+	color: white;
+    text-align: center;
+}
+
+#billingaddress {
+    background-color: #1a1919;
+	width: 100%;
+	height: 5%;
+	font-family: "Helvetica Neue"; 
+	font-size: 13pt;
+	padding-top: 1.5%;
+	color: white;
+    text-align: center;
+}
+
+#accountinfo {
+    background-color: #1a1919;
+	width: 100%;
+	height: 7%;
+	font-family: "Helvetica Neue"; 
+	font-size: 13pt;
+	padding-top: 1.5%;
+	color: white;
+    text-align: center;
+}
+
+#shippingaddress {
+    background-color: #1a1919;
+	width: 100%;
+	height: 10%;
+	font-family: "Helvetica Neue"; 
+	font-size: 13pt;
+	padding-top: 1.5%;
+	color: white;
+    text-align: center;
+}
+
+.inputRegister {
+    width: 70%;
+    height: 5%;
+    padding: 10px 15px;
+    background-color: #A29C97;
+    border: 0;
+    outline: none;
+	margin-top: -7%;
+}
+
+#align {
+	width: 60%;
+	height: 30%;
+	position: absolute;
+	left: 40%;
+	margin-top: 1%;
+}
+
+#align2 {
+	width: 60%;
+	height: 30%;
+	position: absolute;
+	left: 40%;
+	margin-top: 1%;
+}
+
+#submitButton {
+    background-color: white;
+    color: black;
+    font-family: "Helvetica Neue";
+    font-weight: bold;
+    padding: 14px 140px;
+    font-size: 16px;
+    position: absolute;
+    top: 111%;
+    left: 37%;
+}

@@ -1,0 +1,319 @@
+.blueblock{
+	background-color: #111;
+    height: 8%;
+	width: 100%;
+}
+
+#title{
+	font-size: 14pt;
+	color: white;
+	padding-left: 1%;
+	font-family: "ChunkFive Roman", Arial;
+	padding-top: 1%;
+}
+
+#logocontainer{
+	margin-bottom: 0.5%;
+	font-family: "Helvetica Neue";
+    font-weight: bold;
+    font-size: 35px;
+}
+
+#text{
+	position: absolute;
+	top: 3%;
+	left: 5%;
+}
+
+#maincontainer1{
+	width: 98.05%;
+	height: 36em;
+	background-color: white;
+	border-width: thin;
+	border-color: #7D7D7D;
+}
+
+#maincontainer2{
+	width: 98.1%;
+	height: 36em;
+	background-color: #f2f2f2;
+}
+
+#container1{
+	background-color: #f2f2f2;
+	width: 45%;
+	height: 70%;
+	position: absolute;
+	left: 2.5%;
+	top: 30%;
+}
+
+#container2{
+	background-color: #f2f2f2;
+	left: 52.5%;
+	width: 45%;
+	height: 70%;
+	position: absolute;
+	top: 30%;
+}
+
+.fontUP{
+	font-family: "ChunkFive Roman", Arial; 
+	color: #7D7D7D;
+	font-size: 13px;
+	padding-left: 3%;
+}
+
+#personalinfo, #billingaddress, #shippingaddress, #accountinfo{
+	background-color: #1a1919;
+	width: 100%;
+	height: 5%;
+	font-family: "ChunkFive Roman", Arial; 
+	font-size: 12pt;
+	padding-top: 1.5%;
+	color: white;
+}
+
+#logo {
+    font-size: 35px;
+    font-family: "Helvetica Neue";
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.smalltext {
+	color: white;
+    font-family: Helvetica Neue;
+    font-size: 2em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+    float: right;
+	list-style-type: none;
+}
+
+.buttondesign{
+	position: absolute;
+	background-color: #ff1a1a;
+	color: white;
+	padding: 9px 8px;
+	cursor: pointer;
+	text-decoration: none;
+	top: 20.5%;
+	border: none;
+	border-radius: 3%;
+}
+
+.buttondesign:hover{
+	background-color: #f2f2f2;
+}
+
+.buttondesign2:hover{
+	background-color: #ccccb3;
+}
+
+.buttondesign2{
+	background-color: #ff1a1a;
+	color: white;
+	padding: 10px 8px;
+	cursor: pointer;
+	text-decoration: none;
+	border: none;
+	border-radius: 3%;
+}
+
+#changepw{
+	right: 3%;
+	
+}
+
+#editprof{
+	right: 13%;
+}
+
+ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
+}
+
+li{
+	float: left;
+}
+
+li a{
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 15pt;
+}
+
+li a:hover, li a:active{
+	background-color: #111;
+}
+
+#tablink{
+	cursor: pointer;
+}
+
+#watchcontainer{
+	height: 47.5%;
+	width: 17.5%;
+	margin-top: 3%;
+	margin-left: 3%;
+	display: inline-block;
+	border-style: solid;
+	padding-top: 2%;
+}
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 0.5px solid #ccc;
+    border-top: none;
+}
+#watchinfo{
+	text-align: center;
+}
+
+#watchname{
+	font-size: 14pt;
+}
+
+#reviewOverlay{
+	position: absolute;
+	top: 40%;
+	left: 32.5%;
+	display: flex;
+	height: 30%;
+	width: 30%;
+    border-radius: 15px;
+	background-color: white;
+	display: none;
+}
+
+#infoOverlay{
+	position: absolute;
+	top: 30%;
+	left: 25%;
+	height: 50%;
+	width: 50%;
+	background-color: white;
+	display: none;
+}
+
+#overlay, #overlay2{
+	position: fixed;
+	display: none;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,0.5);
+	z-index: 2;
+    font-family: "Helvetica Neue";
+}
+
+#close{
+	position: absolute;
+	color: black;
+	top: 3%;
+	right: 4%;
+	font-size: 10pt;
+	font-family: "Helvetica Neue";
+	cursor: pointer;
+}
+
+#close2{
+	position: absolute;
+	color: black;
+	top: 6%;
+	right: 4%;
+	font-size: 10pt;
+	font-family: "Helvetica Neue";
+	cursor: pointer;
+}
+	
+#close:hover, #close2:hover {
+    color:#E6600D;
+}
+
+#textarea{
+	font-size: 15pt;
+	position: absolute;
+	top: 8%;
+	left: 3%;
+}
+
+#reviewbutton{
+	right: 6%;
+	position: absolute;
+	bottom: 2.5%;
+}
+
+#producttitle{
+	font-size: 15pt;
+	font-family: "ChunkFive Roman", Arial; 
+	position: absolute;
+	top: 5%;
+	left: 2%;
+}
+
+#photo{
+	position: absolute;
+	top: 25%;
+	left: 7%;
+}
+
+#wInfo{
+	position: absolute;
+	left: 35%;
+	top: 30%;
+	font-family: "ChunkFive Roman", Arial; 
+	font-size: 12pt;
+}
+
+#info3{
+	padding-top: 5%;
+	padding-bottom: 5%;
+}
+
+
+
+
+
