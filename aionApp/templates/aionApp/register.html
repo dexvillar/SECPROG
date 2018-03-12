@@ -25,7 +25,7 @@
         
         <div id="registerContainer">
             <p id="bigMessage">REGISTER</p>
-            <form class="addProductmodal-content animate"  action="{% url 'aionApp:signingUp' %}"method = "post">
+            <form action="{% url 'aionApp:signingUp' %}" method = "post">
                 {% csrf_token %}
                 <div id="container1">
                     <div id="info">

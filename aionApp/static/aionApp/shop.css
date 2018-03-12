@@ -396,6 +396,7 @@ span.psw {
 
 .watchShopButton:hover {
     background-color: #B3B3B3;
+    color: white;
 }
 
 .watchText {
@@ -493,6 +494,7 @@ span.psw {
 
 #submitButton:hover {
     background-color: #4688F1;
+    color: white;
 }
 
 #watchImg {
@@ -567,6 +569,7 @@ span.psw {
 
 #addToCart:hover {
     background-color: #B3B3B3;
+    color: white;
 }
 
 #deleteText {

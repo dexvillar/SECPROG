@@ -1,0 +1,51 @@
+<html>
+    <head>
+        {% load static %}
+        <title>Checkout Page</title>
+        <link rel="icon" href="{% static 'aionApp/Images/watch.png' %}" type="image" sizes="16x16">
+        <link rel="stylesheet" type="text/css" href="{% static 'aionApp/checkout.css' %}">
+    </head>
+    <body>
+        <div id="navbar">
+            <p id="logo" style="position: absolute; left: -3%; bottom: -33%;">  
+                <a href="/aionApp/exitSession/"><img src="{% static 'aionApp/Images/watch.png' %}" id="watch"></a>
+                 AION
+            </p>
+        </div>
+        
+        <div id="checkoutContainer">
+            <form action="{% url 'aionApp:checkOutProduct' %}" method = "post">
+                <div id="container1">
+                    <div id="title">PRODUCT DETAILS</div>
+                    <div id="watchphoto"> <img src="{{ MEDIA_URL }}{{ mediaPicture }}" width="200px" height="200px"> </div>
+                    <div id="watchinfo">
+                        <div id="info">Item name: {{ getName }}<br> </div>
+                        <div id="info">Price: ${{ getPrice }}<br> </div>
+                        <div id="info">Quantity: {{ getQuantity }}<br> </div>
+                        <div id="info2"> <b> Total: ${{ total }}</b> <br> </div>
+                    </div>
+                </div>
+
+                <div id="container2">
+                    <div id="title">CHECKOUT</div>
+                        <br>
+                        {% csrf_token %}
+                        <span class="fontUP">Credit Card Number:</span> 
+                        <div id="align"> <input type="text" class="ccInput" id="cardNum" pattern=".{16,16}" name="card_number"> </div>
+                        <br> <br>
+                        <span class="fontUP">Security Number:</span>
+                        <div id="align"> <input type="text" class="ccInput" id="securityNum" pattern=".{3,3}" name="security_number"> </div>
+                        <br> <br>
+                        <span class="fontUP">Expiry Date:</span>
+                        <div id="align"> <input type="text" class="ccInput" id="month" placeholder="mm" min="1" max="12"  pattern=".{2,2}"name="month"> <input type="text" class="ccInput" id="year" placeholder="yy" pattern=".{2,2}" name="year"> </div>
+                        <br> <br>
+
+                </div>
+
+                <button id="submitButton">FINISH PURCHASE</button>
+            </form>
+        </div>
+        
+        <footer>Copyright © 2018 Xcite Interactive. All Rights Reserved.</footer>
+    </body>
+</html>

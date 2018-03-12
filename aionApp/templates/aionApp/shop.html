@@ -140,7 +140,8 @@
         {% if addedProducts %}
         {% for watches in addedProducts %}
             <div id="watchModal{{watches.id}}" class="modal">
-                <form class="watchModal-content animate" method = "post">
+                <form class="watchModal-content animate" action="{% url 'aionApp:buyProduct' watches.id %}" method = "post">
+                    {% csrf_token %}
                     <div class="imgcontainer">
                         <span onclick="closeWatchModal{{watches.id}}()" class="watchShop" title="Close Modal">&times;</span>
                     </div>
@@ -158,7 +159,7 @@
                             <p id="stock">Only {{watches.stock}} left!</p>
                             {% endif %}
                             <p id="quantityText">QUANTITY</p>
-                            <input id="quantity" type="number" value="1" name="quantity" min="1"/>
+                            <input id="quantity" type="number" value="1" name="productQuantity" min="1"/>
                             <a id="checkReviewsText">CHECK REVIEWS</a>
                             <br/>
                             <br/>

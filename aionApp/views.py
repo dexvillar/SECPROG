@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from .models import user, watche, review, billing_addres, shipping_addres, checkout, sale
+from .models import user, watche, review, billing_addres, shipping_addres, checkout, sale, buy_watche
 
 # Create your views here.
 
@@ -115,19 +115,8 @@ def addProduct(request):
         'currentUser': currentUser,
         'addedProducts': addedProducts
     }
-    addingProduct = watche(name = request.POST['productName'], description = request.POST['productDescription'], stock = request.POST['productStock'], price = request.POST['productPrice'], watch_type = request.POST['watchType'], picture = "watchPictures/" + request.POST['productPicture'], user_id = request.session["user"])
+    addingProduct = watche(name = request.POST['productName'], description = request.POST['productDescription'], stock = request.POST['productStock'], price = request.POST['productPrice'], watch_type = request.POST['watchType'], picture = "watchPictures/" + request.POST['productPicture'], watch_id = request.session["user"], user_id = request.session["user"])
     addingProduct.save()
-    return render(request, 'aionApp/shop.html', context)
-    
-def addToCart(request):
-    currentUser = get_object_or_404(user, user_id=request.session["user"])
-    addedProducts = watche.objects.all()
-    context = {
-        'currentUser': currentUser,
-        'addedProducts': addedProducts,
-    }
-    addingWatch = watche(quantity = request.POST['productQuantity'], user_id = request.session["user"])
-    addingWatch.save()
     return render(request, 'aionApp/shop.html', context)
     
 def signingUp(request):
@@ -182,9 +171,52 @@ def editProduct(request, id):
         'currentUser': currentUser,
         'addedProducts': addedProducts,
     }
-    addingProduct = watche(name = request.POST['productName'], description = request.POST['productDescription'], stock = request.POST['productStock'], price = request.POST['productPrice'], watch_type = request.POST['watchType'], picture = "watchPictures/" + request.POST['productPicture'], user_id = request.session["user"])
+    addingProduct = watche(name = request.POST['productName'], description = request.POST['productDescription'], stock = request.POST['productStock'], price = request.POST['productPrice'], watch_type = request.POST['watchType'], picture = "watchPictures/" + request.POST['productPicture'], watch_id = request.session["user"], user_id = request.session["user"])
     addingProduct.save()
     return render(request, 'aionApp/shop.html', context)
+
+def buyProduct(request, id):
+    currentUser = get_object_or_404(user, user_id=request.session["user"])
+    addedProducts = watche.objects.all()
+    
+    getName = get_object_or_404(watche, id=id).name
+    getPrice = get_object_or_404(watche, id=id).price
+    getPicture = get_object_or_404(watche, id=id).picture
+    mediaPicture = "/media/" + str(getPicture)
+    getQuantity = request.POST['productQuantity']
+    total = float(getPrice) * float(getQuantity)
+    
+    context = {
+        'currentUser': currentUser,
+        'addedProducts': addedProducts,
+        'getName': getName,
+        'getPrice': getPrice,
+        'mediaPicture': mediaPicture,
+        'getQuantity': getQuantity,
+        'total': total,
+    }
+    
+    addingWatch = buy_watche(name = str(getName), price = str(getPrice), picture = getPicture, quantity = request.POST['productQuantity'], watch_id = request.session["user"], user_id = request.session["user"])
+    addingWatch.save()
+
+    return render(request, 'aionApp/checkout.html', context)
+
+def checkOutProduct(request):
+    currentUser = get_object_or_404(user, user_id=request.session["user"])
+    addedProducts = watche.objects.all()
+    context = {
+        'currentUser': currentUser,
+        'addedProducts': addedProducts,
+    }
+    
+    buyingProduct = checkout(card_number = request.POST['card_number'], security_number = request.POST['security_number'], month = request.POST['month'], year = request.POST['year'], watch_id = request.session["user"], user_id = request.session["user"])
+    buyingProduct.save()
+    
+    return render(request, 'aionApp/shop.html', context)
+    
+
+def checkoutPage(request):
+    return render(request, 'aionApp/checkout.html')
 
 def purchasePage(request):
     return render(request, 'aionApp/purchasepage.html')

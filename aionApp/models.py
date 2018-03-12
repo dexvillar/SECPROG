@@ -18,7 +18,6 @@ role_choices = {
 }
 
 class billing_addres(models.Model):
-    #user=models.ForeignKey(user, on_delete=models.CASCADE)
     house_number = models.IntegerField(default=0)
     street = models.CharField(max_length=255)
     subdivision = models.CharField(max_length=255)
@@ -30,7 +29,6 @@ class billing_addres(models.Model):
         return self.city
     
 class shipping_addres(models.Model):
-    #user=models.ForeignKey(user, on_delete=models.CASCADE)
     house_number = models.IntegerField(default=0)
     street = models.CharField(max_length=255)
     subdivision = models.CharField(max_length=255)
@@ -59,7 +57,6 @@ class watche(models.Model):
     user_id = models.PositiveIntegerField(default=0)
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=2048, default=0) 
-    quantity = models.PositiveIntegerField(default=0)
     stock = models.PositiveIntegerField(default=0)
     watch_type = models.CharField(max_length=16, choices=watch_choices, default='0')
     price = models.FloatField(default=0)
@@ -76,14 +73,16 @@ class review(models.Model):
         return self.reviews
 
 class checkout(models.Model):
+    watch_id = models.IntegerField(default = 0)
     user_id = models.PositiveIntegerField(default=0)
-    card_number = models.IntegerField()
-    security_number = models.IntegerField()
-#    expiration_date = models.DateField(auto_now=False)
-    total = models.FloatField(default=0)
+    card_number = models.PositiveIntegerField(default=0)
+    security_number = models.PositiveIntegerField(default=0)
+    month = models.PositiveIntegerField(default=0)
+    year = models.PositiveIntegerField(default=0)
+#    total = models.FloatField(default=0)
     
-    def __str__(self):
-        return self.card_number
+    def __unicode__(self):
+        return str(self.card_number)
     
 class sale(models.Model):
     watch_id = models.PositiveIntegerField(default=0)
@@ -93,3 +92,14 @@ class sale(models.Model):
     
     def __str__(self):
         return self.product
+    
+class buy_watche(models.Model):
+    watch_id = models.PositiveIntegerField(default=0)
+    user_id = models.PositiveIntegerField(default=0)
+    name = models.CharField(max_length=255, default="")
+    price = models.FloatField(default=0)
+    picture = models.ImageField(upload_to = 'watchPictures/', default = 'media/no-img.jpg')
+    quantity = models.PositiveIntegerField(default=0)
+    
+    def __str__(self):
+        return self.name

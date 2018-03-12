@@ -183,6 +183,7 @@ footer {
 	font-size: 13pt;
 	padding-top: 1.5%;
 	color: white;
+    font-weight: bold;
     text-align: center;
 }
 
@@ -194,6 +195,7 @@ footer {
 	font-size: 13pt;
 	padding-top: 1.5%;
 	color: white;
+    font-weight: bold;
     text-align: center;
 }
 
@@ -205,6 +207,7 @@ footer {
 	font-size: 13pt;
 	padding-top: 1.5%;
 	color: white;
+    font-weight: bold;
     text-align: center;
 }
 
@@ -216,6 +219,7 @@ footer {
 	font-size: 13pt;
 	padding-top: 1.5%;
 	color: white;
+    font-weight: bold;
     text-align: center;
 }
 
@@ -227,6 +231,8 @@ footer {
     border: 0;
     outline: none;
 	margin-top: -7%;
+    color: white;
+    font-family: "Helvetica Neue"; 
 }
 
 #align {
