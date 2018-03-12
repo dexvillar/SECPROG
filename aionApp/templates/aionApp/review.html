@@ -1,0 +1,108 @@
+<html>
+    <head>
+         {% load static %}
+        <title>Review Page</title>
+        <link rel="icon" href="{% static 'aionApp/Images/watch.png' %}" type="image" sizes="16x16">
+        <link rel="stylesheet" type="text/css" href="{% static 'aionApp/review.css' %}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    
+    <body>
+        <div id="navbar">
+            <p id="logo" style="position: absolute; left: -3%;">  
+                {% if currentUser.user_id > 0 %}
+                <a href="/aionApp/homePage/"><img src="{% static 'aionApp/Images/watch.png' %}" id="watch"></a>
+                {% else %}
+                <a href="/aionApp/exitSession/"><img src="{% static 'aionApp/Images/watch.png' %}" id="watch"></a>
+                {% endif %}
+                 AION
+            </p>
+            
+            {% if currentUser.role_type != "0" %}
+            <form class="searchContainer">
+                <input type="text" id="searchBar" placeholder="SEARCH AION">
+                <a href="#"><img class="searchIcon" src="{% static 'aionApp/Images/search.png' %}"></a>
+            </form>
+            {% endif %}
+            
+            {% if currentUser.user_id > 0 %}
+                {% if currentUser.role_type != "0" %}
+                    <span style="position: absolute; left: 47%;">
+                        <a href="/aionApp/profilePage/"><img src="{% static 'aionApp/Images/profile.png' %}" id="profile"></a>
+                        <a href="/aionApp/shopPage/">SHOP</a>
+                        <a href="/aionApp/exitSession/">LOG OUT</a>    
+                    </span>
+                {% else %}
+                    <span style="position: absolute; left: 70%;">
+                        <a onclick="document.getElementById('addProductModal').style.display='block'">ADD PRODUCT</a>
+                        <a href="/aionApp/exitSession/">LOG OUT</a>    
+                    </span>
+                {% endif %}
+            {% else %}
+            <span style="position: absolute; left: 55%;">
+                <a href="/aionApp/shopPage/">SHOP</a>
+                <a onclick="document.getElementById('loginModal').style.display='block'">LOG IN</a>
+            </span>
+            {% endif %}
+        </div>
+        
+        <div id="loginModal" class="modal">
+            <form class="modal-content animate" action="{% url 'aionApp:shopLogIn' %}" method = "post">
+                {% csrf_token %}
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('loginModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+                </div>
+                
+                <div class="loginContainer">
+                    <div class="spacer" style="margin-bottom: 1em;"> </div>
+                    <input type="text" placeholder="USERNAME" name="userName" required>
+                    <input type="password" placeholder="PASSWORD" name="userPassword" required>
+                    <button type="submit" id="loginBtn">LOG IN</button>
+
+                    {% if error %}
+                    <div class="spacer" style="margin-bottom: 1em;"> </div>
+                    <p id="error">Invalid user name or password.</p>
+                    {% endif %}
+                </div>
+
+                <div class="loginContainer" id="logIn" style="background-color:#f1f1f1; height: 10%;">
+                    <span class="psw">Don't have an account? <a href="/aionApp/registerPage/" class="aLogin">Sign up now.</a></span>
+                </div>
+            </form>
+        </div>
+        
+        <div id="reviewContainer">
+            <p id="bigMessage">{{upperName}} REVIEWS</p>
+            
+            <div id="container1">
+                    <div id="title">PRODUCT DETAILS</div>
+                    <div id="watchphoto"> <img src="{{ MEDIA_URL }}{{ mediaPicture }}" width="180px" height="180px"> </div>
+                    <div id="watchinfo">
+                        {% if getWatchType == "0" %}
+                            <div id="name">{{ getName }} <p id="watchType"> - Analog Watch</p><br> </div>
+                        {% elif getWatchType == "1" %}
+                            <div id="name">{{ getName }} - Digital Watch<br> </div>
+                        {% else %}
+                            <div id="name">{{ getName }} - Smart Watch<br> </div>
+                        {% endif %}
+                        <div id="description">{{ getDescription }}<br> </div>
+                        <div id="price">{{ getPrice }} 
+                        <br> </div>
+                    </div>
+                </div>
+
+                <div id="container2">
+                    <div id="title">REVIEWS</div>
+                    {% if addedReviews %}
+                    {% for reviews in addedReviews %}
+                        <div id="description">► {{ reviews.reviews }}<br> </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+        </div>
+        
+        <footer>Copyright © 2018 Xcite Interactive. All Rights Reserved.</footer>
+    </body>
+</html>

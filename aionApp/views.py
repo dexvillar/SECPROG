@@ -120,8 +120,6 @@ def addProduct(request):
     return render(request, 'aionApp/shop.html', context)
     
 def signingUp(request):
-    
-    
     addingBAddress = billing_addres(house_number = request.POST['bHouseNum'], street = request.POST['bStreet'], subdivision = request.POST['bSubdivision'], city = request.POST['bCity'], postal_code = request.POST['bPostal'], country = request.POST['bCountry'])
     
     addingSAddress = shipping_addres(house_number = request.POST['sHouseNum'], street = request.POST['sStreet'], subdivision = request.POST['sSubdivision'], city = request.POST['sCity'], postal_code = request.POST['sPostal'], country = request.POST['sCountry'])
@@ -132,11 +130,7 @@ def signingUp(request):
     addingUser = user(last_name = request.POST['last_name'], first_name = request.POST['first_name'], middle_initial = request.POST['middle_initial'], email = request.POST['email'], user_name = request.POST['user_name'], password = request.POST['password1'], billing_add=addingBAddress, shipping_add=addingSAddress )
     addingUser.save()
     
-    currentUser = get_object_or_404(user, user_id = request.session["user"])
-    context = {
-        'currentUser': currentUser,
-    }
-    return render(request, 'aionApp/home.html', context)
+    return render(request, 'aionApp/home.html')
     
 def addAdmin(request):
     
@@ -187,6 +181,11 @@ def buyProduct(request, id):
     getQuantity = request.POST['productQuantity']
     total = float(getPrice) * float(getQuantity)
     
+    getStock = get_object_or_404(watche, id=id).stock
+    updateStock = int(getStock) - int(getQuantity)
+    
+    getWatchType = get_object_or_404(watche, id=id).watch_type
+    
     context = {
         'currentUser': currentUser,
         'addedProducts': addedProducts,
@@ -197,8 +196,14 @@ def buyProduct(request, id):
         'total': total,
     }
     
-    addingWatch = buy_watche(name = str(getName), description = str(getDescription), price = str(getPrice), picture = getPicture, quantity = request.POST['productQuantity'], watch_id = request.session["user"], user_id = request.session["user"])
-    addingWatch.save()
+    selectedWatch = get_object_or_404(watche, id=id)
+    selectedWatch.delete()
+    
+    updatingWatch = watche(name = str(getName), description = str(getDescription), stock = updateStock, price = str(getPrice), watch_type = str(getWatchType), picture = getPicture, watch_id = request.session["user"], user_id = request.session["user"])
+    updatingWatch.save()
+    
+    buyingWatch = buy_watche(name = str(getName), description = str(getDescription), price = str(getPrice), picture = getPicture, quantity = request.POST['productQuantity'], watch_id = request.session["user"], user_id = request.session["user"])
+    buyingWatch.save()
 
     return render(request, 'aionApp/checkout.html', context)
 
@@ -239,6 +244,60 @@ def addReview(request, id):
     addingReview.save()
     return render(request, 'aionApp/purchasepage.html', context)
 
+def reviewPage(request, id):
+    if request.session["user"] > 0:
+        currentUser = get_object_or_404(user, user_id=request.session["user"])
+        addedProducts = watche.objects.all()
+
+        getName = get_object_or_404(watche, id=id).name
+        upperName = str(getName).upper()
+
+        getDescription = get_object_or_404(watche, id=id).description
+        getStock = get_object_or_404(watche, id=id).stock
+        getPrice = get_object_or_404(watche, id=id).price
+        getWatchType = get_object_or_404(watche, id=id).watch_type
+        getPicture = get_object_or_404(watche, id=id).picture
+        mediaPicture = "/media/" + str(getPicture)
+
+        addedReviews = review.objects.all()
+        context = {
+            'currentUser': currentUser,
+            'addedProducts': addedProducts,
+            'getName': getName,
+            'upperName': upperName,
+            'getDescription': getDescription,
+            'getStock': getStock,
+            'getPrice': getPrice,
+            'getWatchType': getWatchType,
+            'mediaPicture': mediaPicture,
+            'addedReviews': addedReviews,
+        }
+        return render(request, 'aionApp/review.html', context)
+    else:
+        addedProducts = watche.objects.all()
+        getName = get_object_or_404(watche, id=id).name
+        upperName = str(getName).upper()
+        getDescription = get_object_or_404(watche, id=id).description
+        getStock = get_object_or_404(watche, id=id).stock
+        getPrice = get_object_or_404(watche, id=id).price
+        getWatchType = get_object_or_404(watche, id=id).watch_type
+        getPicture = get_object_or_404(watche, id=id).picture
+        mediaPicture = "/media/" + str(getPicture)
+        addedReviews= review.objects.all()
+        context = {
+            'addedProducts': addedProducts,
+            'getName': getName,
+            'upperName': upperName,
+            'getDescription': getDescription,
+            'getStock': getStock,
+            'getPrice': getPrice,
+            'getWatchType': getWatchType,
+            'mediaPicture': mediaPicture,
+            'addedReviews': addedReviews,
+        }
+        return render(request, 'aionApp/review.html', context)
+        
+
 def editProfilePage(request):
     currentUser = get_object_or_404(user, user_id = request.session["user"])
     tempId=currentUser.user_id
@@ -252,9 +311,6 @@ def editProfilePage(request):
     addingBAddress.save()
     addingSAddress.save()
     
-    
-    
-    
     addingUser.last_name=request.POST.get('last_name', addingUser.last_name)
     addingUser.first_name = request.POST.get('first_name', addingUser.first_name)
     addingUser.middle_initial = request.POST.get('middle_initial', addingUser.middle_initial)
@@ -262,17 +318,12 @@ def editProfilePage(request):
     addingUser.user_name = request.POST.get('user_name', addingUser.user_name)
     addingUser.billing_add=addingBAddress
     addingUser.shipping_add=addingSAddress
-    
-    
     addingUser.save()
     
     userList = user.objects.all()
     
     currentUser = get_object_or_404(user, user_id = request.session["user"])
-    print(currentUser)
-        
-
-    print(currentUser)
+   
     context = {
         'currentUser': currentUser,
     }

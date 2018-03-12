@@ -37,16 +37,24 @@
                         </div>
                         <br>
                         <span class="fontUP">Last Name:</span> 
-                        <span  class="fontUP" name="last_name">{{currentUser.last_name}} </span>
+                        <div id="align">
+                            <span  class="fontUP" name="last_name">{{currentUser.last_name}}</span>
+                        </div>
                         <br> <br>
                         <span class="fontUP">First Name:</span>
-                        <span  class="fontUP" name="first_name">{{currentUser.first_name}} </span>
+                        <div id="align">
+                            <span  class="fontUP" name="first_name">{{currentUser.first_name}}</span>
+                        </div>
                         <br> <br>
-                        <span class="fontUP">Middle Initial:</span>
-                        <span  class="fontUP" name="middle_initial">{{currentUser.middle_initial}} </span>
+                        <span class="fontUP">Middle Initial: </span>
+                        <div id="align">
+                            <span  class="fontUP" name="middle_initial">{{currentUser.middle_initial}}</span>
+                        </div>
                         <br> <br>
                         <span class="fontUP">E-mail Address:</span>
-                        <span  class="fontUP" name="email">{{currentUser.email}} </span>
+                        <div id="align">
+                            <span  class="fontUP" name="email">{{currentUser.email}}</span>
+                        </div>
                         <br> <br>
 
                         <div id="billingaddress">
@@ -54,22 +62,34 @@
                         </div>
                         <br>
                         <span class="fontUP">House No.:</span>
-                        <span  class="fontUP" name="bHouseNum">{{currentUser.billing_add.house_number}} </span>
+                        <div id="align">
+                            <span  class="fontUP" name="bHouseNum">{{currentUser.billing_add.house_number}}</span>
+                        </div>
                         <br> <br>
                         <span class="fontUP">Street:</span>
-                        <span  class="fontUP" name="bStreet">{{currentUser.billing_add.street}} </span>
+                        <div id="align">
+                            <span  class="fontUP" name="bStreet">{{currentUser.billing_add.street}} </span>
+                        </div>
                         <br> <br>
                         <span class="fontUP">Subdivision:</span>
-                        <span  class="fontUP" name="bSubdivision">{{currentUser.billing_add.subdivision}}</span>
+                        <div id="align">
+                            <span  class="fontUP" name="bSubdivision">{{currentUser.billing_add.subdivision}}</span>
+                        </div>
                         <br> <br>
                         <span class="fontUP">City:</span>
-                        <span  class="fontUP" name="bCity">{{currentUser.billing_add.city}}</span>
+                        <div id="align">
+                            <span  class="fontUP" name="bCity">{{currentUser.billing_add.city}}</span>
+                        </div>
                         <br> <br>
                         <span class="fontUP">Postal Code:</span>
-                        <span  class="fontUP" name="bPostal">{{currentUser.billing_add.postal_code}} </span>
+                        <div id="align">
+                            <span  class="fontUP" name="bPostal">{{currentUser.billing_add.postal_code}} </span>
+                        </div>
                         <br> <br>
                         <span class="fontUP">Country:</span>
-                        <span  class="fontUP" name="bCountry">{{currentUser.billing_add.country}} </span>
+                        <div id="align">
+                            <span  class="fontUP" name="bCountry">{{currentUser.billing_add.country}} </span>
+                        </div>
                         <br> <br>
                     </div>
                 </div>
@@ -78,42 +98,52 @@
                     <div id="accountinfo">
                         ACCOUNT INFORMATION
                     </div>
-                        <br>
-                        <span class="fontUP">Username:</span>
-                        <span  class="fontUP" name="username"> </span>
-                        <br> <br>
-                        <span class="fontUP">Password:</span>
-                       <span  class="fontUP" name="password1"> </span>
-                        <br> <br>
-                        <span class="fontUP">Confirm password:</span>
-                        <span  class="fontUP" name="password2"> </span>
-                        <br> <br>
+                    <br>
+                    <span class="fontUP">Username:</span>
+                    <span  class="fontUP" name="username"> </span>
+                    <br> <br>
+                    <span class="fontUP">Password:</span>
+                    <span  class="fontUP" name="password1"> </span>
+                    <br> <br>
+                    <span  class="fontUP" name="password2"> </span>
+                    <br> <br>
                 </div>
 
                 <div id="container3">
                     <div id="shippingaddress">
                         SHIPPING ADDRESS
                     </div>
-                        <br>
-                        <span class="fontUP">House No.: </span>
-                        <span  class="fontUP" name="sHouseNum">{{currentUser.shipping_add.house_number}} </span>
-                        <br> <br>
-                        <span class="fontUP">Street:</span>
+                    <br>
+                    <span class="fontUP">House No.: </span>
+                    <div id="align2">
+                        <span  class="fontUP" name="sHouseNum">{{currentUser.shipping_add.house_number}}</span>
+                    </div>
+                    <br> <br>
+                    <span class="fontUP">Street:</span>
+                    <div id="align2">
                         <span  class="fontUP" name="sStreet">{{currentUser.shipping_add.street}} </span>
-                        <br> <br>
-                        <span class="fontUP">Subdivision:</span>
-                        <span  class="fontUP" name="sSubdivision">{{currentUser.shipping_add.subdivision}} </span>
-                        <br> <br>
-                        <span class="fontUP">City:</span>
+                    </div>
+                    <br> <br>
+                    <span class="fontUP">Subdivision:</span>
+                    <div id="align2">
+                        <span  class="fontUP" name="sSubdivision">{{currentUser.shipping_add.subdivision}}</span>
+                    </div>
+                    <br> <br>
+                    <span class="fontUP">City:</span>
+                    <div id="align2">
                         <span  class="fontUP" name="sCity"> {{currentUser.shipping_add.city}}</span>
-                        <br> <br>
-                        <span class="fontUP">Postal Code:</span>
+                    </div>
+                    <br> <br>
+                    <span class="fontUP">Postal Code:</span>
+                    <div id="align2">
                         <span  class="fontUP" name="sPostal"> {{currentUser.shipping_add.postal_code}}</span>
-                        <br> <br>
-                        <span class="fontUP">Country:</span>
+                    </div>
+                    <br> <br>
+                    <span class="fontUP">Country:</span>
+                    <div id="align2">
                         <span  class="fontUP" name="sCountry"> {{currentUser.shipping_add.country}}</span>
+                    </div>
                 </div>
-                <button id="submitButton" href="#">SUBMIT</button>
             </form>
         </div>
         <footer>Copyright © 2018 Xcite Interactive. All Rights Reserved.</footer>

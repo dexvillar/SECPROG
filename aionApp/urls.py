@@ -22,5 +22,6 @@ urlpatterns= [
     url(r'^checkoutPage/$', views.checkoutPage, name='checkoutPage'),
     url(r'^purchasePage/$', views.purchasePage, name='purchasePage'),
     url(r'^addReview/(?P<id>[\w\-]+)$', views.addReview, name='addReview'),
+    url(r'^reviewPage/(?P<id>[\w\-]+)$', views.reviewPage, name='reviewPage'),
     url(r'^editProfilePage/$', views.editProfilePage, name='editProfilePage'),
 ]

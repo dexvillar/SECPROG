@@ -155,12 +155,14 @@
                             <p id="productName">{{watches.name}}</p>
                             <p id="description">{{watches.description}}</p>
                             <p id="price">${{watches.price}}</p>&nbsp;
-                            {% if watches.stock <= 15 %}
+                            {% if watches.stock == 0 %}
+                            <p id="stock">Out of stock!</p>
+                            {% elif watches.stock <= 15 %}
                             <p id="stock">Only {{watches.stock}} left!</p>
                             {% endif %}
                             <p id="quantityText">QUANTITY</p>
                             <input id="quantity" type="number" value="1" name="productQuantity" min="1"/>
-                            <a id="checkReviewsText">CHECK REVIEWS</a>
+                            <a href="{% url 'aionApp:reviewPage' watches.id %}" id="checkReviewsText">CHECK REVIEWS</a>
                             <br/>
                             <br/>
                             <br/>

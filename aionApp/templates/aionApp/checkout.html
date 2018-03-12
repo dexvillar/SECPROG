@@ -50,7 +50,7 @@
                     <div id="title">PRODUCT DETAILS</div>
                     <div id="watchphoto"> <img src="{{ MEDIA_URL }}{{ mediaPicture }}" width="200px" height="200px"> </div>
                     <div id="watchinfo">
-                        <div id="info">Item name: {{ getName }}<br> </div>
+                        <div id="info">Product Name: {{ getName }}<br> </div>
                         <div id="info">Price: ${{ getPrice }}<br> </div>
                         <div id="info">Quantity: {{ getQuantity }}<br> </div>
                         <div id="info2"> <b> Total: ${{ total }}</b> <br> </div>
@@ -70,7 +70,6 @@
                         <span class="fontUP">Expiry Date:</span>
                         <div id="align"> <input type="text" class="ccInput" id="month" placeholder="mm" min="1" max="12"  pattern=".{2,2}"name="month"> <input type="text" class="ccInput" id="year" placeholder="yy" pattern=".{2,2}" name="year"> </div>
                         <br> <br>
-
                 </div>
 
                 <button id="submitButton">FINISH PURCHASE</button>

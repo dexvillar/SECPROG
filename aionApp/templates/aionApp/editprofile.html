@@ -18,9 +18,11 @@
                 <a href="#"><img class="searchIcon" src="{% static 'aionApp/Images/search.png' %}"></a>
             </form>
             
-            <span style="position: absolute; left: 56%;">
-                <a href="/aionApp/profilePage/"><img src="{% static 'aionApp/Images/profile.png' %}" id="profile"></a>
+            <span style="position: absolute; left: 25%;">
                 <a href="/aionApp/shopPage/">SHOP</a>
+                <a href="/aionApp/purchasePage/">PURCHASES</a>
+                <a href="/aionApp/editProfilePage/">EDIT PROFILE</a>
+                <a href="/aionApp/exitSession/">LOG OUT</a>
             </span>
         </div>
         
@@ -106,7 +108,7 @@
                         <div id="align2"> <input type="text" class="inputRegister" name="sCity"value={{currentUser.shipping_add.city}}> </div>
                         <br> <br>
                         <span class="fontUP">Postal Code:</span>
-                        <div id="align2"> <input type="text" class="inputRegister" name="sPostal" value={{currentUser.shippping_add.postal_code}}> </div>
+                        <div id="align2"> <input type="text" class="inputRegister" name="sPostal" value={{currentUser.shipping_add.postal_code}}> </div>
                         <br> <br>
                         <span class="fontUP">Country:</span>
                         <div id="align2"> <input type="text" class="inputRegister" name="sCountry" value={{currentUser.shipping_add.country}}> </div>
