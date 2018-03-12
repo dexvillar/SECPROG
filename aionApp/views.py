@@ -260,7 +260,7 @@ def reviewPage(request, id):
         getPicture = get_object_or_404(watche, id=id).picture
         mediaPicture = "/media/" + str(getPicture)
 
-        addedReviews = review.objects.all()
+        addedReviews = review.objects.filter(name=str(getName))
         context = {
             'currentUser': currentUser,
             'addedProducts': addedProducts,
