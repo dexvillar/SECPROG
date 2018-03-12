@@ -83,7 +83,6 @@ class checkout(models.Model):
     security_number = models.PositiveIntegerField(default=0)
     month = models.PositiveIntegerField(default=0)
     year = models.PositiveIntegerField(default=0)
-#    total = models.FloatField(default=0)
     
     def __unicode__(self):
         return str(self.card_number)

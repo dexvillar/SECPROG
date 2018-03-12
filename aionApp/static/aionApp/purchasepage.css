@@ -179,6 +179,7 @@ footer {
 
 #watchShop span:hover {
     opacity: 0.9;
+    cursor: pointer;
 }
 
 .watchShopButton {
@@ -288,17 +289,14 @@ span.psw {
 }
 
 /* The Close Button (x) */
-.close {
+#close {
     position: absolute;
-    right: 25px;
-    top: 0;
-    color: #000;
-    font-size: 35px;
-    font-weight: bold;
+    top: -50%;
+    color: #A1A1A1;
 }
 
-.close:hover {
-    color: #4688F1;
+#close:hover {
+    color: #373737;
     cursor: pointer;
 }
 

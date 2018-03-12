@@ -52,11 +52,8 @@
         {% for buy_watches in userProducts %}
             <div id="watchModal{{buy_watches.id}}" class="modal">
                 <form class="watchModal-content animate"  method = "post">
-                    <div class="imgcontainer">
-                        <span onclick="closeWatchModal{{buy_watches.id}}()" class="watchShop" title="Close Modal">&times;</span>
-                    </div>
-
                     <div class="watchModalContainer">
+                        <span onclick="closeWatchModal{{buy_watches.id}}()" class="watchShop" id="close" title="Close Modal">&times;</span>
                         <div class="spacer" style="margin-bottom: 1em;"> </div>
                         <div class="col-md-6">
                             <img src="{{ MEDIA_URL }}{{ buy_watches.picture.url }}" id="watchImg">
@@ -65,7 +62,7 @@
                             <p id="productName">{{buy_watches.name}}</p>
                             <p id="description">{{buy_watches.description}}</p>
                             <p id="price">${{buy_watches.price}}</p>&nbsp;
-                            <a id="checkReviewsText" onclick="openReviewModal{{buy_watches.id}}()">CHECK REVIEWS</a>
+                            <a href="{% url 'aionApp:reviewPage' buy_watches.id %}" id="checkReviewsText">CHECK REVIEWS</a>
                             <br/>
                             <br/>
                             <br/>

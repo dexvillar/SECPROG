@@ -82,13 +82,19 @@
                     <div id="watchphoto"> <img src="{{ MEDIA_URL }}{{ mediaPicture }}" width="180px" height="180px"> </div>
                     <div id="watchinfo">
                         {% if getWatchType == "0" %}
-                            <div id="name">{{ getName }} <p id="watchType"> - Analog Watch</p><br> </div>
+                            <div id="name">{{ getName }} 
+                                <p id="watchType">Analog Watch</p> 
+                            </div>
                         {% elif getWatchType == "1" %}
-                            <div id="name">{{ getName }} - Digital Watch<br> </div>
+                            <div id="name">{{ getName }} 
+                                <p id="watchType">Digital Watch</p> 
+                            </div>
                         {% else %}
-                            <div id="name">{{ getName }} - Smart Watch<br> </div>
+                            <div id="name">{{ getName }} 
+                                <p id="watchType">Smart Watch</p>
+                            </div>
                         {% endif %}
-                        <div id="description">{{ getDescription }}<br> </div>
+                        <div id="description">{{ getDescription }} </div>
                         <div id="price">{{ getPrice }} 
                         <br> </div>
                     </div>
@@ -98,7 +104,7 @@
                     <div id="title">REVIEWS</div>
                     {% if addedReviews %}
                     {% for reviews in addedReviews %}
-                        <div id="description">► {{ reviews.reviews }}<br> </div>
+                        <div id="review">► {{ reviews.reviews }}<br> </div>
                     {% endfor %}
                     {% endif %}
                 </div>
