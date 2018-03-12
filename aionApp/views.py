@@ -223,27 +223,41 @@ def purchasePage(request):
 
 def editProfilePage(request):
     currentUser = get_object_or_404(user, user_id = request.session["user"])
+    tempId=currentUser.user_id
     
-    addingBAddress = billing_addres(house_number = request.POST.get('bHouseNum', True), street = request.POST.get('bStreet', True), subdivision = request.POST.get('bSubdivision', True), city = request.POST.get('bCity', True), postal_code = request.POST.get('bPostal', True), country = request.POST.get('bCountry', True))
+    addingUser=user.objects.get(user_id=currentUser.user_id)
     
-    addingSAddress = shipping_addres(house_number = request.POST.get('sHouseNum', True), street = request.POST.get('sStreet', True), subdivision = request.POST.get('sSubdivision', True), city = request.POST.get('sCity', True), postal_code = request.POST.get('sPostal', True), country = request.POST.get('sCountry', True))
+    addingBAddress = billing_addres(house_number =request.POST.get('bHouseNum', addingUser.billing_add.house_number), street = request.POST.get('bStreet', addingUser.billing_add.street), subdivision = request.POST.get('bSubdivision', addingUser.billing_add.subdivision), city = request.POST.get('bCity', addingUser.billing_add.city), postal_code = request.POST.get('bPostal', addingUser.billing_add.postal_code), country = request.POST.get('bCountry', addingUser.billing_add.country))
+    
+    addingSAddress = shipping_addres(house_number = request.POST.get('sHouseNum', addingUser.shipping_add.house_number), street =request.POST.get('sStreet', addingUser.shipping_add.street), subdivision =request.POST.get('sSubdivision', addingUser.shipping_add.subdivision), city =request.POST.get('sCity', addingUser.shipping_add.city), postal_code = request.POST.get('sPostal', addingUser.shipping_add.postal_code), country = request.POST.get('sCountry', addingUser.shipping_add.country))
     
     addingBAddress.save()
     addingSAddress.save()
-        
-    addingUser=user.objects.get(user_id=currentUser.user_id)
-    addingUser= user(last_name = request.POST.get('last_name', False), first_name = request.POST.get('first_name', False), middle_initial = request.POST.get('middle_initial', False), email = request.POST.get('email', False), user_name = request.POST.get('user_name', False), billing_add=addingBAddress, shipping_add=addingSAddress)
+    
+    
+    
+    
+    addingUser.last_name=request.POST.get('last_name', addingUser.last_name)
+    addingUser.first_name = request.POST.get('first_name', addingUser.first_name)
+    addingUser.middle_initial = request.POST.get('middle_initial', addingUser.middle_initial)
+    addingUser.email = request.POST.get('email', addingUser.email)
+    addingUser.user_name = request.POST.get('user_name', addingUser.user_name)
+    addingUser.billing_add=addingBAddress
+    addingUser.shipping_add=addingSAddress
+    
+    
     addingUser.save()
     
+    userList = user.objects.all()
     
-    
-    
-    
-        
+    currentUser = get_object_or_404(user, user_id = request.session["user"])
     print(currentUser)
-    context = {'currentUser': currentUser,}
+        
+
+    print(currentUser)
+    context = {
+        'currentUser': currentUser,
+    }
     
     return render(request, 'aionApp/editprofile.html', context)
-    
-    
     
