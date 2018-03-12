@@ -48,6 +48,39 @@ html, body {
     color: black;
 }
 
+.searchContainer {
+    text-align: center;
+    position: absolute;
+    right: -25%;
+    bottom: 50%;
+    width: 35%;
+    display: block;
+    margin: 0 auto;
+}
+
+#searchBar{
+    position: absolute;
+    top: 35%;
+    right: 75%;
+    margin: 0 auto;
+    width: 65%;
+    height: 40px;
+    padding: 0 20px;
+    font-size: 1.3rem;
+    border: 1px solid black;
+    border-radius: 25px;
+    font-family: "Helvetica Neue";
+    outline: none;
+}
+
+.searchIcon{
+    position: absolute;
+    top: 62%;
+    right: 78%;
+    width: 4%;
+    height: 70%;
+}
+
 #watch {
     position: relative;
     width: 55px;
@@ -64,6 +97,13 @@ html, body {
     flex-direction: row;
     justify-content:space-between;
     align-items: center;
+    position: absolute;
+    top: -40%;
+}
+
+#profile {
+    width: 30px;
+    height: 30px;
 }
 
 footer {

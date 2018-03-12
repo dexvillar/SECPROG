@@ -177,7 +177,7 @@
         {% if addedProducts %}
         {% for watches in addedProducts %}
             <div id="editProductModal{{watches.id}}" class="modal">
-            <form class="editProductModal-content animate"  action="{% url 'aionApp:editProduct' watches.id %}"method = "post">
+            <form class="editProductModal-content animate"  action="{% url 'aionApp:editProduct' watches.id %}" method = "post">
                 {% csrf_token %}
                 <div class="imgcontainer">
                     <span onclick="closeEditModal{{watches.id}}()" class="close" title="Close Modal">&times;</span>

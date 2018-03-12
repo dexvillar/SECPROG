@@ -1,77 +1,91 @@
-.blueblock{
-	background-color: #111;
-    height: 8%;
-	width: 100%;
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 
-#title{
-	font-size: 14pt;
-	color: white;
-	padding-left: 1%;
-	font-family: "ChunkFive Roman", Arial;
-	padding-top: 1%;
+#navbar {
+    display: flex;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    position: fixed;
+    overflow: hidden;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 5.3em;
+    border-top-style: ridge;
+    border-top-color: #d3d3d3;
+    border-top-width: thin;
+    background-color: white;
+    border-color: #c7c7c7;
+    opacity: 0.9;
 }
 
-#logocontainer{
-	margin-bottom: 0.5%;
-	font-family: "Helvetica Neue";
+#navbar a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: "Helvetica Neue";
     font-weight: bold;
-    font-size: 35px;
+    margin-left: 1.3em;
+    cursor: pointer;
 }
 
-#text{
-	position: absolute;
-	top: 3%;
-	left: 5%;
+#navbar a:hover {
+    color: #A6ACAF;
 }
 
-#maincontainer1{
-	width: 98.05%;
-	height: 36em;
-	background-color: white;
-	border-width: thin;
-	border-color: #7D7D7D;
+#navbar a.active {
+    background-color: #4CAF50;
+    color: black;
 }
 
-#maincontainer2{
-	width: 98.1%;
-	height: 36em;
-	background-color: #f2f2f2;
+.searchContainer {
+    text-align: center;
+    position: absolute;
+    right: -25%;
+    bottom: 50%;
+    width: 35%;
+    display: block;
+    margin: 0 auto;
 }
 
-#container1{
-	background-color: #f2f2f2;
-	width: 45%;
-	height: 70%;
-	position: absolute;
-	left: 2.5%;
-	top: 30%;
+#searchBar{
+    position: absolute;
+    top: 35%;
+    right: 75%;
+    margin: 0 auto;
+    width: 65%;
+    height: 40px;
+    padding: 0 20px;
+    font-size: 1.3rem;
+    border: 1px solid black;
+    border-radius: 25px;
+    font-family: "Helvetica Neue";
+    outline: none;
 }
 
-#container2{
-	background-color: #f2f2f2;
-	left: 52.5%;
-	width: 45%;
-	height: 70%;
-	position: absolute;
-	top: 30%;
+.searchIcon{
+    position: absolute;
+    top: 62%;
+    right: 78%;
+    width: 4%;
+    height: 70%;
 }
 
-.fontUP{
-	font-family: "ChunkFive Roman", Arial; 
-	color: #7D7D7D;
-	font-size: 13px;
-	padding-left: 3%;
-}
-
-#personalinfo, #billingaddress, #shippingaddress, #accountinfo{
-	background-color: #1a1919;
-	width: 100%;
-	height: 5%;
-	font-family: "ChunkFive Roman", Arial; 
-	font-size: 12pt;
-	padding-top: 1.5%;
-	color: white;
+#watch {
+    position: relative;
+    width: 55px;
+    height: 55px;
+    margin-left: 2px;
 }
 
 #logo {
@@ -85,235 +99,333 @@
     align-items: center;
 }
 
-.smalltext {
-	color: white;
-    font-family: Helvetica Neue;
-    font-size: 2em;
-	padding-left: 0.5em;
-	padding-right: 0.5em;
-    float: right;
-	list-style-type: none;
+#profile {
+    width: 30px;
+    height: 30px;
 }
 
-.buttondesign{
-	position: absolute;
-	background-color: #ff1a1a;
-	color: white;
-	padding: 9px 8px;
-	cursor: pointer;
-	text-decoration: none;
-	top: 20.5%;
-	border: none;
-	border-radius: 3%;
+footer {
+    background-color: #1a1919;
+    height: 12%;
+    display: block;
+    padding-top: 30px;
+    position: relative;
+    text-align: center;
+    font-family: "Helvetica Neue";
+    font-size: 15px;
+    position: relative;
+    color: white;
 }
 
-.buttondesign:hover{
-	background-color: #f2f2f2;
+#shopContainer {
+    background-color: #020202;
+    text-align: center;
+    color: white;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 
-.buttondesign2:hover{
-	background-color: #ccccb3;
+#bigMessage {
+    position: relative;
+    top: 20%;
+    transform: translateY(-50%); 
+    text-align: center;
+    font-family: "Helvetica Neue";
+    font-size: 40px;
+    color: white;
+    font-weight: bold;
 }
 
-.buttondesign2{
-	background-color: #ff1a1a;
-	color: white;
-	padding: 10px 8px;
-	cursor: pointer;
-	text-decoration: none;
-	border: none;
-	border-radius: 3%;
+.inline-block {
+    display: inline-block;
 }
 
-#changepw{
-	right: 3%;
-	
+#watchRow {
+    position: relative;
+    top: 20%;
 }
 
-#editprof{
-	right: 13%;
+#watchShop {
+    text-align: center;
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 15%; 
+    height: 18%;
+    display: inline-block;
+    margin-bottom: 7em;
+    margin-right: 1em;
+    border-radius: 25px;
 }
 
-ul{
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	background-color: #333;
+#watchShop span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 18%;
+    padding: 4.5em 0;
+    background: #1a1919;
+    opacity: 0;
+    transition: all 0.8s ease;
+    border-radius: 25px;
 }
 
-li{
-	float: left;
+#watchShop span:hover {
+    opacity: 0.9;
 }
 
-li a{
-	display: block;
-	color: white;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-	font-size: 15pt;
-}
-
-li a:hover, li a:active{
-	background-color: #111;
-}
-
-#tablink{
-	cursor: pointer;
-}
-
-#watchcontainer{
-	height: 47.5%;
-	width: 17.5%;
-	margin-top: 3%;
-	margin-left: 3%;
-	display: inline-block;
-	border-style: solid;
-	padding-top: 2%;
-}
-.tab {
-    overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-}
-.tab button {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
+.watchShopButton {
+    background-color: white;
+    color: black;
+    font-family: "Helvetica Neue";
+    font-weight: bold;
+    padding: 2px 10px;
     font-size: 16px;
+    border-radius: 10px;
+    margin-top: 1em;
+    display: inline-block;
 }
 
-/* Change background color of buttons on hover */
-.tab button:hover {
-    background-color: #ddd;
+.watchShopButton:hover {
+    background-color: #B3B3B3;
+    color: white;
+    cursor: pointer;
 }
 
-/* Create an active/current tablink class */
-.tab button.active {
-    background-color: #ccc;
+.watchText {
+    position: relative;
+    text-align: center;
+    font-family: "Helvetica Neue";
+    font-size: 20px;
+    font-weight: bold;
 }
 
-/* Style the tab content */
-.tabcontent {
-    display: none;
-    padding: 6px 12px;
-    border: 0.5px solid #ccc;
-    border-top: none;
-}
-#watchinfo{
-	text-align: center;
+.aWatch {
+    position: relative;
+    top: 20%;
+    text-align: center;
+    text-decoration: none;
+    color: white;
 }
 
-#watchname{
-	font-size: 14pt;
+.aWatch:hover {
+    position: relative;
+    top: 20%;
+    text-align: center;
+    text-decoration: none;
+    color: #A6ACAF;
 }
 
-#reviewOverlay{
-	position: absolute;
-	top: 40%;
-	left: 32.5%;
-	display: flex;
-	height: 30%;
-	width: 30%;
-    border-radius: 15px;
-	background-color: white;
-	display: none;
+/* Center the image and position the close button */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
 }
 
-#infoOverlay{
-	position: absolute;
-	top: 30%;
-	left: 25%;
-	height: 50%;
-	width: 50%;
-	background-color: white;
-	display: none;
+.watchModalContainer {
+    padding: 16px;
+    position: relative;
+    margin-top: 5%;
 }
 
-#overlay, #overlay2{
-	position: fixed;
-	display: none;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: rgba(0,0,0,0.5);
-	z-index: 2;
+.reviewProductContainer, {
+    padding: 16px;
+}
+
+span.psw {
+    position: relative;
+    top: 20%;
+    left: 8%;
+    padding-top: 10px;
     font-family: "Helvetica Neue";
 }
 
-#close{
-	position: absolute;
-	color: black;
-	top: 3%;
-	right: 4%;
-	font-size: 10pt;
-	font-family: "Helvetica Neue";
-	cursor: pointer;
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
 }
 
-#close2{
-	position: absolute;
-	color: black;
-	top: 6%;
-	right: 4%;
-	font-size: 10pt;
-	font-family: "Helvetica Neue";
-	cursor: pointer;
-}
-	
-#close:hover, #close2:hover {
-    color:#E6600D;
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 25%; /* Could be more or less, depending on screen size */
 }
 
-#textarea{
-	font-size: 15pt;
-	position: absolute;
-	top: 8%;
-	left: 3%;
+.watchModal-content {
+    background-color: #020202;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #E8E2E2;
+    width: 55%; /* Could be more or less, depending on screen size */
+    height: 65%;
 }
 
-#reviewbutton{
-	right: 6%;
-	position: absolute;
-	bottom: 2.5%;
+.reviewProductModal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #E8E2E2;
+    width: 45%; /* Could be more or less, depending on screen size */
+    height: 70%;
 }
 
-#producttitle{
-	font-size: 15pt;
-	font-family: "ChunkFive Roman", Arial; 
-	position: absolute;
-	top: 5%;
-	left: 2%;
+/* The Close Button (x) */
+.close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
 }
 
-#photo{
-	position: absolute;
-	top: 25%;
-	left: 7%;
+.close:hover {
+    color: #4688F1;
+    cursor: pointer;
 }
 
-#wInfo{
-	position: absolute;
-	left: 35%;
-	top: 30%;
-	font-family: "ChunkFive Roman", Arial; 
-	font-size: 12pt;
+.watchShop {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #A1A1A1;
+    font-size: 35px;
+    font-weight: bold;
 }
 
-#info3{
-	padding-top: 5%;
-	padding-bottom: 5%;
+.watchShop:hover {
+    color: #373737;
+    cursor: pointer;
 }
 
+/* Add Zoom Animation */
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
 
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+}
+    
+@keyframes animatezoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
 
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+        font-family: "Helvetica Neue";
+    }
+    .cancelbtn {
+        width: 100%;
+    }
+}
 
+#watchImg {
+    height: 60%; 
+    width: 70%; 
+}
 
+#productName {
+    color: #A29C97;
+    font-family: "Helvetica Neue";
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#description, #quantityText {
+    font-family: "Helvetica Neue";
+    color: #424242;
+    font-size: 12px;
+    margin-right: 10%;
+    text-align: justify;
+}
+
+#price {
+    color: #A29C97;
+    font-family: "Helvetica Neue";
+    font-size: 16px;
+    font-weight: bold;
+    display:inline-block;
+}
+
+#checkReviewsText {
+    color: #A29C97;
+    font-family: "Helvetica Neue";
+    font-size: 16px;
+    font-weight: bold;
+    display:inline-block;
+    text-decoration: none;
+    position: relative;
+    left: 24%;
+}
+
+#checkReviewsText:hover {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+#reviewText {
+    color: black;
+    font-family: "Helvetica Neue";
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+    margin-top: 15%;
+}
+
+#reviewInput {
+    margin: -5px 0;
+    width: 80%;
+    height: 40%;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-family: "Helvetica Neue";
+    position: relative;
+    margin-top: 2%;
+    margin-left: 11%;
+}
+
+#submitButton {
+    background-color: black;
+    color: white;
+    font-family: "Helvetica Neue";
+    font-weight: bold;
+    padding: 14px 140px;
+    font-size: 16px;
+    position: relative;
+    margin-top: 6%;
+    margin-left: 21.5%;
+}
+
+#submitButton:hover {
+    background-color: #4688F1;
+    color: white;
+}

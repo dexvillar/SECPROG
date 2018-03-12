@@ -68,14 +68,16 @@ class watche(models.Model):
         return self.name
     
 class review(models.Model):
-    watch_id = models.IntegerField(default = 0)
-    reviews= models.CharField(max_length=255)
+    watch_id = models.PositiveIntegerField(default = 0)
+    user_id = models.PositiveIntegerField(default=0)
+    name = models.CharField(max_length=255, default=0)
+    reviews = models.CharField(max_length=2048)
     
     def __str__(self):
-        return self.reviews
+        return self.name
 
 class checkout(models.Model):
-    watch_id = models.IntegerField(default = 0)
+    watch_id = models.PositiveIntegerField(default = 0)
     user_id = models.PositiveIntegerField(default=0)
     card_number = models.PositiveIntegerField(default=0)
     security_number = models.PositiveIntegerField(default=0)
@@ -98,7 +100,8 @@ class sale(models.Model):
 class buy_watche(models.Model):
     watch_id = models.PositiveIntegerField(default=0)
     user_id = models.PositiveIntegerField(default=0)
-    name = models.CharField(max_length=255, default="")
+    name = models.CharField(max_length=255, default=0)
+    description = models.CharField(max_length=2048, default=0)
     price = models.FloatField(default=0)
     picture = models.ImageField(upload_to = 'watchPictures/', default = 'media/no-img.jpg')
     quantity = models.PositiveIntegerField(default=0)

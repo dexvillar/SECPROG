@@ -180,6 +180,7 @@ def buyProduct(request, id):
     addedProducts = watche.objects.all()
     
     getName = get_object_or_404(watche, id=id).name
+    getDescription = get_object_or_404(watche, id=id).description
     getPrice = get_object_or_404(watche, id=id).price
     getPicture = get_object_or_404(watche, id=id).picture
     mediaPicture = "/media/" + str(getPicture)
@@ -196,7 +197,7 @@ def buyProduct(request, id):
         'total': total,
     }
     
-    addingWatch = buy_watche(name = str(getName), price = str(getPrice), picture = getPicture, quantity = request.POST['productQuantity'], watch_id = request.session["user"], user_id = request.session["user"])
+    addingWatch = buy_watche(name = str(getName), description = str(getDescription), price = str(getPrice), picture = getPicture, quantity = request.POST['productQuantity'], watch_id = request.session["user"], user_id = request.session["user"])
     addingWatch.save()
 
     return render(request, 'aionApp/checkout.html', context)
@@ -208,7 +209,6 @@ def checkOutProduct(request):
         'currentUser': currentUser,
         'addedProducts': addedProducts,
     }
-    
     buyingProduct = checkout(card_number = request.POST['card_number'], security_number = request.POST['security_number'], month = request.POST['month'], year = request.POST['year'], watch_id = request.session["user"], user_id = request.session["user"])
     buyingProduct.save()
     
@@ -219,7 +219,25 @@ def checkoutPage(request):
     return render(request, 'aionApp/checkout.html')
 
 def purchasePage(request):
-    return render(request, 'aionApp/purchasepage.html')
+    currentUser = get_object_or_404(user, user_id=request.session["user"])
+    userProducts = buy_watche.objects.filter(user_id=request.session["user"])
+    context = {
+        'currentUser': currentUser,
+        'userProducts': userProducts,
+    }
+    return render(request, 'aionApp/purchasepage.html', context)
+
+def addReview(request, id):
+    currentUser = get_object_or_404(user, user_id=request.session["user"])
+    userProducts = buy_watche.objects.filter(user_id=request.session["user"])
+    getName = get_object_or_404(buy_watche, id=id).name
+    context = {
+        'currentUser': currentUser,
+        'userProducts': userProducts,
+    }
+    addingReview = review(reviews = request.POST['review'], name = str(getName), watch_id = request.session["user"], user_id = request.session["user"])
+    addingReview.save()
+    return render(request, 'aionApp/purchasepage.html', context)
 
 def editProfilePage(request):
     currentUser = get_object_or_404(user, user_id = request.session["user"])

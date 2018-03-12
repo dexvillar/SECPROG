@@ -1,180 +1,137 @@
 <html>
-<head>
-    {% load static %}
-	<title> Profile </title>
-	<link rel="icon" href="{% static 'aionApp/Images/watch.png' %}" type="image" sizes="16x16">
-	<link rel="stylesheet" type="text/css" href="{% static 'aionApp/purchasepage.css' %}">
-</head>
-<body>
-	<div id="logocontainer">
-		<img src="{% static 'aionApp/Images/watch.png' %}" height="60px" width="60px">
-		<div id="text"> AION </div>
-	</div>
-	
-	<div class="tab">
-	  <button class="tablinks" onclick="openCity(event, 'maincontainer1')">Profile</button>
-	  <button class="tablinks" onclick="openCity(event, 'maincontainer2')">Purchase History</button>
-	</div>
+    <head>
+        {% load static %}
+        <title>Profile Page</title>
+        <link rel="icon" href="{% static 'aionApp/Images/watch.png' %}" type="image" sizes="16x16">
+        <link rel="stylesheet" type="text/css" href="{% static 'aionApp/purchasepage.css' %}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    
+    <body>
+        <div id="navbar">
+            <p id="logo" style="position: absolute; left: -3%;">  
+                {% if currentUser.user_id > 0 %}
+                <a href="/aionApp/homePage/"><img src="{% static 'aionApp/Images/watch.png' %}" id="watch"></a>
+                {% else %}
+                <a href="/aionApp/exitSession/"><img src="{% static 'aionApp/Images/watch.png' %}" id="watch"></a>
+                {% endif %}
+                 AION
+            </p>
+            
+            {% if currentUser.role_type != "0" %}
+            <form class="searchContainer">
+                <input type="text" id="searchBar" placeholder="SEARCH AION">
+                <a href="#"><img class="searchIcon" src="{% static 'aionApp/Images/search.png' %}"></a>
+            </form>
+            {% endif %}
+            
+            {% if currentUser.user_id > 0 %}
+                {% if currentUser.role_type != "0" %}
+                    <span style="position: absolute; left: 47%;">
+                        <a href="/aionApp/profilePage/"><img src="{% static 'aionApp/Images/profile.png' %}" id="profile"></a>
+                        <a href="/aionApp/shopPage/">SHOP</a>
+                        <a href="/aionApp/exitSession/">LOG OUT</a>    
+                    </span>
+                {% else %}
+                    <span style="position: absolute; left: 70%;">
+                        <a onclick="document.getElementById('addProductModal').style.display='block'">ADD PRODUCT</a>
+                        <a href="/aionApp/exitSession/">LOG OUT</a>    
+                    </span>
+                {% endif %}
+            {% else %}
+            <span style="position: absolute; left: 55%;">
+                <a href="#">SHOP</a>
+                <a onclick="document.getElementById('loginModal').style.display='block'">LOG IN</a>
+            </span>
+            {% endif %}
+        </div>
+        
+        <div id="shopContainer">
+            <p id="bigMessage">PURCHASE HISTORY</p>
+            <div id="watchRow">
+                {% if userProducts %}
+                    {% for buy_watches in userProducts %}
+                         <div class="inline-block" id="watchShop" style="background-image: url({{ MEDIA_URL }}{{ buy_watches.picture.url }})">
+                            <span class="watchText"><a href="#" class="aWatch" onclick="openWatchModal{{buy_watches.id}}()">QUICK VIEW</a></span>
+                            <button class="watchShopButton" onclick="openReviewModal{{buy_watches.id}}()">LEAVE A REVIEW</button>
+                        </div>
+                        <div class="inline-block" style="margin-right: 1em;"> </div>
+                    {% endfor %}
+                {% endif %}
+            </div>   
+        </div>
+        
+        {% if userProducts %}
+        {% for buy_watches in userProducts %}
+            <div id="watchModal{{buy_watches.id}}" class="modal">
+                <form class="watchModal-content animate"  method = "post">
+                    <div class="imgcontainer">
+                        <span onclick="closeWatchModal{{buy_watches.id}}()" class="watchShop" title="Close Modal">&times;</span>
+                    </div>
 
-	<div id="maincontainer1" class="tabcontent">
-	    <div class="blueblock">
-			<div id="title">My Profile </div>
-					<li style="float: right;" class="smalltext" onclick="uploadFile();">
-						<div class="bar-title-box"> <button class="buttondesign" id = "changepw"> Change Password </button> </div>
-					</li>
-					<li style="float: right;" class="smalltext" onclick=";">
-						<div class="bar-title-box"> <button class="buttondesign" id="editprof"> Edit Profile </button> </div>
-					</li>
-				
-		</div>
-		
-	<div id="container1">
-		<div id="info">
-			<div id="personalinfo">
-				Personal Information
-			</div>
-			<br>
-			<span class="fontUP">Last Name:</span>
-			<br> <br>
-			<span class="fontUP">First Name:</span>
-			<br> <br>
-			<span class="fontUP">Middle Initial:</span>
-			<br> <br>
-			<span class="fontUP">E-mail Address:</span>
-			<br> <br>
-			
-			<div id="billingaddress">
-				Billing Address
-			</div>
-			<br>
-			<span class="fontUP">House No.:</span>
-			<br> <br>
-			<span class="fontUP">Street:</span>
-			<br> <br>
-			<span class="fontUP">Subdivision:</span>
-			<br> <br>
-			<span class="fontUP">City:</span>
-			<br> <br>
-			<span class="fontUP">Postal Code:</span>
-			<br> <br>
-			<span class="fontUP">Country:</span>
-			<br> <br>
-			
-			
-		</div>
-	</div>
-	
-	<div id="container2">
-		<div id="accountinfo">
-			Account Information
-		</div>
-			<br>
-			<span class="fontUP">Username:</span>
-			<br> <br>
-			<span class="fontUP">Password:</span>
-			<br> <br>
-			
-		<div id="shippingaddress">
-			Shipping Address
-		</div>
-			<br>
-			<span class="fontUP">House No.:</span>
-			<br> <br>
-			<span class="fontUP">Street:</span>
-			<br> <br>
-			<span class="fontUP">Subdivision:</span>
-			<br> <br>
-			<span class="fontUP">City:</span>
-			<br> <br>
-			<span class="fontUP">Postal Code:</span>
-			<br> <br>
-			<span class="fontUP">Country:</span>
-			<br> <br>
-		
-		
-	</div>
-			
-	</div>
-</div>
+                    <div class="watchModalContainer">
+                        <div class="spacer" style="margin-bottom: 1em;"> </div>
+                        <div class="col-md-6">
+                            <img src="{{ MEDIA_URL }}{{ buy_watches.picture.url }}" id="watchImg">
+                        </div>
+                        <div class="col-md-6">
+                            <p id="productName">{{buy_watches.name}}</p>
+                            <p id="description">{{buy_watches.description}}</p>
+                            <p id="price">${{buy_watches.price}}</p>&nbsp;
+                            <a id="checkReviewsText" onclick="openReviewModal{{buy_watches.id}}()">CHECK REVIEWS</a>
+                            <br/>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        {% endfor %}
+        {% endif %}
+        
+        {% if userProducts %}
+        {% for buy_watches in userProducts %}
+            <div id="reviewProductModal{{buy_watches.id}}" class="modal">
+                <form class="reviewProductmodal-content animate" action="{% url 'aionApp:addReview' buy_watches.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="imgcontainer">
+                        <span onclick="closeReviewModal{{buy_watches.id}}()" class="watchShop" title="Close Modal">&times;</span>
+                    </div>
+                    <div class="reviewProductContainer">
+                        <div class="spacer" style="margin-bottom: 1em;"> </div>
+                        <p id="reviewText">REVIEW A PRODUCT</p>
+                        <textarea id="reviewInput" name="review"></textarea>
+                        <button id="submitButton" href="#">SUBMIT</button>
+                    </div>
+                </form>
+            </div>
+        {% endfor %}
+        {% endif %}
+        
+        <footer>Copyright © 2018 Xcite Interactive. All Rights Reserved.</footer>
+    </body>
+    
+    {% if userProducts %}
+    {% for buy_watches in userProducts %}
+        <script>
+            function openWatchModal{{buy_watches.id}}() {          
+                document.getElementById('watchModal{{buy_watches.id}}').style.display='block';
+            }
 
-<div id="maincontainer2" class="tabcontent">
-	
-  <div id="watchcontainer" align="middle">
-			<img src="watch1.png" width="200px" height="200px">
-			<div id="watchinfo">
-			<div id="watchname"> *insert watchname here* </div>
-			<button id="View info" class="buttondesign2" onclick="viewInfo()"> View Info </button>
-			<button id="Leave a review" class="buttondesign2" onclick="leavereview()"> Leave a review </button>
-			</div>
-		</div>
-		
-		<div id="watchcontainer" align="middle">
-			<img src="watch2.png" width="200px" height="200px">
-			<div id="watchinfo">
-			<div id="watchname"> *insert watchname here* </div>
-			<button id="viewInfo" class="buttondesign2" onclick="viewInfo()"> View Info </button>
-			<button id="addReview" class="buttondesign2" onclick="leavereview()"> Leave a review </button>
-			</div>
-		</div>
-		
-		<div id="overlay">
-			<div id="reviewOverlay">
-				<div id="textarea">
-					Leave a review
-					<div id="close" onclick="off()"> X </div>
-					<textarea rows="7" cols="50"> </textarea>
-				</div>
-				<button class="buttondesign2" id="reviewbutton"> Add review </button>
-			</div>
-		</div>
-		
-		<div id="overlay2">
-			<div id="infoOverlay">
-				<div id="producttitle"> <b> Product Details </b> </div>
-				<div id="close2" onclick="off()"> X </div>
-		 		<div id="photo"> <img src="watch1.png" height="175px" width="175px"> </div>
-				<div id="wInfo">
-					<div id="info3">Product name: <br> </div>
-					<div id="info3">Description: <br> </div>
-					<div id="info3">Quantity: <br> </div>
-					<div id="info3"> Price: <br> </div>
-				</div>
-			</div>
-		</div>
+            function closeWatchModal{{buy_watches.id}}() {
+                document.getElementById('watchModal{{buy_watches.id}}').style.display='none';
+            }
+            
+            function openReviewModal{{buy_watches.id}}(){
+                document.getElementById("reviewProductModal{{buy_watches.id}}").style.display = "block";
+            }
 
-<script>
-	function openCity(evt, cityName) {
-		var i, tabcontent, tablinks;
-		tabcontent = document.getElementsByClassName("tabcontent");
-		for (i = 0; i < tabcontent.length; i++) {
-			tabcontent[i].style.display = "none";
-		}
-		tablinks = document.getElementsByClassName("tablinks");
-		for (i = 0; i < tablinks.length; i++) {
-			tablinks[i].className = tablinks[i].className.replace(" active", "");
-		}
-		document.getElementById(cityName).style.display = "block";
-		evt.currentTarget.className += " active";
-	}
-	
-	function leavereview(){
-		document.getElementById("reviewOverlay").style.display = "block";
-		document.getElementById("overlay").style.display = "block";
-	}
-	
-	function viewInfo(){
-		document.getElementById("infoOverlay").style.display = "block";
-		document.getElementById("overlay2").style.display = "block";
-	}
-	
-	function off(){
-		document.getElementById("reviewOverlay").style.display = "none";
-		document.getElementById("overlay").style.display = "none";
-		document.getElementById("overlay2").style.display = "none";
-		document.getElementById("infoOverlay").style.display = "none";
-		
-	}
-</script>
-     
-</body>
+            function closeReviewModal{{buy_watches.id}}(){
+                document.getElementById("reviewProductModal{{buy_watches.id}}").style.display = "none";
+            }
+        </script>
+    {% endfor %}
+    {% endif %}
 </html> 

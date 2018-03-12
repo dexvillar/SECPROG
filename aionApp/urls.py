@@ -21,5 +21,6 @@ urlpatterns= [
     url(r'^profilePage/$', views.profilePage, name='profilePage'),
     url(r'^checkoutPage/$', views.checkoutPage, name='checkoutPage'),
     url(r'^purchasePage/$', views.purchasePage, name='purchasePage'),
+    url(r'^addReview/(?P<id>[\w\-]+)$', views.addReview, name='addReview'),
     url(r'^editProfilePage/$', views.editProfilePage, name='editProfilePage'),
 ]
