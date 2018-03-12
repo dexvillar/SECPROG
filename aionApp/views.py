@@ -284,7 +284,7 @@ def reviewPage(request, id):
         getWatchType = get_object_or_404(watche, id=id).watch_type
         getPicture = get_object_or_404(watche, id=id).picture
         mediaPicture = "/media/" + str(getPicture)
-        addedReviews= review.objects.all()
+        addedReviews = review.objects.filter(name=str(getName))
         context = {
             'addedProducts': addedProducts,
             'getName': getName,
