@@ -13,12 +13,14 @@
                  AION
             </p>
             
-            <form class="searchContainer">
-                <input type="text" id="searchBar" placeholder="SEARCH AION">
-                <a href="#"><img class="searchIcon" src="{% static 'aionApp/Images/search.png' %}"></a>
+            <form class="searchContainer" role="search" method="get" action="{% url 'aionApp:search' %}">
+                <input type="text" id="searchBar" placeholder="SEARCH AION"
+                class="form-control" name="q" value="{{ request.GET.q }}">
+                <button type="submit" class="btn btn-default"><img class="searchIcon" src="{% static 'aionApp/Images/search.png' %}"></button>
             </form>
             
-            <span style="position: absolute; left: 25%;">
+            <span style="position: absolute; left: 18%;">
+                <a href="#"><img src="{% static 'aionApp/Images/profile.png' %}" id="profile"></a>
                 <a href="/aionApp/shopPage/">SHOP</a>
                 <a href="/aionApp/purchasePage/">PURCHASES</a>
                 <a href="/aionApp/editProfilePage/">EDIT PROFILE</a>

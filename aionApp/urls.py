@@ -24,4 +24,8 @@ urlpatterns= [
     url(r'^addReview/(?P<id>[\w\-]+)$', views.addReview, name='addReview'),
     url(r'^reviewPage/(?P<id>[\w\-]+)$', views.reviewPage, name='reviewPage'),
     url(r'^editProfilePage/$', views.editProfilePage, name='editProfilePage'),
+    url(r'^search/$', views.search, name='search'),
+    url(r'^analog/$', views.analog, name='analog'),
+    url(r'^digital/$', views.digital, name='digital'),
+    url(r'^smart/$', views.smart, name='smart'),
 ]

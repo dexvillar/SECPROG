@@ -20,9 +20,10 @@
                  AION
             </p>
             
-            <form class="searchContainer">
-                <input type="text" id="searchBar" placeholder="SEARCH AION">
-                <a href="#"><img class="searchIcon" src="{% static 'aionApp/Images/search.png' %}"></a>
+             <form class="searchContainer" role="search" method="get" action="{% url 'aionApp:search' %}">
+                <input type="text" id="searchBar" placeholder="SEARCH AION"
+                class="form-control" name="q" value="{{ request.GET.q }}">
+                <button type="submit" class="btn btn-default"><img class="searchIcon" src="{% static 'aionApp/Images/search.png' %}"></button>
             </form>
             
             {% if currentUser.user_id > 0 %}
@@ -59,15 +60,15 @@
 
         <div id="watches">
             <div class="inline-block" id="analogWatch">
-                <span class="watchText"><a href="#" class="aWatch">ANALOG WATCH</a></span>
+                <span class="watchText"><a href="/aionApp/analog/" class="aWatch">ANALOG WATCH</a></span>
             </div>
 
             <div class="inline-block" id="digitalWatch">
-                <span class="watchText"><a href="#" class="aWatch">DIGITAL WATCH</a></span>
+                <span class="watchText"><a href="/aionApp/digital/" class="aWatch">DIGITAL WATCH</a></span>
             </div>
 
             <div class="inline-block" id="smartWatch">
-                <span class="watchText"><a href="#" class="aWatch">SMART WATCH</a></span>
+                <span class="watchText"><a href="/aionApp/smart/" class="aWatch">SMART WATCH</a></span>
             </div>
         </div>
         

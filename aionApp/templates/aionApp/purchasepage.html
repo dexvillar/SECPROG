@@ -20,32 +20,17 @@
                  AION
             </p>
             
-            {% if currentUser.role_type != "0" %}
-            <form class="searchContainer">
-                <input type="text" id="searchBar" placeholder="SEARCH AION">
-                <a href="#"><img class="searchIcon" src="{% static 'aionApp/Images/search.png' %}"></a>
+            <form class="searchContainer" role="search" method="get" action="{% url 'aionApp:search' %}">
+                <input type="text" id="searchBar" placeholder="SEARCH AION"
+                class="form-control" name="q" value="{{ request.GET.q }}">
+                <button type="submit" class="btn btn-default"><img class="searchIcon" src="{% static 'aionApp/Images/search.png' %}"></button>
             </form>
-            {% endif %}
             
-            {% if currentUser.user_id > 0 %}
-                {% if currentUser.role_type != "0" %}
-                    <span style="position: absolute; left: 47%;">
-                        <a href="/aionApp/profilePage/"><img src="{% static 'aionApp/Images/profile.png' %}" id="profile"></a>
-                        <a href="/aionApp/shopPage/">SHOP</a>
-                        <a href="/aionApp/exitSession/">LOG OUT</a>    
-                    </span>
-                {% else %}
-                    <span style="position: absolute; left: 70%;">
-                        <a onclick="document.getElementById('addProductModal').style.display='block'">ADD PRODUCT</a>
-                        <a href="/aionApp/exitSession/">LOG OUT</a>    
-                    </span>
-                {% endif %}
-            {% else %}
-            <span style="position: absolute; left: 55%;">
-                <a href="#">SHOP</a>
-                <a onclick="document.getElementById('loginModal').style.display='block'">LOG IN</a>
+            <span style="position: absolute; left: 47%;">
+                <a href="/aionApp/profilePage/"><img src="{% static 'aionApp/Images/profile.png' %}" id="profile"></a>
+                <a href="/aionApp/shopPage/">SHOP</a>
+                <a href="/aionApp/exitSession/">LOG OUT</a>
             </span>
-            {% endif %}
         </div>
         
         <div id="shopContainer">

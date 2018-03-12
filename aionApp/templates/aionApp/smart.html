@@ -1,0 +1,289 @@
+<html>
+    <head>
+        {% load static %}
+        <title>Shop Page</title>
+        <link rel="icon" href="{% static 'aionApp/Images/watch.png' %}" type="image" sizes="16x16">
+        <link rel="stylesheet" type="text/css" href="{% static 'aionApp/shop.css' %}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    
+    <body>
+        <div id="navbar">
+            <p id="logo" style="position: absolute; left: -3%;">  
+                {% if currentUser.user_id > 0 %}
+                <a href="/aionApp/homePage/"><img src="{% static 'aionApp/Images/watch.png' %}" id="watch"></a>
+                {% else %}
+                <a href="/aionApp/exitSession/"><img src="{% static 'aionApp/Images/watch.png' %}" id="watch"></a>
+                {% endif %}
+                 AION
+            </p>
+            
+            {% if currentUser.role_type != "0" %}
+            <form class="searchContainer" role="search" method="get" action="{% url 'aionApp:search' %}">
+                <input type="text" id="searchBar" placeholder="SEARCH AION"
+                class="form-control" name="q" value="{{ request.GET.q }}">
+                <button type="submit" class="btn btn-default"><img class="searchIcon" src="{% static 'aionApp/Images/search.png' %}"></button>
+            </form>
+            {% endif %}
+            
+            {% if currentUser.user_id > 0 %}
+                {% if currentUser.role_type != "0" %}
+                    <span style="position: absolute; left: 47%;">
+                        <a href="/aionApp/profilePage/"><img src="{% static 'aionApp/Images/profile.png' %}" id="profile"></a>
+                        <a href="/aionApp/shopPage/">SHOP</a>
+                        <a href="/aionApp/exitSession/">LOG OUT</a>    
+                    </span>
+                {% else %}
+                    <span style="position: absolute; left: 70%;">
+                        <a onclick="document.getElementById('addProductModal').style.display='block'">ADD PRODUCT</a>
+                        <a href="/aionApp/exitSession/">LOG OUT</a>    
+                    </span>
+                {% endif %}
+            {% else %}
+            <span style="position: absolute; left: 55%;">
+                <a href="/aionApp/shopPage/">SHOP</a>
+                <a onclick="document.getElementById('loginModal').style.display='block'">LOG IN</a>
+            </span>
+            {% endif %}
+        </div>
+        
+        <div id="loginModal" class="modal">
+            <form class="modal-content animate" action="{% url 'aionApp:shopLogIn' %}" method = "post">
+                {% csrf_token %}
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('loginModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+                </div>
+                
+                <div class="loginContainer">
+                    <div class="spacer" style="margin-bottom: 1em;"> </div>
+                    <input type="text" placeholder="USERNAME" name="userName" required>
+                    <input type="password" placeholder="PASSWORD" name="userPassword" required>
+                    <button type="submit" id="loginBtn">LOG IN</button>
+
+                    {% if error %}
+                    <div class="spacer" style="margin-bottom: 1em;"> </div>
+                    <p id="error">Invalid user name or password.</p>
+                    {% endif %}
+                </div>
+
+                <div class="loginContainer" id="logIn" style="background-color:#f1f1f1; height: 10%;">
+                    <span class="psw">Don't have an account? <a href="/aionApp/registerPage/" class="aLogin">Sign up now.</a></span>
+                </div>
+            </form>
+        </div>
+        
+        <div id="addProductModal" class="modal">
+            <form class="addProductmodal-content animate"  action="{% url 'aionApp:addProduct' %}"method = "post">
+                {% csrf_token %}
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('addProductModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+                </div>
+                
+                <div class="addProductContainer">
+                    <div class="spacer" style="margin-bottom: 1em;"> </div>
+                    <p class="addProductBigText">ADD A PRODUCT</p>
+                    
+                    <p class="addProductSmallText">NAME: <input id="nameInput" type="text" name="productName"/></p>
+                    
+                    <p class="addProductSmallText">DESCRIPTION:</p>
+                    <textarea id="descriptionInput" name="productDescription"></textarea>
+                    <br/>
+                    <br/>
+                    
+                    <div class="col-md-6">
+                        <p class="addProductSmallText">STOCK: <input id="stockInput" type="number" name="productStock" min="0"/></p>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="addProductSmallText">PRICE: <input id="priceInput" type="number" name="productPrice" min="1"/></p>
+                    </div>
+                    
+                    <p class="addProductSmallText" id="watchTypeText">WATCH TYPE: </p>
+                    <select name="watchType" class="dropDown">
+                        <option value="0">ANALOG WATCH</option>
+                        <option value="1">DIGITAL WATCH</option>    
+                        <option value="2">SMART WATCH</option>
+                    </select>
+                    
+                    <div class="spacer" style="margin-bottom: 0.4em;"> </div>
+                    
+                    <p class="addProductSmallText">PICTURE:</p>
+                    <input type="file" name="productPicture">
+                    
+                    
+                    <div class="spacer" style="margin-bottom: 1em;"> </div>
+                    
+                    <button id="submitButton" href="#">SUBMIT</button>
+                </div>
+            </form>
+        </div>
+        
+        <div id="shopContainer">
+            <p id="bigMessage">SMART WATCHES</p>
+            <div id="watchRow">
+                {% if Swatches %}
+                    {% for watches in Swatches %}
+                         <div class="inline-block" id="watchShop" style="background-image: url({{ MEDIA_URL }}{{ watches.picture.url }})">
+                            <span class="watchText"><a href="#" class="aWatch" onclick="openWatchModal{{watches.id}}()">QUICK VIEW</a></span>
+                             {% if currentUser.role_type == "0" %}
+                                <button class="watchShopButton" onclick="openEditModal{{watches.id}}()">EDIT</button>
+                                <button class="watchShopButton" onclick="openDeleteModal{{watches.id}}()">DELETE</button>
+                             {% endif %}
+                        </div>
+                        <div class="inline-block" style="margin-right: 1em;"> </div>
+                    {% endfor %}
+                {% endif %}
+            </div>     
+        </div>
+        
+        {% if Swatches %}
+            {% for watches in Swatches%}
+            <div id="watchModal{{watches.id}}" class="modal">
+                <form class="watchModal-content animate" action="{% url 'aionApp:buyProduct' watches.id %}" method = "post">
+                    {% csrf_token %}
+                    <div class="imgcontainer">
+                        <span onclick="closeWatchModal{{watches.id}}()" class="watchShop" title="Close Modal">&times;</span>
+                    </div>
+
+                    <div class="watchModalContainer">
+                        <div class="spacer" style="margin-bottom: 1em;"> </div>
+                        <div class="col-md-6">
+                            <img src="{{ MEDIA_URL }}{{ watches.picture.url }}" id="watchImg">
+                        </div>
+                        <div class="col-md-6">
+                            <p id="productName">{{watches.name}}</p>
+                            <p id="description">{{watches.description}}</p>
+                            <p id="price">${{watches.price}}</p>&nbsp;
+                            {% if watches.stock <= 15 %}
+                            <p id="stock">Only {{watches.stock}} left!</p>
+                            {% endif %}
+                            <p id="quantityText">QUANTITY</p>
+                            <input id="quantity" type="number" value="1" name="productQuantity" min="1"/>
+                            <a id="checkReviewsText">CHECK REVIEWS</a>
+                            <br/>
+                            <br/>
+                            <br/>
+                            {% if currentUser.user_id > 0 %}
+                                <button id="addToCart" href="#">BUY</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        {% endfor %}
+        {% endif %}
+    
+        {% if Swatches %}
+        {% for watches in Swatches %}
+            <div id="editProductModal{{watches.id}}" class="modal">
+            <form class="editProductModal-content animate"  action="{% url 'aionApp:editProduct' watches.id %}" method = "post">
+                {% csrf_token %}
+                <div class="imgcontainer">
+                    <span onclick="closeEditModal{{watches.id}}()" class="close" title="Close Modal">&times;</span>
+                </div>
+                
+                <div class="addProductContainer">
+                    <div class="spacer" style="margin-bottom: 1em;"> </div>
+                    <p class="addProductBigText">EDIT A PRODUCT</p>
+                    
+                    <p class="addProductSmallText">NAME: <input id="nameInput" type="text" name="productName" value="{{watches.name}}"/></p>
+                    
+                    <p class="addProductSmallText">DESCRIPTION:</p>
+                    <textarea id="descriptionInput" name="productDescription">{{watches.description}}</textarea>
+                    <br/>
+                    <br/>
+                    
+                    <div class="col-md-6">
+                        <p class="addProductSmallText">STOCK: <input id="stockInput" type="number" name="productStock" min="0" value="{{watches.stock}}"/></p>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <p class="addProductSmallText">PRICE: <input id="priceInput" type="number" name="productPrice" min="1" value="{{watches.price}}"/></p>
+                    </div>
+                    
+                    <p class="addProductSmallText" id="watchTypeText">WATCH TYPE: </p>
+                    <select name="watchType" class="dropDown">
+                        <option value="0">ANALOG WATCH</option>
+                        <option value="1">DIGITAL WATCH</option>    
+                        <option value="2">SMART WATCH</option>
+                    </select>
+                    
+                    <div class="spacer" style="margin-bottom: 0.4em;"> </div>
+                    
+                    <p class="addProductSmallText">PICTURE:</p>
+                    <input type="file" name="productPicture">
+                    
+                    
+                    <div class="spacer" style="margin-bottom: 1em;"> </div>
+                    
+                    <button id="submitButton" href="#">SUBMIT</button>
+                </div>
+            </form>
+        </div>
+        {% endfor %}
+        {% endif %}
+    
+        {% if Swatches %}
+        {% for watches in Swatches %}
+            <div id="deleteProductModal{{watches.id}}" class="modal">
+                <form class="deleteProductmodal-content animate" method="post">
+                    <div class="imgcontainer">
+                    </div>
+                    <div class="deleteProductContainer">
+                        <div class="spacer" style="margin-bottom: 1em;"> </div>
+                        <p id="deleteText">Are you sure you want to delete this product?</p>
+                        <div class="spacer" style="margin-bottom: 0.5em;"> </div>
+                        <div class="col-md-6">
+                            <a href="{% url 'aionApp:deleteProduct' watches.id %}" class="deleteProductButton" >YES</a>
+                        </div>
+                        <div class="col-md-6">
+                             <a class="deleteProductButton" onclick="closeDeleteModal{{watches.id}}()">NO</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        {% endfor %}
+        {% endif %}
+        
+        <footer>Copyright © 2018 Xcite Interactive. All Rights Reserved.</footer>
+    </body>
+    
+    <script>
+        {% if error %}
+            $(document).ready(function() {
+                $('#loginModal').modal('show');
+            });
+        {% endif %}
+    </script>
+    
+    {% if Swatches %}
+        {% for watches in Swatches %}
+            <script>
+                function openWatchModal{{watches.id}}() {          
+                    document.getElementById('watchModal{{watches.id}}').style.display='block';
+                }
+                function closeWatchModal{{watches.id}}() {
+                    document.getElementById('watchModal{{watches.id}}').style.display='none';
+                }
+
+                function openDeleteModal{{watches.id}}(){
+                    document.getElementById("deleteProductModal{{watches.id}}").style.display = "block";
+                }
+
+                function closeDeleteModal{{watches.id}}(){
+                    document.getElementById("deleteProductModal{{watches.id}}").style.display = "none";
+                }
+                
+                function openEditModal{{watches.id}}(){
+                    document.getElementById("editProductModal{{watches.id}}").style.display = "block";
+                }
+
+                function closeEditModal{{watches.id}}(){
+                    document.getElementById("editProductModal{{watches.id}}").style.display = "none";
+                }
+            </script>
+        {% endfor %}
+    {% endif %}
+</html>

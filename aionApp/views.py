@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import user, watche, review, billing_addres, shipping_addres, checkout, sale, buy_watche
+from django.db.models import Q
 
 # Create your views here.
 
@@ -23,9 +24,9 @@ def adminPage(request):
 def profilePage(request):
     if request.session["user"] > 0:
         currentUser = get_object_or_404(user, user_id = request.session["user"])
-    context = {
-            'currentUser': currentUser,
-        }
+        context = {
+                'currentUser': currentUser,
+            }
     return render(request, 'aionApp/profile.html', context)
 
 def homeLogIn(request):
@@ -297,7 +298,6 @@ def reviewPage(request, id):
         }
         return render(request, 'aionApp/review.html', context)
         
-
 def editProfilePage(request):
     currentUser = get_object_or_404(user, user_id = request.session["user"])
     tempId=currentUser.user_id
@@ -330,3 +330,84 @@ def editProfilePage(request):
     
     return render(request, 'aionApp/editprofile.html', context)
     
+def search(request):
+    if request.session["user"] > 0:
+        currentUser = get_object_or_404(user, user_id=request.session["user"])
+        Swatches = watche.objects.all()
+        query = request.GET.get("q")
+        if query:
+            Swatches = Swatches.filter(
+                Q(name__icontains=query)
+            ).distinct()
+            context = {
+                'currentUser': currentUser,
+                'Swatches': Swatches,
+            }
+            return render(request, 'aionApp/search.html', context)
+        else:
+            return render(request, 'aionApp/home.html')
+    else: 
+        Swatches = watche.objects.all()
+        query = request.GET.get("q")
+        if query:
+            Swatches = Swatches.filter(
+                Q(name__icontains=query)
+            ).distinct()
+            context = {
+                'Swatches': Swatches,
+            }
+            return render(request, 'aionApp/search.html',
+                context)
+        else:
+            return render(request, 'aionApp/home.html')
+        
+        
+        
+def analog(request):
+    if request.session["user"] > 0:
+        currentUser = get_object_or_404(user, user_id=request.session["user"])
+        Swatches = watche.objects.filter(watch_type=0)
+        context = {
+            'currentUser': currentUser,
+            'Swatches': Swatches,
+        }
+        return render(request, 'aionApp/analog.html', context)
+    else:
+        Swatches = watche.objects.filter(watch_type=0)
+        context = {
+            'Swatches': Swatches,
+        }
+        return render(request, 'aionApp/analog.html', context)
+
+def digital(request):
+    if request.session["user"] > 0:
+        currentUser = get_object_or_404(user, user_id=request.session["user"])
+        Swatches = watche.objects.filter(watch_type=1)
+        context = {
+            'currentUser': currentUser,
+            'Swatches': Swatches,
+        }
+        return render(request, 'aionApp/digital.html', context)
+    else: 
+        Swatches = watche.objects.filter(watch_type=1)
+        context = {
+            'Swatches': Swatches,
+        }
+        return render(request, 'aionApp/digital.html', context)
+
+def smart(request):
+    if request.session["user"] > 0:
+        currentUser = get_object_or_404(user, user_id=request.session["user"])
+        Swatches = watche.objects.filter(watch_type=2)
+        context = {
+            'currentUser': currentUser,
+            'Swatches': Swatches,
+        }
+        return render(request, 'aionApp/smart.html', context)
+    else:
+        Swatches = watche.objects.filter(watch_type=2)
+        context = {
+            'Swatches': Swatches,
+        }
+        return render(request, 'aionApp/smart.html', context)
+        

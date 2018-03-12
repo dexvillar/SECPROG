@@ -17,9 +17,10 @@
             </p>
             
             {% if currentUser.role_type != "0" %}
-            <form class="searchContainer">
-                <input type="text" id="searchBar" placeholder="SEARCH AION">
-                <a href="#"><img class="searchIcon" src="{% static 'aionApp/Images/search.png' %}"></a>
+            <form class="searchContainer" role="search" method="get" action="{% url 'aionApp:search' %}">
+                <input type="text" id="searchBar" placeholder="SEARCH AION"
+                class="form-control" name="q" value="{{ request.GET.q }}">
+                <button type="submit" class="btn btn-default"><img class="searchIcon" src="{% static 'aionApp/Images/search.png' %}"></button>
             </form>
             {% endif %}
             
@@ -53,7 +54,7 @@
                         <div id="info">Product Name: {{ getName }}<br> </div>
                         <div id="info">Price: ${{ getPrice }}<br> </div>
                         <div id="info">Quantity: {{ getQuantity }}<br> </div>
-                        <div id="info2"> <b> Total: ${{ total }}</b> <br> </div>
+                        <div id="info2"> <b> Total: ${{ total }}</b> <br> <br> </div>
                     </div>
                 </div>
 

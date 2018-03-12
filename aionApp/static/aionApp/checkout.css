@@ -52,7 +52,7 @@ html, body {
     text-align: center;
     position: absolute;
     right: -25%;
-    bottom: 50%;
+    bottom: 60%;
     width: 35%;
     display: block;
     margin: 0 auto;
@@ -75,10 +75,10 @@ html, body {
 
 .searchIcon{
     position: absolute;
-    top: 62%;
+    top: 102%;
     right: 78%;
     width: 4%;
-    height: 70%;
+    height: 120%;
 }
 
 #watch {
