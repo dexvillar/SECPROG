@@ -62,6 +62,7 @@ class watche(models.Model):
     stock = models.PositiveIntegerField(default=0)
     watch_type = models.CharField(max_length=16, choices=watch_choices, default='0')
     price = models.FloatField(default=0)
+    quantity = models.PositiveIntegerField(default=0)
     picture = models.ImageField(upload_to = 'watchPictures/', default = 'media/no-img.jpg')
 
     def __str__(self):

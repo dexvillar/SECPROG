@@ -156,7 +156,7 @@
                             <p id="productName">{{watches.name}}</p>
                             <p id="description">{{watches.description}}</p>
                             <p id="price">${{watches.price}}</p>&nbsp;
-                            {% if watches.stock == 0 %}
+                            {% if watches.stock <= 0 %}
                             <p id="stock">Out of stock!</p>
                             {% elif watches.stock <= 15 %}
                             <p id="stock">Only {{watches.stock}} left!</p>

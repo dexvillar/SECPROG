@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import user, watche, review, billing_addres, shipping_addres, checkout, sale, buy_watche
-from django.db.models import Q
+from django.db.models import Q, F, Sum
 
 # Create your views here.
 
@@ -20,6 +20,18 @@ def registerPage(request):
 
 def adminPage(request):
     return render(request, 'aionApp/adminpage.html')
+
+def accountingPage(request):
+    addedProducts = watche.objects.all()
+    totalSales = watche.objects.aggregate(total=Sum(F('price') * F('quantity')))['total']
+#    totalSales = watche.objects.aggregate(Sum('price'))
+    
+    context = {
+        'addedProducts': addedProducts,
+#        'sales': sales,
+        'totalSales': totalSales,
+    }
+    return render(request, 'aionApp/accounting.html', context)
 
 def profilePage(request):
     if request.session["user"] > 0:
@@ -46,6 +58,8 @@ def homeLogIn(request):
             
             if choice == "0":
                 return shopPage(request)
+            elif choice == "1":
+                return accountingPage(request)
             elif choice == "2":
                 return adminPage(request)
             else:
@@ -74,8 +88,9 @@ def shopLogIn(request):
                 'currentUser': currentUser,
                 'addedProducts': addedProducts,
             }
-            
-            if choice == "2":
+            if choice == "1":
+                return accountingPage(request)
+            elif choice == "2":
                 return adminPage(request)
             else:
                 return render(request, 'aionApp/shop.html', context)
@@ -134,11 +149,9 @@ def signingUp(request):
     return render(request, 'aionApp/home.html')
     
 def addAdmin(request):
-    
     addingBAddress = billing_addres.objects.first()
-    
     addingSAddress = shipping_addres.objects.first()
-        
+    
     addingAdmin = user(last_name = request.POST['last_name'], first_name = request.POST['first_name'], middle_initial = request.POST['middle_initial'], email = request.POST['email'], role_type = request.POST['role_type'], user_name = request.POST['user_name'], password = request.POST['password1'], billing_add=addingBAddress, shipping_add=addingSAddress)
     
     addingAdmin.save()
@@ -200,7 +213,7 @@ def buyProduct(request, id):
     selectedWatch = get_object_or_404(watche, id=id)
     selectedWatch.delete()
     
-    updatingWatch = watche(name = str(getName), description = str(getDescription), stock = updateStock, price = str(getPrice), watch_type = str(getWatchType), picture = getPicture, watch_id = request.session["user"], user_id = request.session["user"])
+    updatingWatch = watche(name = str(getName), description = str(getDescription), stock = updateStock, price = str(getPrice), watch_type = str(getWatchType), quantity = getQuantity, picture = getPicture, watch_id = request.session["user"], user_id = request.session["user"])
     updatingWatch.save()
     
     buyingWatch = buy_watche(name = str(getName), description = str(getDescription), price = str(getPrice), picture = getPicture, quantity = request.POST['productQuantity'], watch_id = request.session["user"], user_id = request.session["user"])
@@ -360,9 +373,7 @@ def search(request):
                 context)
         else:
             return render(request, 'aionApp/home.html')
-        
-        
-        
+             
 def analog(request):
     if request.session["user"] > 0:
         currentUser = get_object_or_404(user, user_id=request.session["user"])

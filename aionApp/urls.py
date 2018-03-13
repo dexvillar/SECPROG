@@ -7,6 +7,7 @@ urlpatterns= [
     url(r'^homePage/$', views.homePage, name='homePage'),
     url(r'^registerPage/$', views.registerPage, name='registerPage'),
     url(r'^adminPage/$', views.adminPage, name='adminPage'),
+    url(r'^accountingPage/$', views.accountingPage, name='accountingPage'),
     url(r'^homeLogIn/$', views.homeLogIn, name='homeLogIn'),
     url(r'^shopLogIn/$', views.shopLogIn, name='shopLogIn'),
     url(r'^exitSession/$', views.exitSession, name='exitSession'),

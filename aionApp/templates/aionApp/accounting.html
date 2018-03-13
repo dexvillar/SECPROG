@@ -1,0 +1,187 @@
+<html>
+    <head>
+        {% load static %}
+        <title> Accounting Page </title>
+        <link rel="icon" href="{% static 'aionApp/Images/watch.png' %}" type="image" sizes="16x16">
+        <link rel="stylesheet" type="text/css" href="{% static 'aionApp/accounting.css' %}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+        <div id="navbar">
+            <p id="logo" style="position: absolute; left: -3%;"> 
+                <a href="/aionApp/exitSession/"><img src="{% static 'aionApp/Images/watch.png' %}" id="watch"></a>
+                 AION
+            </p>
+
+            <span style="position: absolute; left: 85%;">
+                <a href="/aionApp/exitSession/">LOG OUT</a>    
+            </span>
+        </div>
+        <div id="accountingContainer">
+            <p id="bigMessage">FINANCIAL RECORDS</p>
+            <div id="accountingTable1">
+                <table id="myTable" style="width:70%">
+                    <tr>
+                    <th> Product Name <buttones0 onclick="sortTableID()" id="buttones">▼</buttones0></div> </th>
+                    <th> Product Type <buttones1 onclick="sortTableName()" id="buttones">▼</buttones1></div> </th>
+                    <th> Stock </th>
+                    <th> Sold </th>
+                    <th> Selling Price </th>
+                    <th> Sales </th>
+        
+                    {% if addedProducts %}
+                    {% for watches in addedProducts %}
+                    <tr>
+                    <td>{{watches.name}}</td>
+                    {% if watches.watch_type == "0" %}
+                    <td>Analog Watch</td>
+                    {% elif watches.watch_type == "1" %}
+                    <td>Digital Watch</td>
+                    {% else %}
+                    <td>Smart Watch</td>
+                    {% endif %}
+                        
+                    {% if watches.stock <= 0 %}
+                    <td>0</td>
+                    {% else %}
+                    <td>{{watches.stock}}</td>
+                    {% endif %}
+                    <td>{{watches.quantity}}</td>
+                    <td>${{watches.price}}</td>
+                    <td>${{sales}}</td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                </table>
+                
+                <table style="width:70%">
+                    <tr>
+                    <td style="width: 83.9%"> <b> Total Sales</b> </td>
+                    <td>${{totalSales}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="accountingTable2">
+                <table style="width: 35%">
+                    <tr>
+                    <th style="width:80%"> Total Sales Per Product Type </th>
+                    <th> </th>
+                    </tr>
+                    <tr>
+                    <td> </td>
+                    <td> Total Sales </td>
+                    </tr>
+                    <tr>
+                    <td> Analog Watch </td>
+                    <td> Php 69,000 </td>
+                    </tr>
+                    <tr>
+                    <td> Digital Watch </td>
+                    <td> Php 60,000 </td>
+                    </tr>
+                    <tr>
+                    <td> Smart Watch </td>
+                    <td> Php 100,000 </td>
+                    </tr>
+                </table>
+            </div>  
+    </body>
+
+    <script>
+
+         $(document).ready(function(){
+                    $("buttones0").click(function(){
+                        $("buttones0").text("▲");
+                        $("buttones1").text("▼");
+                        $("buttones2").text("▼");
+                    });
+                });
+
+                $(document).ready(function(){
+                    $("buttones1").click(function(){
+                        $("buttones1").text("▲");
+                        $("buttones0").text("▼");
+                        $("buttones2").text("▼");
+                    });
+                });
+
+                function sortTableID() {
+                  var table, rows, switching, i, x, y, shouldSwitch;
+                  table = document.getElementById("myTable");
+                  switching = true;
+                  /*Make a loop that will continue until
+                  no switching has been done:*/
+                  while (switching) {
+                    //start by saying: no switching is done:
+                    switching = false;
+                    rows = table.getElementsByTagName("TR");
+                    /*Loop through all table rows (except the
+                    first, which contains table headers):*/
+                    for (i = 1; i < (rows.length - 1); i++) {
+                      //start by saying there should be no switching:
+                      shouldSwitch = false;
+                      /*Get the two elements you want to compare,
+                      one from current row and one from the next:*/
+                      x = rows[i].getElementsByTagName("TD")[0];
+                      y = rows[i + 1].getElementsByTagName("TD")[0];
+                      //check if the two rows should switch place:
+                      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch= true;
+                        break;
+                      }
+                    }
+                    if (shouldSwitch) {
+                      /*If a switch has been marked, make the switch
+                      and mark that a switch has been done:*/
+                      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                      switching = true;
+                    }
+                  }
+                }
+
+                function sortTableName() {
+                  var table, rows, switching, i, x, y, shouldSwitch;
+                  table = document.getElementById("myTable");
+                  switching = true;
+                  /*Make a loop that will continue until
+                  no switching has been done:*/
+                  while (switching) {
+                    //start by saying: no switching is done:
+                    switching = false;
+                    rows = table.getElementsByTagName("TR");
+                    /*Loop through all table rows (except the
+                    first, which contains table headers):*/
+                    for (i = 1; i < (rows.length - 1); i++) {
+                      //start by saying there should be no switching:
+                      shouldSwitch = false;
+                      /*Get the two elements you want to compare,
+                      one from current row and one from the next:*/
+                      x = rows[i].getElementsByTagName("TD")[1];
+                      y = rows[i + 1].getElementsByTagName("TD")[1];
+                      //check if the two rows should switch place:
+                      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch= true;
+                        break;
+                      }
+                    }
+                    if (shouldSwitch) {
+                      /*If a switch has been marked, make the switch
+                      and mark that a switch has been done:*/
+                      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                      switching = true;
+                    }
+                  }
+                }
+
+
+    </script>
+
+    </body>
+</html>
+
