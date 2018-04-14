@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'aionApp.apps.AionappConfig',
+    'mathfilters',
 ]
 
 MIDDLEWARE = [

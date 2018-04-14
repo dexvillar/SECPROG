@@ -25,16 +25,16 @@ def accountingPage(request):
     addedProducts = watche.objects.all()
     totalSales = watche.objects.aggregate(total=Sum(F('price') * F('quantity')))['total']
 #    sales = watche.objects.all().aggregate(Sum('price'))
-#    totalAnalog =  watche.objects.filter(watch_type=0).aggregate(total=Sum(F('price') 
-#    totalDigital =  watche.objects.filter(watch_type=1).aggregate(total=Sum(F('price')                                                                                                                      
-#    totalSmart =  watche.objects.filter(watch_type=2).aggregate(total=Sum(F('price')                        
+    totalAnalog =  watche.objects.filter(watch_type=0).aggregate(total=Sum(F('price') * F('quantity')))['total']
+    totalDigital =  watche.objects.filter(watch_type=1).aggregate(total=Sum(F('price') * F('quantity')))['total']
+    totalSmart =  watche.objects.filter(watch_type=2).aggregate(total=Sum(F('price') * F('quantity')))['total']                     
     context = {
         'addedProducts': addedProducts,
 #        'sales': sales,
         'totalSales': totalSales,
-#        'totalAnalog': totalAnalog,
-#        'totalDigital': totalDigital,
-#        'totalSmart': totalSmart,
+        'totalAnalog': totalAnalog,
+        'totalDigital': totalDigital,
+        'totalSmart': totalSmart,
     }
     return render(request, 'aionApp/accounting.html', context)
 

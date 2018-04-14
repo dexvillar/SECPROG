@@ -31,7 +31,7 @@
                     <th> Sold </th>
                     <th> Selling Price </th>
                     <th> Sales </th>
-        
+                    {% load mathfilters %}
                     {% if addedProducts %}
                     {% for watches in addedProducts %}
                     <tr>
@@ -51,7 +51,7 @@
                     {% endif %}
                     <td>{{watches.quantity}}</td>
                     <td>${{watches.price}}</td>
-                    <td>${{sales}}</td>
+                    <td>${{ watches.price|mul:watches.quantity }}</td>
                     </tr>
                     {% endfor %}
                     {% endif %}
@@ -59,7 +59,7 @@
                 
                 <table style="width:70%">
                     <tr>
-                    <td style="width: 83.9%"> <b> Total Sales</b> </td>
+                    <td style="width: 88%"> <b> Total Sales</b> </td>
                     <td>${{totalSales}}</td>
                     </tr>
                 </table>
