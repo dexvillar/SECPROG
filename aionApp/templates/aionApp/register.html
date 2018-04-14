@@ -25,6 +25,7 @@
         
         <div id="registerContainer">
             <p id="bigMessage">REGISTER</p>
+
             <form action="{% url 'aionApp:signingUp' %}" method = "post">
                 {% csrf_token %}
                 <div id="container1">
@@ -80,10 +81,24 @@
                         <div id="align2"> <input type="text" class="inputRegister" name="user_name"> </div>
                         <br> <br>
                         <span class="fontUP">Password:</span>
-                        <div id="align2"><input type="password" class="inputRegister" name="password1"> </div>
+                        <div id="align2">
+                            <input type="password" class="inputRegister" name="password1">
+                            {% if error %}
+                                <p id="passAst1">*</p>
+                            {% endif %}
+                        </div>
                         <br> <br>
                         <span class="fontUP">Confirm password:</span>
-                        <div id="align2"> <input type="password" class="inputRegister" name="password2"> </div>
+                        <div id="align2">
+                            <input type="password" class="inputRegister" name="password2">
+                            {% if error %}
+                                <p id="passAst2">*</p>
+                            {% endif %}
+                        </div>
+                        {% if error %}
+                        <div class="spacer" style="margin-bottom: 1em;"> </div>
+                        <p id="error">Passwords do not match.</p>
+                        {% endif %}
                         <br> <br>
                 </div>
 

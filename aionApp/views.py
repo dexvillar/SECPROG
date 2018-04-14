@@ -24,12 +24,17 @@ def adminPage(request):
 def accountingPage(request):
     addedProducts = watche.objects.all()
     totalSales = watche.objects.aggregate(total=Sum(F('price') * F('quantity')))['total']
-#    totalSales = watche.objects.aggregate(Sum('price'))
-    
+#    sales = watche.objects.all().aggregate(Sum('price'))
+#    totalAnalog =  watche.objects.filter(watch_type=0).aggregate(total=Sum(F('price') 
+#    totalDigital =  watche.objects.filter(watch_type=1).aggregate(total=Sum(F('price')                                                                                                                      
+#    totalSmart =  watche.objects.filter(watch_type=2).aggregate(total=Sum(F('price')                        
     context = {
         'addedProducts': addedProducts,
 #        'sales': sales,
         'totalSales': totalSales,
+#        'totalAnalog': totalAnalog,
+#        'totalDigital': totalDigital,
+#        'totalSmart': totalSmart,
     }
     return render(request, 'aionApp/accounting.html', context)
 
@@ -136,17 +141,26 @@ def addProduct(request):
     return render(request, 'aionApp/shop.html', context)
     
 def signingUp(request):
-    addingBAddress = billing_addres(house_number = request.POST['bHouseNum'], street = request.POST['bStreet'], subdivision = request.POST['bSubdivision'], city = request.POST['bCity'], postal_code = request.POST['bPostal'], country = request.POST['bCountry'])
+    error = False
+    password1 = request.POST['password1']
+    password2 = request.POST['password2']
     
-    addingSAddress = shipping_addres(house_number = request.POST['sHouseNum'], street = request.POST['sStreet'], subdivision = request.POST['sSubdivision'], city = request.POST['sCity'], postal_code = request.POST['sPostal'], country = request.POST['sCountry'])
+    if password1 == password2:
+        addingBAddress = billing_addres(house_number = request.POST['bHouseNum'], street = request.POST['bStreet'], subdivision = request.POST['bSubdivision'], city = request.POST['bCity'], postal_code = request.POST['bPostal'], country = request.POST['bCountry'])
+
+        addingSAddress = shipping_addres(house_number = request.POST['sHouseNum'], street = request.POST['sStreet'], subdivision = request.POST['sSubdivision'], city = request.POST['sCity'], postal_code = request.POST['sPostal'], country = request.POST['sCountry'])
+
+        addingBAddress.save()
+        addingSAddress.save()
+
+        addingUser = user(last_name = request.POST['last_name'], first_name = request.POST['first_name'], middle_initial = request.POST['middle_initial'], email = request.POST['email'], user_name = request.POST['user_name'], password = request.POST['password1'], billing_add=addingBAddress, shipping_add=addingSAddress )
+        addingUser.save()
+
+        return render(request, 'aionApp/home.html', {'error': error})
     
-    addingBAddress.save()
-    addingSAddress.save()
-    
-    addingUser = user(last_name = request.POST['last_name'], first_name = request.POST['first_name'], middle_initial = request.POST['middle_initial'], email = request.POST['email'], user_name = request.POST['user_name'], password = request.POST['password1'], billing_add=addingBAddress, shipping_add=addingSAddress )
-    addingUser.save()
-    
-    return render(request, 'aionApp/home.html')
+    else:
+        error = True
+        return render(request, 'aionApp/register.html', {'error': error})
     
 def addAdmin(request):
     addingBAddress = billing_addres.objects.first()

@@ -262,3 +262,27 @@ footer {
     top: 111%;
     left: 37%;
 }
+
+#error {
+    position: relative;
+    left: 40%;
+    font-family: "Helvetica Neue";
+    font-size: 15px;
+    color: #E8453C; 
+}
+
+#passAst1 {
+	position: absolute;
+	left: 70%;
+    top: -40%;
+    font-family: "Helvetica Neue";
+    color: #E8453C; 
+}
+
+#passAst2 {
+	position: absolute;
+	left: 70%;
+    top: -40%;
+    font-family: "Helvetica Neue";
+    color: #E8453C; 
+}
