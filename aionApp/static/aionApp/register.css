@@ -235,6 +235,20 @@ footer {
     font-family: "Helvetica Neue"; 
 }
 
+.errorInputRegister{
+    width: 70%;
+    height: 5%;
+    padding: 10px 15px;
+    background-color: #A29C97;
+    border: 1;
+    outline: none;
+	margin-top: -7%;
+    color: white;
+    font-family: "Helvetica Neue"; 
+    border-style: solid;
+    border-color: #E8453C;
+}
+
 #align {
 	width: 60%;
 	height: 30%;
