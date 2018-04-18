@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'aionApp.apps.AionappConfig',
     'mathfilters',
+    'django_countries',
 ]
 
 MIDDLEWARE = [

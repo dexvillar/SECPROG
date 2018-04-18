@@ -286,3 +286,13 @@ footer {
     font-family: "Helvetica Neue";
     color: #E8453C; 
 }
+
+.dropDown {
+    display: inline-block;
+    font-size: 14px;
+    margin-top: -7%;
+    color: black;
+    font-family: "Helvetica Neue";
+    font-weight: bold;
+    width: 70%;
+}

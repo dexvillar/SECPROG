@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
-
+from django_countries.fields import CountryField
 # Create your models here.
 
 watch_choices = {
@@ -23,7 +23,7 @@ class billing_addres(models.Model):
     subdivision = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     postal_code = models.CharField(max_length=255)
-    country = models.CharField(max_length=255)
+    country = CountryField()
     
     def __str__(self):
         return self.city
@@ -34,15 +34,15 @@ class shipping_addres(models.Model):
     subdivision = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     postal_code = models.CharField(max_length=255)
-    country = models.CharField(max_length=255)
+    country = CountryField()
     
     def __str__(self):
         return self.city
 
 class user(models.Model):
     user_id = models.AutoField(primary_key=True)
-    last_name = models.CharField(max_length=255)
-    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=64)
+    first_name = models.CharField(max_length=64)
     middle_initial = models.CharField(max_length=3)
     user_name = models.CharField(max_length=255)
     password = models.CharField(max_length=255)

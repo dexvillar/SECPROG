@@ -34,6 +34,7 @@
                             PERSONAL INFORMATION
                         </div>
                         <br>
+                   
                         <span class="fontUP">Last Name:</span> 
                         <div id="align"> <input type="text" class="inputRegister" name="last_name"> </div>
                         <br> <br>
@@ -46,7 +47,7 @@
                         <span class="fontUP">E-mail Address:</span>
                         <div id="align"> <input type="email" class="inputRegister" name="email"> </div>
                         <br> <br>
-
+                        
                         <div id="billingaddress">
                             BILLING ADDRESS
                         </div>
@@ -67,7 +68,13 @@
                         <div id="align"> <input type="text" class="inputRegister" name="bPostal"> </div>
                         <br> <br>
                         <span class="fontUP">Country:</span>
-                        <div id="align"> <input type="text" class="inputRegister" name="bCountry"> </div>
+                        <div id="align">
+                            <select name="bCountry" class="dropDown">
+                                {% for getBCountry, getBCode in combined_bCountry %}
+                                <option value="{{getBCode}}">{{ getBCountry }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
                         <br> <br>
                     </div>
                 </div>
@@ -123,7 +130,13 @@
                         <div id="align2"> <input type="text" class="inputRegister" name="sPostal"> </div>
                         <br> <br>
                         <span class="fontUP">Country:</span>
-                        <div id="align2"> <input type="text" class="inputRegister" name="sCountry"> </div>
+                        <div id="align2">
+                            <select name="sCountry" class="dropDown">
+                                {% for getSCountry, getSCode in combined_sCountry %}
+                                <option value="{{getSCode}}">{{ getSCountry }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
                 </div>
                 <button id="submitButton" href="#">SUBMIT</button>
             </form>

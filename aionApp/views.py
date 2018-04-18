@@ -4,6 +4,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import user, watche, review, billing_addres, shipping_addres, checkout, sale, buy_watche
 from django.db.models import Q, F, Sum
+from django.contrib.auth import authenticate, login
+from django_countries import countries
 
 # Create your views here.
 
@@ -16,7 +18,22 @@ def homePage(request):
     return render(request, 'aionApp/home.html', context)
 
 def registerPage(request):
-    return render(request, 'aionApp/register.html')
+    getBCountry = (name for code, name in list(countries))
+    getBCode = (code for code, name in list(countries))
+    combined_bCountry = zip(getBCountry, getBCode)
+    
+    getSCountry = (name for code, name in list(countries))
+    getSCode = (code for code, name in list(countries))
+    combined_sCountry = zip(getSCountry, getSCode)
+    context = {
+        'getBCountry': getBCountry,
+        'getBCode': getBCode,
+        'combined_bCountry': combined_bCountry,
+        'getSCountry': getSCountry,
+        'getSCode': getSCode,
+        'combined_sCountry': combined_sCountry,
+    }
+    return render(request, 'aionApp/register.html', context)
 
 def adminPage(request):
     return render(request, 'aionApp/adminpage.html')
@@ -24,13 +41,11 @@ def adminPage(request):
 def accountingPage(request):
     addedProducts = watche.objects.all()
     totalSales = watche.objects.aggregate(total=Sum(F('price') * F('quantity')))['total']
-#    sales = watche.objects.all().aggregate(Sum('price'))
     totalAnalog =  watche.objects.filter(watch_type=0).aggregate(total=Sum(F('price') * F('quantity')))['total']
     totalDigital =  watche.objects.filter(watch_type=1).aggregate(total=Sum(F('price') * F('quantity')))['total']
     totalSmart =  watche.objects.filter(watch_type=2).aggregate(total=Sum(F('price') * F('quantity')))['total']                     
     context = {
         'addedProducts': addedProducts,
-#        'sales': sales,
         'totalSales': totalSales,
         'totalAnalog': totalAnalog,
         'totalDigital': totalDigital,
@@ -146,6 +161,7 @@ def signingUp(request):
     password2 = request.POST['password2']
     
     if password1 == password2:
+    
         addingBAddress = billing_addres(house_number = request.POST['bHouseNum'], street = request.POST['bStreet'], subdivision = request.POST['bSubdivision'], city = request.POST['bCity'], postal_code = request.POST['bPostal'], country = request.POST['bCountry'])
 
         addingSAddress = shipping_addres(house_number = request.POST['sHouseNum'], street = request.POST['sStreet'], subdivision = request.POST['sSubdivision'], city = request.POST['sCity'], postal_code = request.POST['sPostal'], country = request.POST['sCountry'])
@@ -155,7 +171,7 @@ def signingUp(request):
 
         addingUser = user(last_name = request.POST['last_name'], first_name = request.POST['first_name'], middle_initial = request.POST['middle_initial'], email = request.POST['email'], user_name = request.POST['user_name'], password = request.POST['password1'], billing_add=addingBAddress, shipping_add=addingSAddress )
         addingUser.save()
-
+        
         return render(request, 'aionApp/home.html', {'error': error})
     
     else:
