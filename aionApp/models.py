@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django_countries.fields import CountryField
+from passlib.hash import pbkdf2_sha256
 # Create your models here.
 
 watch_choices = {
@@ -51,6 +52,8 @@ class user(models.Model):
     billing_add=models.ForeignKey(billing_addres, default=0)
     shipping_add=models.ForeignKey(shipping_addres, default=0)
     
+    def verify_pass(self, raw_pass):
+        return pbkdf2_sha256.verify(raw_pass, self.password)
     def __str__(self):
         return self.last_name
 

@@ -6,6 +6,7 @@ from .models import user, watche, review, billing_addres, shipping_addres, check
 from django.db.models import Q, F, Sum
 from django.contrib.auth import authenticate, login
 from django_countries import countries
+from passlib.hash import pbkdf2_sha256
 
 # Create your views here.
 
@@ -65,9 +66,11 @@ def homeLogIn(request):
     userList = user.objects.all()
     error = False
     try:
+        password = request.POST['userPassword']
+        encrypt_pass=pbkdf2_sha256.encrypt(password,rounds=12000,salt_size=32)
         for userTry in userList:
             if userTry.user_name == str(request.POST['userName']):
-                if userTry.password == str(request.POST['userPassword']):
+                if True == userTry.verify_pass(password):
                     request.session["user"] = userTry.user_id
                     choice= userTry.role_type
         if request.session["user"] >= 0:
@@ -96,9 +99,11 @@ def shopLogIn(request):
     userList = user.objects.all()
     error = False
     try:
+        password = request.POST['userPassword']
+        encrypt_pass=pbkdf2_sha256.encrypt(password, rounds=12000,salt_size=32)
         for userTry in userList:
             if userTry.user_name == str(request.POST['userName']):
-                if userTry.password == str(request.POST['userPassword']):
+                if True == userTry.verify_pass(password):
                     request.session["user"] = userTry.user_id
                     choice= userTry.role_type
         if request.session["user"] >= 0:
@@ -168,8 +173,11 @@ def signingUp(request):
 
         addingBAddress.save()
         addingSAddress.save()
+                                           
+        password = request.POST['password1']
+        encrypt_pass=pbkdf2_sha256.encrypt(password, rounds=12000,salt_size=32)
 
-        addingUser = user(last_name = request.POST['last_name'], first_name = request.POST['first_name'], middle_initial = request.POST['middle_initial'], email = request.POST['email'], user_name = request.POST['user_name'], password = request.POST['password1'], billing_add=addingBAddress, shipping_add=addingSAddress )
+        addingUser = user(last_name = request.POST['last_name'], first_name = request.POST['first_name'], middle_initial = request.POST['middle_initial'], email = request.POST['email'], user_name = request.POST['user_name'], password = encrypt_pass, billing_add=addingBAddress, shipping_add=addingSAddress )
         addingUser.save()
         
         return render(request, 'aionApp/home.html', {'error': error})
