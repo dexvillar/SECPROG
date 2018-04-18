@@ -2,11 +2,12 @@
 from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from .models import user, watche, review, billing_addres, shipping_addres, checkout, sale, buy_watche
+from .models import user, watche, review, billing_addres, shipping_addres, checkout, sale, buy_watche, login_log
 from django.db.models import Q, F, Sum
 from django.contrib.auth import authenticate, login
 from django_countries import countries
 from passlib.hash import pbkdf2_sha256
+import datetime
 
 # Create your views here.
 
@@ -73,23 +74,39 @@ def homeLogIn(request):
                 if True == userTry.verify_pass(password):
                     request.session["user"] = userTry.user_id
                     choice= userTry.role_type
+                    
         if request.session["user"] >= 0:
+            
+            
+            
             currentUser = get_object_or_404(user, user_id = request.session["user"])
             context = {
                 'currentUser': currentUser,
             }
             
             if choice == "0":
+                logLogin=login_log(log=str(datetime.datetime.now())+" username= "+str(request.POST['userName'])+" aionApp/exitSession/"+" Log in= SUCCES ",username=str(request.POST['userName']), location="aionApp/exitSession/", action="Log in", result="SUCCES")
+                logLogin.save()
                 return shopPage(request)
             elif choice == "1":
+                logLogin=login_log(log=str(datetime.datetime.now())+" username= "+str(request.POST['userName'])+" aionApp/exitSession/"+" Log in= SUCCES ",username=str(request.POST['userName']), location="aionApp/exitSession/", action="Log in", result="SUCCES")
+                logLogin.save()
                 return accountingPage(request)
             elif choice == "2":
+                logLogin=login_log(log=str(datetime.datetime.now())+" username= "+str(request.POST['userName'])+" aionApp/exitSession/"+" Log in= SUCCES ",username=str(request.POST['userName']), location="aionApp/exitSession/", action="Log in", result="SUCCES")
+                logLogin.save()
                 return adminPage(request)
             else:
+                logLogin=login_log(log=str(datetime.datetime.now())+" username= "+str(request.POST['userName'])+" aionApp/exitSession/"+" Log in= SUCCES ",username=str(request.POST['userName']), location="aionApp/exitSession/", action="Log in", result="SUCCES")
+                logLogin.save()
                 return render(request, 'aionApp/home.html', context)
+                
         else:
                 error = True
+                
                 request.session["user"] = -1
+                logLogin=login_log(log=str(datetime.datetime.now())+" username= "+str(request.POST['userName'])+" aionApp/exitSession/"+" Log in= FAILED ATTEMPT ",username=str(request.POST['userName']), location="aionApp/exitSession/", action="Log in", result="FAILED ATTEMPT")
+                logLogin.save()
                 return render(request, 'aionApp/home.html', {'error': error})
     except ValueError:
         error = True
@@ -114,15 +131,23 @@ def shopLogIn(request):
                 'addedProducts': addedProducts,
             }
             if choice == "1":
+                logLogin=login_log(log=str(datetime.datetime.now())+" username= "+str(request.POST['userName'])+" aionApp/exitSession/"+" Log in= SUCCES ",username=str(request.POST['userName']), location="aionApp/exitSession/", action="Log in", result="SUCCES")
+                logLogin.save()
                 return accountingPage(request)
             elif choice == "2":
+                logLogin=login_log(log=str(datetime.datetime.now())+" username= "+str(request.POST['userName'])+" aionApp/exitSession/"+" Log in= SUCCES ",username=str(request.POST['userName']), location="aionApp/exitSession/", action="Log in", result="SUCCES")
+                logLogin.save()
                 return adminPage(request)
             else:
+                logLogin=login_log(log=str(datetime.datetime.now())+" username= "+str(request.POST['userName'])+" aionApp/exitSession/"+" Log in= SUCCES ",username=str(request.POST['userName']), location="aionApp/exitSession/", action="Log in", result="SUCCES")
+                logLogin.save()
                 return render(request, 'aionApp/shop.html', context)
             
         else:
                 error = True
                 request.session["user"] = -1
+                logLogin=login_log(log=str(datetime.datetime.now())+" username= "+str(request.POST['userName'])+" aionApp/exitSession/"+" Log in= FAILED ATTEMPT ",username=str(request.POST['userName']), location="aionApp/exitSession/", action="Log in", result="FAILED ATTEMPT")
+                logLogin.save()
                 return render(request, 'aionApp/shop.html', {'error': error})
     except ValueError:
         error = True
