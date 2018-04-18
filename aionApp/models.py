@@ -56,7 +56,7 @@ class user(models.Model):
         return pbkdf2_sha256.verify(raw_pass, self.password)
     
     def __str__(self):
-        return self.last_name
+        return self.user_name
 
 class watche(models.Model):
     watch_id = models.PositiveIntegerField(default=0)

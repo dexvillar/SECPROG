@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'aionApp.apps.AionappConfig',
     'mathfilters',
     'django_countries',
+    'password_policies',
 ]
 
 MIDDLEWARE = [
@@ -124,3 +125,6 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+PASSWORD_DURATION_SECONDS = 24 * 60**3
+PASSWORD_HISTORY_COUNT = 16
