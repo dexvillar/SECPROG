@@ -181,6 +181,7 @@ def addProduct(request):
         'currentUser': currentUser,
         'addedProducts': addedProducts
     }
+    print(currentUser)
     addingProduct = watche(name = request.POST['productName'], description = request.POST['productDescription'], stock = request.POST['productStock'], price = request.POST['productPrice'], watch_type = request.POST['watchType'], picture = "watchPictures/" + request.POST['productPicture'], watch_id = request.session["user"], user_id = request.session["user"])
     addingProduct.save()
     return render(request, 'aionApp/shop.html', context)
@@ -225,7 +226,10 @@ def addAdmin(request):
     addingBAddress = billing_addres.objects.first()
     addingSAddress = shipping_addres.objects.first()
     
-    addingAdmin = user(last_name = request.POST['last_name'], first_name = request.POST['first_name'], middle_initial = request.POST['middle_initial'], email = request.POST['email'], role_type = request.POST['role_type'], user_name = request.POST['user_name'], password = request.POST['password1'], billing_add=addingBAddress, shipping_add=addingSAddress)
+    password = request.POST['password1']
+    encrypt_pass = pbkdf2_sha256.encrypt(password, rounds=12000,salt_size=32)
+    
+    addingAdmin = user(last_name = request.POST['last_name'], first_name = request.POST['first_name'], middle_initial = request.POST['middle_initial'], email = request.POST['email'], role_type = request.POST['role_type'], user_name = request.POST['user_name'], password = encrypt_pass, billing_add=addingBAddress, shipping_add=addingSAddress)
     
     addingAdmin.save()
     return render(request, 'aionApp/adminpage.html')
