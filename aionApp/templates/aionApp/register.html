@@ -85,26 +85,49 @@
                     </div>
                         <br>
                         <span class="fontUP">Username:</span>
-                        <div id="align2"> <input type="text" class="inputRegister" name="user_name"> </div>
+                        <div id="align2"> 
+                            <input type="text" class="inputRegister" name="user_name">
+                            {% if errorUsername %}
+                                <p class="errorAst">*</p>
+                            {% endif %}
+                        </div>
                         <br> <br>
+                    
+                        {% if errorUsername %}
+                        <div id="align2">
+                            <p id="error" style="top: -23%; left: 0%;">Username already exists.</p>
+                        </div>
+                        <br>
+                        {% endif %}
+                            
                         <span class="fontUP">Password:</span>
                         <div id="align2">
                             <input type="password" class="inputRegister" name="password1">
-                            {% if error %}
-                                <p id="passAst1">*</p>
+                            {% if errorPassword %}
+                                <p class="errorAst">*</p>
                             {% endif %}
                         </div>
                         <br> <br>
+                    
+                        {% if errorPassword %}
+                         <div id="align2">
+                            <p id="error" style="top: -24%; left: 0%;">Passwords do not match.</p>
+                        </div>
+                        <br>
+                        {% endif %}
+                    
                         <span class="fontUP">Confirm password:</span>
                         <div id="align2">
                             <input type="password" class="inputRegister" name="password2">
-                            {% if error %}
-                                <p id="passAst2">*</p>
+                            {% if errorPassword %}
+                                <p class="errorAst">*</p>
                             {% endif %}
                         </div>
-                        {% if error %}
-                        <div class="spacer" style="margin-bottom: 1em;"> </div>
-                        <p id="error">Passwords do not match.</p>
+                    
+                        {% if errorPassword %}
+                         <div id="align2">
+                            <p id="error" style="top: -11%; left: 0%;">Passwords do not match.</p>
+                        </div>
                         {% endif %}
                         <br> <br>
                 </div>

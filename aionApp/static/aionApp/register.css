@@ -271,20 +271,13 @@ footer {
     color: #E8453C; 
 }
 
-#passAst1 {
+.errorAst {
 	position: absolute;
 	left: 70%;
     top: -40%;
     font-family: "Helvetica Neue";
     color: #E8453C; 
-}
-
-#passAst2 {
-	position: absolute;
-	left: 70%;
-    top: -40%;
-    font-family: "Helvetica Neue";
-    color: #E8453C; 
+    font-size: 18px;
 }
 
 .dropDown {

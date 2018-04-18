@@ -54,6 +54,7 @@ class user(models.Model):
     
     def verify_pass(self, raw_pass):
         return pbkdf2_sha256.verify(raw_pass, self.password)
+    
     def __str__(self):
         return self.last_name
 

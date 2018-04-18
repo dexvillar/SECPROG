@@ -161,30 +161,40 @@ def addProduct(request):
     return render(request, 'aionApp/shop.html', context)
     
 def signingUp(request):
-    error = False
+    errorUsername = False
+    errorPassword = False
     password1 = request.POST['password1']
     password2 = request.POST['password2']
+    username = request.POST['user_name']
+    usernameList = user.objects.values_list('user_name', flat=True)
+    usernameList = list(usernameList)
     
-    if password1 == password2:
-    
-        addingBAddress = billing_addres(house_number = request.POST['bHouseNum'], street = request.POST['bStreet'], subdivision = request.POST['bSubdivision'], city = request.POST['bCity'], postal_code = request.POST['bPostal'], country = request.POST['bCountry'])
+    for userTry in usernameList:
+        if userTry != username:
+            if password1 == password2:
 
-        addingSAddress = shipping_addres(house_number = request.POST['sHouseNum'], street = request.POST['sStreet'], subdivision = request.POST['sSubdivision'], city = request.POST['sCity'], postal_code = request.POST['sPostal'], country = request.POST['sCountry'])
+                addingBAddress = billing_addres(house_number = request.POST['bHouseNum'], street = request.POST['bStreet'], subdivision = request.POST['bSubdivision'], city = request.POST['bCity'], postal_code = request.POST['bPostal'], country = request.POST['bCountry'])
 
-        addingBAddress.save()
-        addingSAddress.save()
-                                           
-        password = request.POST['password1']
-        encrypt_pass=pbkdf2_sha256.encrypt(password, rounds=12000,salt_size=32)
+                addingSAddress = shipping_addres(house_number = request.POST['sHouseNum'], street = request.POST['sStreet'], subdivision = request.POST['sSubdivision'], city = request.POST['sCity'], postal_code = request.POST['sPostal'], country = request.POST['sCountry'])
 
-        addingUser = user(last_name = request.POST['last_name'], first_name = request.POST['first_name'], middle_initial = request.POST['middle_initial'], email = request.POST['email'], user_name = request.POST['user_name'], password = encrypt_pass, billing_add=addingBAddress, shipping_add=addingSAddress )
-        addingUser.save()
+                addingBAddress.save()
+                addingSAddress.save()
+
+                password = request.POST['password1']
+                encrypt_pass = pbkdf2_sha256.encrypt(password, rounds=12000,salt_size=32)
+
+                addingUser = user(last_name = request.POST['last_name'], first_name = request.POST['first_name'], middle_initial = request.POST['middle_initial'], email = request.POST['email'], user_name = request.POST['user_name'], password = encrypt_pass, billing_add=addingBAddress, shipping_add=addingSAddress )
+                addingUser.save()
+
+                return render(request, 'aionApp/home.html')
+
+            else:
+                errorPassword = True
+                return render(request, 'aionApp/register.html', {'errorPassword': errorPassword})
         
-        return render(request, 'aionApp/home.html', {'error': error})
-    
-    else:
-        error = True
-        return render(request, 'aionApp/register.html', {'error': error})
+        else:
+            errorUsername = True
+            return render(request, 'aionApp/register.html', {'errorUsername': errorUsername})
     
 def addAdmin(request):
     addingBAddress = billing_addres.objects.first()
