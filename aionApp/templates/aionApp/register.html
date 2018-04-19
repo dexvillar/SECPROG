@@ -23,6 +23,36 @@
             </span>
         </div>
         
+        <div id="uPolicyModal" class="modal">
+            <form class="uPolicymodal-content animate">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('uPolicyModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+                </div>
+                
+                <div class="uPolicyContainer">
+                    <p id="pBigMessage">USERNAME POLICY</p>
+                    <p id="smallMessage">• It should only contain lowercase letters.</p>
+                </div>
+            </form>
+        </div>
+        
+        <div id="pPolicyModal" class="modal">
+            <form class="pPolicymodal-content animate">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('pPolicyModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+                </div>
+                
+               <div class="pPolicyContainer" style="padding: 16px;">
+                    <p id="pBigMessage">PASSWORD POLICY</p>
+                    <p id="smallMessage1">• Password must be at least 8 characters long and contain the following options:</p>
+                    <p id="smallMessage2">• Lower case letter (a-z)</p>
+                    <p id="smallMessage3">• Upper case letter (A-Z)</p>
+                    <p id="smallMessage4">• Number (0-9)</p>
+                    <p id="smallMessage5">• Special character (!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~)</p>
+                </div>
+            </form>
+        </div>
+        
         <div id="registerContainer">
             <p id="bigMessage">REGISTER</p>
 
@@ -84,20 +114,27 @@
                         ACCOUNT INFORMATION
                     </div>
                         <br>
-                        {% if errorUsername %}
+                        {% if errorUsername or errorUPolicy %}
                         <span class="fontUP">Username:</span>
                         <div id="align2"> 
                             <input type="text" class="errorInputRegister" name="user_name" autocomplete="off" required>
-                            {% if errorUsername %}
+                            {% if errorUsername or errorUPolicy %}
                                 <p class="errorAst">*</p>
                             {% endif %}
                         </div>
                         <br> <br>
                     
+                        {% if errorUsername %}
                         <div id="align2">
-                            <p id="error" style="top: -22%; left: 0%;">Username already exists.</p>
+                            <p id="error" style="top: -18%; left: 0%;">Username already exists.</p>
                         </div>
+                        {% elif errorUPolicy %}
+                        <div id="align2">
+                            <p id="error" style="top: -18%; left: 0%;">Username is too common or should follow our <a onclick="document.getElementById('uPolicyModal').style.display='block'" id="aError" style="font-weight: bold; cursor: pointer;">username policy.</a></p>
+                        </div>
+                        {% endif %}
                         <br>
+                    
                         {% else %}
                         <span class="fontUP">Username:</span>
                         <div id="align2"> 
@@ -109,20 +146,28 @@
                         <br> <br>
                         {% endif %}
                     
-                        {% if errorPassword %}
+                        {% if errorPassword or errorPPolicy %}
                         <span class="fontUP">Password:</span>
                         <div id="align2">
                             <input type="password" class="errorInputRegister" name="password1" required>
-                            {% if errorPassword %}
+                            {% if errorPassword or errorPPolicy %}
                                 <p class="errorAst">*</p>
                             {% endif %}
                         </div>
                         <br> <br>
                         
+                        {% if errorPassword %}
                         <div id="align2">
-                            <p id="error" style="top: -22%; left: 0%;">Passwords do not match.</p>
+                            <p id="error" style="top: -18%; left: 0%;">Passwords do not match.</p>
                         </div>
                         <br>
+                        {% elif errorPPolicy %}
+                        <div id="align2">
+                            <p id="error" style="top: -18%; left: 0%;">Password should follow our <a onclick="document.getElementById('pPolicyModal').style.display='block'" class="aError">password policy.</a></p>
+                        </div>
+                        <br>
+                        {% endif %}
+                    
                         {% else %}
                         <span class="fontUP">Password:</span>
                         <div id="align2">
@@ -134,27 +179,41 @@
                         <br> <br>
                         {% endif %}
                     
-                        {% if errorPassword %}
-                        <span class="fontUP">Confirm password:</span>
+                        {% if errorPassword or errorPPolicy %}
+                        <span class="fontUP">Confirm Password:</span>
                         <div id="align2">
                             <input type="password" class="errorInputRegister" name="password2" required>
+                            {% if errorPassword or errorPPolicy %}
+                                <p class="errorAst">*</p>
+                            {% endif %}
+                        </div>
+                        <br> <br>
+                        
+                        {% if errorPassword %}
+                        <div id="align2">
+                            <p id="error" style="top: -18%; left: 0%;">Passwords do not match.</p>
+                        </div>
+                        <br>
+                        {% elif errorPPolicy %}
+                        <div id="align2">
+                            <p id="error" style="top: -18%; left: 0%;">Password should follow our <a onclick="document.getElementById('pPolicyModal').style.display='block'" class="aError">password policy.</a></p>
+                        </div>
+                        <br>
+                        {% endif %}
+                    
+                        {% else %}
+                        <span class="fontUP">Confirm Password:</span>
+                        <div id="align2">
+                            <input type="password" class="inputRegister" name="password2" required style="border: 1; border-style: solid; border-color: #E8453C;">
                             {% if errorPassword %}
                                 <p class="errorAst">*</p>
                             {% endif %}
                         </div>
                         <br> <br>
-                    
-                        <div id="align2">
-                            <p id="error" style="top: -22%; left: 0%;">Passwords do not match.</p>
-                        </div>
-                        {% else %}
-                        <span class="fontUP">Confirm password:</span>
-                        <div id="align2">
-                            <input type="password" class="inputRegister" name="password2" required>
-                            {% if errorPassword %}
-                                <p class="errorAst">*</p>
-                            {% endif %}
-                        </div>
+                        {% if errorUsername != True and errorUPolicy != True%}
+                        <a id="uPolicy" onclick="document.getElementById('uPolicyModal').style.display='block'">Username Policy</a>
+                        <a id="pPolicy" onclick="document.getElementById('pPolicyModal').style.display='block'">Password Policy</a>
+                        {% endif %}
                         {% endif %}
                         <br> <br>
                 </div>
@@ -165,7 +224,7 @@
                     </div>
                         <br>
                         <span class="fontUP">House No.: </span>
-                        <div id="align2"> <input type="number" class="inputRegister" name="sHouseNum" min="1" required> </div>
+                        <div id="align2"> <input type="number" class="inputRegister" name="sHouseNum" min="1" required autocomplete="off"> </div>
                         <br> <br>
                         <span class="fontUP">Street:</span>
                         <div id="align2"> <input type="text" class="inputRegister" name="sStreet" pattern="[A-Za-z0-9.-\s]+" autocomplete="off" required> </div>

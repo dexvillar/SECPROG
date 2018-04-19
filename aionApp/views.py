@@ -191,7 +191,8 @@ def addProduct(request):
 def signingUp(request):
     errorUsername = False
     errorPassword = False
-    errorPolicy = False
+    errorUPolicy = False
+    errorPPolicy = False
     password1 = request.POST['password1']
     password2 = request.POST['password2']
     username = request.POST['user_name']
@@ -201,32 +202,34 @@ def signingUp(request):
     for userTry in usernameList:
         if userTry != username:
             if password1 == password2:
-                if re.match("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[^ ]{8,}$", password1):
+                if re.match("^(?!admin|root|system|guest|operator|super|user|test|qa)[a-z0-9_\-.]*$", username):
+                    if re.match("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[^ ]{8,}$", password1):
+                        addingBAddress = billing_addres(house_number = request.POST['bHouseNum'], street = request.POST['bStreet'], subdivision = request.POST['bSubdivision'], city = request.POST['bCity'], postal_code = request.POST['bPostal'], country = request.POST['bCountry'])
 
-                    addingBAddress = billing_addres(house_number = request.POST['bHouseNum'], street = request.POST['bStreet'], subdivision = request.POST['bSubdivision'], city = request.POST['bCity'], postal_code = request.POST['bPostal'], country = request.POST['bCountry'])
+                        addingSAddress = shipping_addres(house_number = request.POST['sHouseNum'], street = request.POST['sStreet'], subdivision = request.POST['sSubdivision'], city = request.POST['sCity'], postal_code = request.POST['sPostal'], country = request.POST['sCountry'])
 
-                    addingSAddress = shipping_addres(house_number = request.POST['sHouseNum'], street = request.POST['sStreet'], subdivision = request.POST['sSubdivision'], city = request.POST['sCity'], postal_code = request.POST['sPostal'], country = request.POST['sCountry'])
+                        addingBAddress.save()
+                        addingSAddress.save()
 
-                    addingBAddress.save()
-                    addingSAddress.save()
+                        password = request.POST['password1']
+                        encrypt_pass = pbkdf2_sha256.encrypt(password, rounds=12000,salt_size=32)
 
-                    password = request.POST['password1']
-                    encrypt_pass = pbkdf2_sha256.encrypt(password, rounds=12000,salt_size=32)
+                        addingUser = user(last_name = request.POST['last_name'], first_name = request.POST['first_name'], middle_initial = request.POST['middle_initial'], email = request.POST['email'], user_name = request.POST['user_name'], password = encrypt_pass, billing_add=addingBAddress, shipping_add=addingSAddress )
+                        addingUser.save()
 
-                    addingUser = user(last_name = request.POST['last_name'], first_name = request.POST['first_name'], middle_initial = request.POST['middle_initial'], email = request.POST['email'], user_name = request.POST['user_name'], password = encrypt_pass, billing_add=addingBAddress, shipping_add=addingSAddress )
-                    addingUser.save()
-                    
-                    logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/register.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = SUCCES",username="guest", location="aionApp/register.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="SUCCES")
-                    logUser.save()
-                    return render(request, 'aionApp/home.html')
-                
+                        logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/register.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = SUCCES",username="guest", location="aionApp/register.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="SUCCES")
+                        logUser.save()
+                        return render(request, 'aionApp/home.html')
+
+                    else:
+                        errorPPolicy = True
+                        return render(request, 'aionApp/register.html', {'errorPPolicy': errorPPolicy})
                 else:
-                    errorPolicy = True
-                    return render(request, 'aionApp/register.html', {'errorPolicy': errorPolicy})
+                    errorUPolicy = True
+                    return render(request, 'aionApp/register.html', {'errorUPolicy': errorUPolicy})
             else:
                 errorPassword = True
                 return render(request, 'aionApp/register.html', {'errorPassword': errorPassword})
-        
         else:
             errorUsername = True
             return render(request, 'aionApp/register.html', {'errorUsername': errorUsername})
