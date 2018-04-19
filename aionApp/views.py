@@ -239,6 +239,8 @@ def signingUp(request):
                             'combined_sCountry': combined_sCountry,
                             'errorPPolicy': errorPPolicy,
                         }
+                        logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/register.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/register.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
+                        logUser.save()
                         return render(request, 'aionApp/register.html', context)
                 else:
                     errorUPolicy = True
@@ -252,6 +254,8 @@ def signingUp(request):
                         'errorPPolicy': errorPPolicy,
                         'errorUPolicy': errorUPolicy,
                     }
+                    logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/register.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/register.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
+                    logUser.save()
                     return render(request, 'aionApp/register.html', context)
             else:
                 errorPassword = True
@@ -266,6 +270,8 @@ def signingUp(request):
                     'errorUPolicy': errorUPolicy,
                     'errorPassword': errorPassword,
                 }
+                logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/register.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/register.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
+                logUser.save()
                 return render(request, 'aionApp/register.html', context)
         else:
             errorUsername = True
@@ -281,6 +287,8 @@ def signingUp(request):
                 'errorPassword': errorPassword,
                 'errorUsername': errorUsername,
             }
+            logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/register.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/register.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
+            logUser.save()
             return render(request, 'aionApp/register.html', context)
     
     
