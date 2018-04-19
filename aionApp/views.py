@@ -199,6 +199,13 @@ def signingUp(request):
     usernameList = user.objects.values_list('user_name', flat=True)
     usernameList = list(usernameList)
     
+    getBCountry = (name for code, name in list(countries))
+    getBCode = (code for code, name in list(countries))
+    combined_bCountry = zip(getBCountry, getBCode)
+    getSCountry = (name for code, name in list(countries))
+    getSCode = (code for code, name in list(countries))
+    combined_sCountry = zip(getSCountry, getSCode)
+    
     for userTry in usernameList:
         if userTry != username:
             if password1 == password2:
@@ -223,16 +230,58 @@ def signingUp(request):
 
                     else:
                         errorPPolicy = True
-                        return render(request, 'aionApp/register.html', {'errorPPolicy': errorPPolicy})
+                        context = {
+                            'getBCountry': getBCountry,
+                            'getBCode': getBCode,
+                            'combined_bCountry': combined_bCountry,
+                            'getSCountry': getSCountry,
+                            'getSCode': getSCode,
+                            'combined_sCountry': combined_sCountry,
+                            'errorPPolicy': errorPPolicy,
+                        }
+                        return render(request, 'aionApp/register.html', context)
                 else:
                     errorUPolicy = True
-                    return render(request, 'aionApp/register.html', {'errorUPolicy': errorUPolicy})
+                    context = {
+                        'getBCountry': getBCountry,
+                        'getBCode': getBCode,
+                        'combined_bCountry': combined_bCountry,
+                        'getSCountry': getSCountry,
+                        'getSCode': getSCode,
+                        'combined_sCountry': combined_sCountry,
+                        'errorPPolicy': errorPPolicy,
+                        'errorUPolicy': errorUPolicy,
+                    }
+                    return render(request, 'aionApp/register.html', context)
             else:
                 errorPassword = True
-                return render(request, 'aionApp/register.html', {'errorPassword': errorPassword})
+                context = {
+                    'getBCountry': getBCountry,
+                    'getBCode': getBCode,
+                    'combined_bCountry': combined_bCountry,
+                    'getSCountry': getSCountry,
+                    'getSCode': getSCode,
+                    'combined_sCountry': combined_sCountry,
+                    'errorPPolicy': errorPPolicy,
+                    'errorUPolicy': errorUPolicy,
+                    'errorPassword': errorPassword,
+                }
+                return render(request, 'aionApp/register.html', context)
         else:
             errorUsername = True
-            return render(request, 'aionApp/register.html', {'errorUsername': errorUsername})
+            context = {
+                'getBCountry': getBCountry,
+                'getBCode': getBCode,
+                'combined_bCountry': combined_bCountry,
+                'getSCountry': getSCountry,
+                'getSCode': getSCode,
+                'combined_sCountry': combined_sCountry,
+                'errorPPolicy': errorPPolicy,
+                'errorUPolicy': errorUPolicy,
+                'errorPassword': errorPassword,
+                'errorUsername': errorUsername,
+            }
+            return render(request, 'aionApp/register.html', context)
     
     
 def addAdmin(request):
