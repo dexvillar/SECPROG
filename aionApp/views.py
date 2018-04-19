@@ -521,6 +521,25 @@ def reviewPage(request, id):
         
 def editProfilePage(request):
     currentUser = get_object_or_404(user, user_id = request.session["user"])
+    getBCountry = (name for code, name in list(countries))
+    getBCode = (code for code, name in list(countries))
+    combined_bCountry = zip(getBCountry, getBCode)
+    getSCountry = (name for code, name in list(countries))
+    getSCode = (code for code, name in list(countries))
+    combined_sCountry = zip(getSCountry, getSCode)
+    context = {
+        'currentUser': currentUser,
+        'getBCountry': getBCountry,
+        'getBCode': getBCode,
+        'combined_bCountry': combined_bCountry,
+        'getSCountry': getSCountry,
+        'getSCode': getSCode,
+        'combined_sCountry': combined_sCountry,
+    }
+    return render(request, 'aionApp/editprofile.html', context)
+
+def editingProfile(request):
+    currentUser = get_object_or_404(user, user_id = request.session["user"])
     
     addingUser=user.objects.get(user_id=currentUser.user_id)
     
@@ -548,18 +567,13 @@ def editProfilePage(request):
     addingUser.save()
     logUser=account_log(log=str(datetime.datetime.now())+" username= "+str(currentUser)+" aionApp/editprofile.html"+" Editted profile: "+ str(request.POST.get('user_name', addingUser.user_name))+" "+ str(request.POST.get('email', addingUser.email))+" = SUCCES",username=str(currentUser), location="aionApp/editprofile.html", action=" Signed up: "+ str(request.POST.get('user_name', addingUser.user_name))+" "+ str(request.POST.get('email', addingUser.email)), result="SUCCES")
     logUser.save()
-    
-    
-    userList = user.objects.all()
-    
-    currentUser = get_object_or_404(user, user_id = request.session["user"])
    
     context = {
         'currentUser': currentUser,
     }
     
     return render(request, 'aionApp/editprofile.html', context)
-    
+
 def search(request):
     if request.session["user"] > 0:
         currentUser = get_object_or_404(user, user_id=request.session["user"])

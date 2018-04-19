@@ -29,7 +29,7 @@
         
         <div id="registerContainer">
             <p id="bigMessage">EDIT PROFILE</p>
-            <form class="addProductmodal-content animate"  action="{% url 'aionApp:editProfilePage' %}"method = "post">
+            <form class="addProductmodal-content animate"  action="{% url 'aionApp:editingProfile' %}"method = "post">
                 {% csrf_token %}
                 <div id="container1">
                     <div id="info">
@@ -70,7 +70,13 @@
                         <div id="align"> <input type="text" class="inputRegister" name="bPostal" value={{currentUser.billing_add.postal_code}}> </div>
                         <br> <br>
                         <span class="fontUP">Country:</span>
-                        <div id="align"> <input type="text" class="inputRegister" name="bCountry" value={{currentUser.billing_add.country}}> </div>
+                        <div id="align"> 
+                            <select name="bCountry" class="dropDown">
+                                {% for getBCountry, getBCode in combined_bCountry %}
+                                <option value="{{getBCode}}">{{ getBCountry }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
                         <br> <br>
                     </div>
                 </div>
@@ -106,13 +112,19 @@
                         <div id="align2"> <input type="text" class="inputRegister" name="sSubdivision" value={{currentUser.shipping_add.subdivision}}> </div>
                         <br> <br>
                         <span class="fontUP">City:</span>
-                        <div id="align2"> <input type="text" class="inputRegister" name="sCity"value={{currentUser.shipping_add.city}}> </div>
+                        <div id="align2"> <input type="text" class="inputRegister" name="sCity" value={{currentUser.shipping_add.city}}> </div>
                         <br> <br>
                         <span class="fontUP">Postal Code:</span>
                         <div id="align2"> <input type="text" class="inputRegister" name="sPostal" value={{currentUser.shipping_add.postal_code}}> </div>
                         <br> <br>
                         <span class="fontUP">Country:</span>
-                        <div id="align2"> <input type="text" class="inputRegister" name="sCountry" value={{currentUser.shipping_add.country}}> </div>
+                        <div id="align2">
+                            <select name="sCountry" class="dropDown">
+                                {% for getSCountry, getSCode in combined_sCountry %}
+                                <option value="{{getSCode}}">{{ getSCountry }}</option>
+                                {% endfor %}
+                            </select>   
+                        </div>
                 </div>
                 <button id="submitButton" href="#">UPDATE</button>
             </form>
