@@ -324,7 +324,7 @@ def addAdmin(request):
                         context = {
                             'errorPPolicy': errorPPolicy,
                         }
-                        logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/adminpage.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/register.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
+                        logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/adminpage.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/adminpage.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
                         logUser.save()
                         return render(request, 'aionApp/adminpage.html', context)
                 else:
@@ -332,7 +332,7 @@ def addAdmin(request):
                     context = {
                         'errorUPolicy': errorUPolicy,
                     }
-                    logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/adminpage.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/register.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
+                    logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/adminpage.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/adminpage.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
                     logUser.save()
                     return render(request, 'aionApp/adminpage.html', context)
             else:
@@ -340,7 +340,7 @@ def addAdmin(request):
                 context = {
                     'errorPassword': errorPassword,
                 }
-                logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/adminpage.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/register.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
+                logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/adminpage.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/adminpage.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
                 logUser.save()
                 return render(request, 'aionApp/adminpage.html', context)
         else:
@@ -348,7 +348,7 @@ def addAdmin(request):
             context = {
                 'errorUsername': errorUsername,
             }
-            logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/adminpage.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/register.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
+            logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/adminpage.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/adminpage.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
             logUser.save()
             return render(request, 'aionApp/adminpage.html', context)
 
@@ -540,39 +540,97 @@ def editProfilePage(request):
 
 def editingProfile(request):
     currentUser = get_object_or_404(user, user_id = request.session["user"])
-    
     addingUser=user.objects.get(user_id=currentUser.user_id)
     
-    addingBAddress = billing_addres(house_number =request.POST.get('bHouseNum', addingUser.billing_add.house_number), street = request.POST.get('bStreet', addingUser.billing_add.street), subdivision = request.POST.get('bSubdivision', addingUser.billing_add.subdivision), city = request.POST.get('bCity', addingUser.billing_add.city), postal_code = request.POST.get('bPostal', addingUser.billing_add.postal_code), country = request.POST.get('bCountry', addingUser.billing_add.country))
+    errorUsername = False
+    errorPassword = False
+    errorUPolicy = False
+    errorPPolicy = False
+    password1 = request.POST['password1']
+    password2 = request.POST['password2']
+    username = request.POST['user_name']
+    usernameList = user.objects.values_list('user_name', flat=True)
+    usernameList = list(usernameList)
     
-    addingSAddress = shipping_addres(house_number = request.POST.get('sHouseNum', addingUser.shipping_add.house_number), street =request.POST.get('sStreet', addingUser.shipping_add.street), subdivision =request.POST.get('sSubdivision', addingUser.shipping_add.subdivision), city =request.POST.get('sCity', addingUser.shipping_add.city), postal_code = request.POST.get('sPostal', addingUser.shipping_add.postal_code), country = request.POST.get('sCountry', addingUser.shipping_add.country))
-    
-    addingBAddress.save()
-    addingSAddress.save()
-    
-    print(request.POST.get('password1', addingUser.password)==addingUser.password)
-    if request.POST.get('password1', addingUser.password)==addingUser.password:
-        encrypt_pass=addingUser.password
-    else:
-        password = request.POST['password1']
-        encrypt_pass = pbkdf2_sha256.encrypt(password, rounds=12000,salt_size=32)
-    addingUser.last_name=request.POST.get('last_name', addingUser.last_name)
-    addingUser.first_name = request.POST.get('first_name', addingUser.first_name)
-    addingUser.middle_initial = request.POST.get('middle_initial', addingUser.middle_initial)
-    addingUser.email = request.POST.get('email', addingUser.email)
-    addingUser.user_name = request.POST.get('user_name', addingUser.user_name)
-    addingUser.password=encrypt_pass
-    addingUser.billing_add=addingBAddress
-    addingUser.shipping_add=addingSAddress
-    addingUser.save()
-    logUser=account_log(log=str(datetime.datetime.now())+" username= "+str(currentUser)+" aionApp/editprofile.html"+" Editted profile: "+ str(request.POST.get('user_name', addingUser.user_name))+" "+ str(request.POST.get('email', addingUser.email))+" = SUCCES",username=str(currentUser), location="aionApp/editprofile.html", action=" Signed up: "+ str(request.POST.get('user_name', addingUser.user_name))+" "+ str(request.POST.get('email', addingUser.email)), result="SUCCES")
-    logUser.save()
-   
-    context = {
-        'currentUser': currentUser,
-    }
-    
-    return render(request, 'aionApp/editprofile.html', context)
+    for userTry in usernameList:
+        if userTry != username:
+            if password1 == password2:
+                if re.match("^(?!admin|root|system|guest|operator|super|user|test|qa)[a-z0-9_\-.]*$", username):
+                    if re.match("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[^ ]{8,}$", password1):
+                        addingBAddress = billing_addres(house_number =request.POST.get('bHouseNum', addingUser.billing_add.house_number), street = request.POST.get('bStreet', addingUser.billing_add.street), subdivision = request.POST.get('bSubdivision', addingUser.billing_add.subdivision), city = request.POST.get('bCity', addingUser.billing_add.city), postal_code = request.POST.get('bPostal', addingUser.billing_add.postal_code), country = request.POST.get('bCountry', addingUser.billing_add.country))
+
+                        addingSAddress = shipping_addres(house_number = request.POST.get('sHouseNum', addingUser.shipping_add.house_number), street =request.POST.get('sStreet', addingUser.shipping_add.street), subdivision =request.POST.get('sSubdivision', addingUser.shipping_add.subdivision), city =request.POST.get('sCity', addingUser.shipping_add.city), postal_code = request.POST.get('sPostal', addingUser.shipping_add.postal_code), country = request.POST.get('sCountry', addingUser.shipping_add.country))
+
+                        addingBAddress.save()
+                        addingSAddress.save()
+
+                        if request.POST.get('password1', addingUser.password)==addingUser.password:
+                            encrypt_pass=addingUser.password
+                        else:
+                            password = request.POST['password1']
+                            encrypt_pass = pbkdf2_sha256.encrypt(password, rounds=12000,salt_size=32)
+                        addingUser.last_name=request.POST.get('last_name', addingUser.last_name)
+                        addingUser.first_name = request.POST.get('first_name', addingUser.first_name)
+                        addingUser.middle_initial = request.POST.get('middle_initial', addingUser.middle_initial)
+                        addingUser.email = request.POST.get('email', addingUser.email)
+                        addingUser.user_name = request.POST.get('user_name', addingUser.user_name)
+                        addingUser.password=encrypt_pass
+                        addingUser.billing_add=addingBAddress
+                        addingUser.shipping_add=addingSAddress
+                        addingUser.save()
+                        logUser=account_log(log=str(datetime.datetime.now())+" username= "+str(currentUser)+" aionApp/editprofile.html"+" Editted profile: "+ str(request.POST.get('user_name', addingUser.user_name))+" "+ str(request.POST.get('email', addingUser.email))+" = SUCCES",username=str(currentUser), location="aionApp/editprofile.html", action=" Signed up: "+ str(request.POST.get('user_name', addingUser.user_name))+" "+ str(request.POST.get('email', addingUser.email)), result="SUCCES")
+                        logUser.save()
+
+                        currentUser = get_object_or_404(user, user_id = request.session["user"])
+                        getBCountry = (name for code, name in list(countries))
+                        getBCode = (code for code, name in list(countries))
+                        combined_bCountry = zip(getBCountry, getBCode)
+                        getSCountry = (name for code, name in list(countries))
+                        getSCode = (code for code, name in list(countries))
+                        combined_sCountry = zip(getSCountry, getSCode)
+                        context = {
+                            'currentUser': currentUser,
+                            'getBCountry': getBCountry,
+                            'getBCode': getBCode,
+                            'combined_bCountry': combined_bCountry,
+                            'getSCountry': getSCountry,
+                            'getSCode': getSCode,
+                            'combined_sCountry': combined_sCountry,
+                        }
+
+                        return render(request, 'aionApp/editprofile.html', context)
+                    else:
+                        errorPPolicy = True
+                        context = {
+                            'errorPPolicy': errorPPolicy,
+                        }
+                        logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/editprofile.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/editprofile.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
+                        logUser.save()
+                        return render(request, 'aionApp/editprofile.html', context)
+                else:
+                    errorUPolicy = True
+                    context = {
+                        'errorUPolicy': errorUPolicy,
+                    }
+                    logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/editprofile.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/editprofile.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
+                    logUser.save()
+                    return render(request, 'aionApp/editprofile.html', context)
+            else:
+                errorPassword = True
+                context = {
+                    'errorPassword': errorPassword,
+                }
+                logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/editprofile.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/editprofile.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
+                logUser.save()
+                return render(request, 'aionApp/editprofile.html', context)
+        else:
+            errorUsername = True
+            context = {
+                'errorUsername': errorUsername,
+            }
+            logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/editprofile.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/editprofile.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
+            logUser.save()
+            return render(request, 'aionApp/editprofile.html', context)
 
 def search(request):
     if request.session["user"] > 0:
