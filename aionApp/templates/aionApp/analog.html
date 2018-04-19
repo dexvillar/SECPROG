@@ -23,7 +23,7 @@
             {% if currentUser.role_type != "0" %}
             <form class="searchContainer" role="search" method="get" action="{% url 'aionApp:search' %}">
                 <input type="text" id="searchBar" placeholder="SEARCH AION"
-                class="form-control" name="q" value="{{ request.GET.q }}">
+                class="form-control" name="q" value="{{ request.GET.q }}" pattern="[A-Za-z0-9-\s]+">
                 <button type="submit" class="btn btn-default"><img class="searchIcon" src="{% static 'aionApp/Images/search.png' %}"></button>
             </form>
             {% endif %}
@@ -85,10 +85,10 @@
                     <div class="spacer" style="margin-bottom: 1em;"> </div>
                     <p class="addProductBigText">ADD A PRODUCT</p>
                     
-                    <p class="addProductSmallText">NAME: <input id="nameInput" type="text" name="productName"/></p>
+                    <p class="addProductSmallText">NAME: <input id="nameInput" type="text" name="productName" pattern="[A-Za-z0-9.-\s]+"/></p>
                     
                     <p class="addProductSmallText">DESCRIPTION:</p>
-                    <textarea id="descriptionInput" name="productDescription"></textarea>
+                    <textarea id="descriptionInput" name="productDescription" pattern="[A-Za-z0-9.-\s]+"></textarea>
                     <br/>
                     <br/>
                     
@@ -162,7 +162,7 @@
                             <p id="stock">Only {{watches.stock}} left!</p>
                             {% endif %}
                             <p id="quantityText">QUANTITY</p>
-                            <input id="quantity" type="number" value="1" name="productQuantity" min="1"/>
+                            <input id="quantity" type="number" value="1" name="productQuantity" min="1" max="{{watches.stock}}"/>
                             <a id="checkReviewsText">CHECK REVIEWS</a>
                             <br/>
                             <br/>

@@ -22,7 +22,7 @@
             
             <form class="searchContainer" role="search" method="get" action="{% url 'aionApp:search' %}">
                 <input type="text" id="searchBar" placeholder="SEARCH AION"
-                class="form-control" name="q" value="{{ request.GET.q }}">
+                class="form-control" name="q" value="{{ request.GET.q }}" pattern="[A-Za-z0-9-\s]+">
                 <button type="submit" class="btn btn-default"><img class="searchIcon" src="{% static 'aionApp/Images/search.png' %}"></button>
             </form>
             
