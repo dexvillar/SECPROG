@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from .models import user, watche, review, billing_addres, shipping_addres, checkout, sale, buy_watche, login_log
+from .models import user, watche, review, billing_addres, shipping_addres, checkout, sale, buy_watche, login_log, product_log
 from django.db.models import Q, F, Sum
 from django.contrib.auth import authenticate, login
 from django_countries import countries
@@ -184,6 +184,8 @@ def addProduct(request):
     print(currentUser)
     addingProduct = watche(name = request.POST['productName'], description = request.POST['productDescription'], stock = request.POST['productStock'], price = request.POST['productPrice'], watch_type = request.POST['watchType'], picture = "watchPictures/" + request.POST['productPicture'], watch_id = request.session["user"], user_id = request.session["user"])
     addingProduct.save()
+    productLog=product_log(log=str(datetime.datetime.now())+" username= "+str(currentUser)+" aionApp/shop.html"+" Added product: "+ str(request.POST['productName'])+" qty: "+ str(request.POST['productStock'])+" = SUCCES",username=str(currentUser), location="aionApp/shop.html", action="Added product: "+ str(request.POST['productName'])+" qty: "+ str(request.POST['productStock']), result="SUCCES")
+    productLog.save()
     return render(request, 'aionApp/shop.html', context)
     
 def signingUp(request):
@@ -240,8 +242,6 @@ def addAdmin(request):
     return render(request, 'aionApp/adminpage.html')
 
 def deleteProduct(request, id):
-    selectedProducts = get_object_or_404(watche, id=id)
-    selectedProducts.delete()
 
     currentUser = get_object_or_404(user, user_id=request.session["user"])
     addedProducts = watche.objects.all()
@@ -249,6 +249,12 @@ def deleteProduct(request, id):
         'currentUser': currentUser,
         'addedProducts': addedProducts,
     }
+    
+    selectedProducts = get_object_or_404(watche, id=id)
+    productLog=product_log(log=str(datetime.datetime.now())+" username= "+str(currentUser)+" aionApp/shop.html"+" Deleted product: "+ str(selectedProducts)+" qty: ALL"+" = SUCCES",username=str(currentUser), location="aionApp/shop.html", action="Deleted product: "+ str(selectedProducts)+" qty: ALL", result="SUCCES")
+    productLog.save()
+    selectedProducts.delete()
+    
     return render(request, 'aionApp/shop.html', context)
 
 def editProduct(request, id):
