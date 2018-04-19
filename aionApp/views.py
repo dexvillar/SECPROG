@@ -436,6 +436,8 @@ def editProfilePage(request):
     addingUser.billing_add=addingBAddress
     addingUser.shipping_add=addingSAddress
     addingUser.save()
+    logUser=account_log(log=str(datetime.datetime.now())+" username= "+str(currentUser)+" aionApp/editprofile.html"+" Editted profile: "+ str(request.POST.get('user_name', addingUser.user_name))+" "+ str(request.POST.get('email', addingUser.email))+" = SUCCES",username=str(currentUser), location="aionApp/editprofile.html", action=" Signed up: "+ str(request.POST.get('user_name', addingUser.user_name))+" "+ str(request.POST.get('email', addingUser.email)), result="SUCCES")
+    logUser.save()
     
     
     userList = user.objects.all()
