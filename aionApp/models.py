@@ -144,3 +144,21 @@ class product_log(models.Model):
         return self.date
     def __str__(self):
         return self.log
+
+class account_log(models.Model):
+    log= models.CharField(max_length=255, default=0)
+    time= models.DateTimeField(auto_now_add=True, blank=True)
+    date= models.DateField(auto_now_add=True, blank=True)
+    username=models.CharField(max_length=255, default=0)
+    location=models.CharField(max_length=255, default=0)
+    action=models.CharField(max_length=255, default=0)
+    result=models.CharField(max_length=255, default=0)
+    
+    
+    def get_time(self):
+        return self.time
+    def get_date(self):
+        return self.date
+    def __str__(self):
+        return self.log
+

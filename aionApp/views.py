@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from .models import user, watche, review, billing_addres, shipping_addres, checkout, sale, buy_watche, login_log, product_log
+from .models import user, watche, review, billing_addres, shipping_addres, checkout, sale, buy_watche, login_log, product_log, account_log
 from django.db.models import Q, F, Sum
 from django.contrib.auth import authenticate, login
 from django_countries import countries
@@ -191,9 +191,7 @@ def addProduct(request):
 def signingUp(request):
     errorUsername = False
     errorPassword = False
-    errorUPolicy = False
-    errorPPolicy = False
-    errorSame = False
+    errorPolicy = False
     password1 = request.POST['password1']
     password2 = request.POST['password2']
     username = request.POST['user_name']
@@ -203,41 +201,39 @@ def signingUp(request):
     for userTry in usernameList:
         if userTry != username:
             if password1 == password2:
-                if re.match("^(?!admin|root|system|guest|operator|super|user|test|qa)[a-z0-9_\-.]*$", username):
-                    if re.match("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[^ ]{8,}$", password1):
-                        if username != password1:
-                            addingBAddress = billing_addres(house_number = request.POST['bHouseNum'], street = request.POST['bStreet'], subdivision = request.POST['bSubdivision'], city = request.POST['bCity'], postal_code = request.POST['bPostal'], country = request.POST['bCountry'])
+                if re.match("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[^ ]{8,}$", password1):
 
-                            addingSAddress = shipping_addres(house_number = request.POST['sHouseNum'], street = request.POST['sStreet'], subdivision = request.POST['sSubdivision'], city = request.POST['sCity'], postal_code = request.POST['sPostal'], country = request.POST['sCountry'])
+                    addingBAddress = billing_addres(house_number = request.POST['bHouseNum'], street = request.POST['bStreet'], subdivision = request.POST['bSubdivision'], city = request.POST['bCity'], postal_code = request.POST['bPostal'], country = request.POST['bCountry'])
 
-                            addingBAddress.save()
-                            addingSAddress.save()
+                    addingSAddress = shipping_addres(house_number = request.POST['sHouseNum'], street = request.POST['sStreet'], subdivision = request.POST['sSubdivision'], city = request.POST['sCity'], postal_code = request.POST['sPostal'], country = request.POST['sCountry'])
 
-                            password = request.POST['password1']
-                            encrypt_pass = pbkdf2_sha256.encrypt(password, rounds=12000,salt_size=32)
+                    addingBAddress.save()
+                    addingSAddress.save()
 
-                            addingUser = user(last_name = request.POST['last_name'], first_name = request.POST['first_name'], middle_initial = request.POST['middle_initial'], email = request.POST['email'], user_name = request.POST['user_name'], password = encrypt_pass, billing_add=addingBAddress, shipping_add=addingSAddress )
-                            addingUser.save()
+                    password = request.POST['password1']
+                    encrypt_pass = pbkdf2_sha256.encrypt(password, rounds=12000,salt_size=32)
 
-                            return render(request, 'aionApp/home.html')
-                        
-                        else:
-                            errorSame = True
-                            return render(request, 'aionApp/register.html', {'errorSame': errorSame})   
-                    else:
-                        errorPPolicy = True
-                        return render(request, 'aionApp/register.html', {'errorPPolicy': errorPPolicy})
+                    addingUser = user(last_name = request.POST['last_name'], first_name = request.POST['first_name'], middle_initial = request.POST['middle_initial'], email = request.POST['email'], user_name = request.POST['user_name'], password = encrypt_pass, billing_add=addingBAddress, shipping_add=addingSAddress )
+                    addingUser.save()
+                    
+                    logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/register.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = SUCCES",username="guest", location="aionApp/register.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="SUCCES")
+                    logUser.save()
+                    return render(request, 'aionApp/home.html')
+                
                 else:
-                    errorUPolicy = True
-                    return render(request, 'aionApp/register.html', {'errorUPolicy': errorUPolicy})  
+                    errorPolicy = True
+                    return render(request, 'aionApp/register.html', {'errorPolicy': errorPolicy})
             else:
                 errorPassword = True
                 return render(request, 'aionApp/register.html', {'errorPassword': errorPassword})
+        
         else:
             errorUsername = True
             return render(request, 'aionApp/register.html', {'errorUsername': errorUsername})
     
+    
 def addAdmin(request):
+    currentUser = get_object_or_404(user, user_id=request.session["user"])
     addingBAddress = billing_addres.objects.first()
     addingSAddress = shipping_addres.objects.first()
     
@@ -247,6 +243,9 @@ def addAdmin(request):
     addingAdmin = user(last_name = request.POST['last_name'], first_name = request.POST['first_name'], middle_initial = request.POST['middle_initial'], email = request.POST['email'], role_type = request.POST['role_type'], user_name = request.POST['user_name'], password = encrypt_pass, billing_add=addingBAddress, shipping_add=addingSAddress)
     
     addingAdmin.save()
+    
+    logUser=account_log(log=str(datetime.datetime.now())+" username= "+str(currentUser)+ "aionApp/adminpage.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = SUCCES",username=str(currentUser), location="aionApp/adminpage.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="SUCCES")
+    logUser.save()
     return render(request, 'aionApp/adminpage.html')
 
 def deleteProduct(request, id):
