@@ -269,6 +269,8 @@ def editProduct(request, id):
     }
     addingProduct = watche(name = request.POST['productName'], description = request.POST['productDescription'], stock = request.POST['productStock'], price = request.POST['productPrice'], watch_type = request.POST['watchType'], picture = "watchPictures/" + request.POST['productPicture'], watch_id = request.session["user"], user_id = request.session["user"])
     addingProduct.save()
+    productLog=product_log(log=str(datetime.datetime.now())+" username= "+str(currentUser)+" aionApp/shop.html"+" Edited product: "+ str(request.POST['productName'])+" qty: "+str(request.POST['productStock'])+" = SUCCES",username=str(currentUser), location="aionApp/shop.html", action="Deleted product: "+ str(request.POST['productName'])+" qty: "+str(request.POST['productStock']), result="SUCCES")
+    productLog.save()
     return render(request, 'aionApp/shop.html', context)
 
 def buyProduct(request, id):
