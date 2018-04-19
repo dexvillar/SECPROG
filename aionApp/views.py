@@ -552,6 +552,13 @@ def editingProfile(request):
     usernameList = user.objects.values_list('user_name', flat=True)
     usernameList = list(usernameList)
     
+    getBCountry = (name for code, name in list(countries))
+    getBCode = (code for code, name in list(countries))
+    combined_bCountry = zip(getBCountry, getBCode)
+    getSCountry = (name for code, name in list(countries))
+    getSCode = (code for code, name in list(countries))
+    combined_sCountry = zip(getSCountry, getSCode)
+    
     for userTry in usernameList:
         if userTry != username:
             if password1 == password2:
@@ -581,13 +588,12 @@ def editingProfile(request):
                         logUser=account_log(log=str(datetime.datetime.now())+" username= "+str(currentUser)+" aionApp/editprofile.html"+" Editted profile: "+ str(request.POST.get('user_name', addingUser.user_name))+" "+ str(request.POST.get('email', addingUser.email))+" = SUCCES",username=str(currentUser), location="aionApp/editprofile.html", action=" Signed up: "+ str(request.POST.get('user_name', addingUser.user_name))+" "+ str(request.POST.get('email', addingUser.email)), result="SUCCES")
                         logUser.save()
 
-                        currentUser = get_object_or_404(user, user_id = request.session["user"])
-                        getBCountry = (name for code, name in list(countries))
-                        getBCode = (code for code, name in list(countries))
-                        combined_bCountry = zip(getBCountry, getBCode)
-                        getSCountry = (name for code, name in list(countries))
-                        getSCode = (code for code, name in list(countries))
-                        combined_sCountry = zip(getSCountry, getSCode)
+                        context = {
+                            'currentUser': currentUser,
+                        }
+                        return render(request, 'aionApp/profile.html', context)
+                    else:
+                        errorPPolicy = True
                         context = {
                             'currentUser': currentUser,
                             'getBCountry': getBCountry,
@@ -596,20 +602,21 @@ def editingProfile(request):
                             'getSCountry': getSCountry,
                             'getSCode': getSCode,
                             'combined_sCountry': combined_sCountry,
-                        }
-
-                        return render(request, 'aionApp/editprofile.html', context)
-                    else:
-                        errorPPolicy = True
-                        context = {
                             'errorPPolicy': errorPPolicy,
                         }
                         logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/editprofile.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/editprofile.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
                         logUser.save()
-                        return render(request, 'aionApp/editprofile.html', context)
+                        return render(request, 'aionApp/profile.html', context)
                 else:
                     errorUPolicy = True
                     context = {
+                        'currentUser': currentUser,
+                        'getBCountry': getBCountry,
+                        'getBCode': getBCode,
+                        'combined_bCountry': combined_bCountry,
+                        'getSCountry': getSCountry,
+                        'getSCode': getSCode,
+                        'combined_sCountry': combined_sCountry,
                         'errorUPolicy': errorUPolicy,
                     }
                     logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/editprofile.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/editprofile.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
@@ -618,6 +625,13 @@ def editingProfile(request):
             else:
                 errorPassword = True
                 context = {
+                    'currentUser': currentUser,
+                    'getBCountry': getBCountry,
+                    'getBCode': getBCode,
+                    'combined_bCountry': combined_bCountry,
+                    'getSCountry': getSCountry,
+                    'getSCode': getSCode,
+                    'combined_sCountry': combined_sCountry,
                     'errorPassword': errorPassword,
                 }
                 logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/editprofile.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/editprofile.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
@@ -626,6 +640,13 @@ def editingProfile(request):
         else:
             errorUsername = True
             context = {
+                'currentUser': currentUser,
+                'getBCountry': getBCountry,
+                'getBCode': getBCode,
+                'combined_bCountry': combined_bCountry,
+                'getSCountry': getSCountry,
+                'getSCode': getSCode,
+                'combined_sCountry': combined_sCountry,
                 'errorUsername': errorUsername,
             }
             logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/editprofile.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/editprofile.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
