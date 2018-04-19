@@ -116,7 +116,7 @@ footer {
 	font-family: "Helvetica Neue"; 
 	color: #7D7D7D;
 	font-size: 15px;
-	padding-right: 60%;
+	padding-right: 65%;
 }
 
 #align {
@@ -177,6 +177,20 @@ footer {
 	margin-top: -7%;
 }
 
+.errorInputRegister{
+    width: 70%;
+    height: 5%;
+    padding: 10px 15px;
+    background-color: #A29C97;
+    border: 1;
+    outline: none;
+	margin-top: -7%;
+    color: white;
+    font-family: "Helvetica Neue"; 
+    border-style: solid;
+    border-color: #E8453C;
+}
+
 .dropDown {
     left: -3%;
     display: inline-block;
@@ -198,4 +212,206 @@ footer {
     position: absolute;
     top: 98%;
     left: 37%;
+}
+
+#error {
+    position: relative;
+    left: 19%;
+    font-family: "Helvetica Neue";
+    font-size: 11px;
+    color: #E8453C; 
+}
+
+.aError {
+    position: relative;
+    left: 0%;
+    font-family: "Helvetica Neue";
+    font-size: 11px;
+    color: #E8453C; 
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.errorAst {
+	position: absolute;
+	left: 85.5%;
+    top: -23%;
+    font-family: "Helvetica Neue";
+    color: #E8453C; 
+    font-size: 18px;
+}
+
+#uPolicy {
+    font-family: "Helvetica Neue"; 
+	color: black;
+	font-size: 12px;
+    position: absolute;
+    top: 36%;
+    left: 41%;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#pPolicy {
+    font-family: "Helvetica Neue"; 
+	color: black;
+	font-size: 12px;
+    position: absolute;
+    top: 36%;
+    left: 61%;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.uPolicymodal-content {
+    background-color: #fefefe;
+    margin: 18% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 25%; /* Could be more or less, depending on screen size */
+}
+
+.pPolicymodal-content {
+    background-color: #fefefe;
+    margin: 15% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 25%; /* Could be more or less, depending on screen size */
+}
+
+/* Add Zoom Animation */
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+}
+    
+@keyframes animatezoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+        font-family: "Helvetica Neue";
+    }
+    .cancelbtn {
+        width: 100%;
+    }
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+}
+
+.uPolicyContainer {
+    padding: 16px;
+}
+
+/* The Close Button (x) */
+.close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.close:hover {
+    color: #4688F1;
+    cursor: pointer;
+}
+
+#pBigMessage {
+    color: black;
+    font-family: "Helvetica Neue";
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 0.5em;
+    margin-left: 1.0em;
+}
+
+#smallMessage {
+    color: black;
+    font-family: "Helvetica Neue";
+    font-size: 16px;
+    font-weight: 100;
+    position: relative;
+    margin-top: -1.0em;
+    margin-left: 1em;
+}
+
+#smallMessage1 {
+    color: black;
+    font-family: "Helvetica Neue";
+    font-size: 16px;
+    font-weight: 100;
+    position: relative;
+    margin-top: -1.0em;
+    margin-left: 1em;
+}
+
+#smallMessage2 {
+    color: black;
+    font-family: "Helvetica Neue";
+    font-size: 16px;
+    font-weight: 100;
+    position: relative;
+    margin-top: -0.5em;
+    margin-left: 2em;
+}
+
+#smallMessage3 {
+    color: black;
+    font-family: "Helvetica Neue";
+    font-size: 16px;
+    font-weight: 100;
+    position: relative;
+    margin-top: -0.5em;
+    margin-left: 2em;
+}
+
+#smallMessage4 {
+    color: black;
+    font-family: "Helvetica Neue";
+    font-size: 16px;
+    font-weight: 100;
+    position: relative;
+    margin-top: -0.5em;
+    margin-left: 2em;
+}
+
+#smallMessage5 {
+    color: black;
+    font-family: "Helvetica Neue";
+    font-size: 16px;
+    font-weight: 100;
+    position: relative;
+    margin-top: -0.5em;
+    margin-left: 2em;
 }

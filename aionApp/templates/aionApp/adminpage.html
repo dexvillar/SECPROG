@@ -20,7 +20,36 @@
                 <a href="/aionApp/exitSession/">LOG OUT</a>    
             </span>
         </div>
-
+        
+        <div id="uPolicyModal" class="modal">
+            <form class="uPolicymodal-content animate">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('uPolicyModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+                </div>
+                
+                <div class="uPolicyContainer">
+                    <p id="pBigMessage">USERNAME POLICY</p>
+                    <p id="smallMessage">• It should only contain lowercase letters (a-z).</p>
+                </div>
+            </form>
+        </div>
+        
+        <div id="pPolicyModal" class="modal">
+            <form class="pPolicymodal-content animate">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('pPolicyModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+                </div>
+                
+               <div class="pPolicyContainer" style="padding: 16px;">
+                    <p id="pBigMessage">PASSWORD POLICY</p>
+                    <p id="smallMessage1">• Password must be at least 8 characters long and contain the following options:</p>
+                    <p id="smallMessage2">• Lower case letter (a-z)</p>
+                    <p id="smallMessage3">• Upper case letter (A-Z)</p>
+                    <p id="smallMessage4">• Number (0-9)</p>
+                    <p id="smallMessage5">• Special character (!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~)</p>
+                </div>
+            </form>
+        </div>
 
         <div id="adminContainer">
             <p id="bigMessage">REGISTER AN ACCOUNT</p>
@@ -57,19 +86,113 @@
                     Account Information
                     </div>
                     <br>
+                    {% if errorUsername or errorUPolicy %}
                     <span class="fontUP">Username:</span>
-                    <div id="align"> <input type="text" class="inputRegister" name="user_name" required autocomplete="off"> </div>
+                    <div id="align"> 
+                        <input type="text" class="errorInputRegister" name="user_name" required autocomplete="off"> 
+                        {% if errorUsername or errorUPolicy %}
+                            <p class="errorAst">*</p>
+                        {% endif %}
+                    </div>
+                    <br> 
+                    {% if errorUsername %}
+                    <div id="align">
+                        <p id="error" style="top: -4.3%;">Username already exists.</p>
+                    </div>
+                    {% elif errorUPolicy %}
+                    <div id="align">
+                        <p id="error" style="top: -4%; left: 0%;">Username is too common or should follow our <a onclick="document.getElementById('uPolicyModal').style.display='block'" id="aError" style="font-weight: bold; cursor: pointer; color: #E8453C;">username policy.</a></p>
+                    </div>
+                    {% endif %}
+                    <br>
+                    {% else %}
+                    <span class="fontUP">Username:</span>
+                    <div id="align"> 
+                        <input type="text" class="inputRegister" name="user_name" required autocomplete="off"> 
+                        {% if errorUsername or errorUPolicy %}
+                            <p class="errorAst">*</p>
+                        {% endif %}
+                    </div>
                     <br> <br>
+                    {% endif %}
+                    
+                    {% if errorPassword or errorPPolicy %}
                     <span class="fontUP">Password:</span>
-                    <div id="align"><input type="password" class="inputRegister" name="password1" required> </div>
+                    <div id="align">
+                        <input type="password" class="errorInputRegister" name="password1" required> 
+                        {% if errorPassword or errorPPolicy %}
+                            <p class="errorAst">*</p>
+                        {% endif %}
+                    </div>
+                    <br>
+                    {% if errorPassword %}
+                    <div id="align">
+                        <p id="error" style="top: -18%;">Passwords do not match.</p>
+                    </div>
+                    {% elif errorPPolicy %}
+                    <div id="align">
+                        <p id="error" style="top: -4%; left: 6%;">Password should follow our <a onclick="document.getElementById('pPolicyModal').style.display='block'" class="aError">password policy.</a></p>
+                    </div>
+                    <br>
+                    {% endif %}
+                    {% else %}
+                    <span class="fontUP">Password:</span>
+                    <div id="align">
+                        <input type="password" class="inputRegister" name="password1" required> 
+                        {% if errorPassword or errorPPolicy %}
+                            <p class="errorAst">*</p>
+                        {% endif %}
+                    </div>
                     <br> <br>
+                    {% endif %}
+                    
+                    {% if errorPassword or errorPPolicy %}
                     <span class="fontUP">Confirm password:</span>
-                    <div id="align"> <input type="password" class="inputRegister" name="password2" required> </div>
+                    <div id="align"> 
+                        <input type="password" class="errorInputRegister" name="password2" required> 
+                        {% if errorPassword or errorPPolicy %}
+                            <p class="errorAst">*</p>
+                        {% endif %}
+                    </div>
+                    <br> <br>
+                    {% if errorPassword %}
+                    <div id="align">
+                        <p id="error" style="top: -18%;">Passwords do not match.</p>
+                    </div>
+                    <br>
+                    {% elif errorPPolicy %}
+                    <div id="align">
+                        <p id="error" style="top: -18%; left: 6%;">Password should follow our <a onclick="document.getElementById('pPolicyModal').style.display='block'" class="aError">password policy.</a></p>
+                    </div>
+                    <br>
+                    {% endif %}
+                    {% else %}
+                    <span class="fontUP">Confirm password:</span>
+                    <div id="align"> 
+                        <input type="password" class="inputRegister" name="password2" required> 
+                        {% if errorPassword or errorPPolicy %}
+                            <p class="errorAst">*</p>
+                        {% endif %}
+                    </div>
+                    <br> <br>
+                    {% if errorUsername != True and errorUPolicy != True%}
+                    <a id="uPolicy" onclick="document.getElementById('uPolicyModal').style.display='block'">Username Policy</a>
+                    <a id="pPolicy" onclick="document.getElementById('pPolicyModal').style.display='block'">Password Policy</a>
+                    {% endif %}
+                    {% endif %}
                     <br> <br>
                 </div>
             </div>
             <button id="submitButton" href="#">SUBMIT</button>
             </form>
+            {% if messages %}
+                {% for message in messages %}
+                    <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+                        <a class="close" data-dismiss="alert" href="#">&times;</a>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
         <footer>Copyright © 2018 Xcite Interactive. All Rights Reserved.</footer>
     </body>

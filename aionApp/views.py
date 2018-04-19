@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login
 from django_countries import countries
 from passlib.hash import pbkdf2_sha256
 import datetime, re
+from django.contrib import messages
 
 # Create your views here.
 
@@ -251,7 +252,6 @@ def signingUp(request):
                         'getSCountry': getSCountry,
                         'getSCode': getSCode,
                         'combined_sCountry': combined_sCountry,
-                        'errorPPolicy': errorPPolicy,
                         'errorUPolicy': errorUPolicy,
                     }
                     logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/register.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/register.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
@@ -266,8 +266,6 @@ def signingUp(request):
                     'getSCountry': getSCountry,
                     'getSCode': getSCode,
                     'combined_sCountry': combined_sCountry,
-                    'errorPPolicy': errorPPolicy,
-                    'errorUPolicy': errorUPolicy,
                     'errorPassword': errorPassword,
                 }
                 logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/register.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/register.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
@@ -282,9 +280,6 @@ def signingUp(request):
                 'getSCountry': getSCountry,
                 'getSCode': getSCode,
                 'combined_sCountry': combined_sCountry,
-                'errorPPolicy': errorPPolicy,
-                'errorUPolicy': errorUPolicy,
-                'errorPassword': errorPassword,
                 'errorUsername': errorUsername,
             }
             logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/register.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/register.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
@@ -297,16 +292,65 @@ def addAdmin(request):
     addingBAddress = billing_addres.objects.first()
     addingSAddress = shipping_addres.objects.first()
     
-    password = request.POST['password1']
-    encrypt_pass = pbkdf2_sha256.encrypt(password, rounds=12000,salt_size=32)
+    errorUsername = False
+    errorPassword = False
+    errorUPolicy = False
+    errorPPolicy = False
+    password1 = request.POST['password1']
+    password2 = request.POST['password2']
+    username = request.POST['user_name']
+    usernameList = user.objects.values_list('user_name', flat=True)
+    usernameList = list(usernameList)
     
-    addingAdmin = user(last_name = request.POST['last_name'], first_name = request.POST['first_name'], middle_initial = request.POST['middle_initial'], email = request.POST['email'], role_type = request.POST['role_type'], user_name = request.POST['user_name'], password = encrypt_pass, billing_add=addingBAddress, shipping_add=addingSAddress)
-    
-    addingAdmin.save()
-    
-    logUser=account_log(log=str(datetime.datetime.now())+" username= "+str(currentUser)+ "aionApp/adminpage.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = SUCCES",username=str(currentUser), location="aionApp/adminpage.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="SUCCES")
-    logUser.save()
-    return render(request, 'aionApp/adminpage.html')
+    for userTry in usernameList:
+        if userTry != username:
+            if password1 == password2:
+                if re.match("^(?!admin|root|system|guest|operator|super|user|test|qa)[a-z0-9_\-.]*$", username):
+                    if re.match("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[^ ]{8,}$", password1):
+                        password = request.POST['password1']
+                        encrypt_pass = pbkdf2_sha256.encrypt(password, rounds=12000,salt_size=32)
+
+                        addingAdmin = user(last_name = request.POST['last_name'], first_name = request.POST['first_name'], middle_initial = request.POST['middle_initial'], email = request.POST['email'], role_type = request.POST['role_type'], user_name = request.POST['user_name'], password = encrypt_pass, billing_add=addingBAddress, shipping_add=addingSAddress)
+
+                        addingAdmin.save()
+
+                        logUser=account_log(log=str(datetime.datetime.now())+" username= "+str(currentUser)+ "aionApp/adminpage.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = SUCCES",username=str(currentUser), location="aionApp/adminpage.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="SUCCES")
+                        logUser.save()
+                        messages.add_message(request, messages.INFO, 'Successfully registered an account!')
+                        return render(request, 'aionApp/adminpage.html')
+                    
+                    else:
+                        errorPPolicy = True
+                        context = {
+                            'errorPPolicy': errorPPolicy,
+                        }
+                        logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/adminpage.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/register.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
+                        logUser.save()
+                        return render(request, 'aionApp/adminpage.html', context)
+                else:
+                    errorUPolicy = True
+                    context = {
+                        'errorUPolicy': errorUPolicy,
+                    }
+                    logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/adminpage.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/register.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
+                    logUser.save()
+                    return render(request, 'aionApp/adminpage.html', context)
+            else:
+                errorPassword = True
+                context = {
+                    'errorPassword': errorPassword,
+                }
+                logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/adminpage.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/register.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
+                logUser.save()
+                return render(request, 'aionApp/adminpage.html', context)
+        else:
+            errorUsername = True
+            context = {
+                'errorUsername': errorUsername,
+            }
+            logUser=account_log(log=str(datetime.datetime.now())+" username= guest aionApp/adminpage.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = FAILED",username="guest", location="aionApp/register.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="FAILED")
+            logUser.save()
+            return render(request, 'aionApp/adminpage.html', context)
 
 def deleteProduct(request, id):
 
@@ -477,7 +521,6 @@ def reviewPage(request, id):
         
 def editProfilePage(request):
     currentUser = get_object_or_404(user, user_id = request.session["user"])
-    tempId=currentUser.user_id
     
     addingUser=user.objects.get(user_id=currentUser.user_id)
     
