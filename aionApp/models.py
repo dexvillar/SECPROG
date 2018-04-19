@@ -92,15 +92,6 @@ class checkout(models.Model):
     def __unicode__(self):
         return str(self.card_number)
     
-class sale(models.Model):
-    watch_id = models.PositiveIntegerField(default=0)
-    total_sales = models.FloatField(default=0)
-    product_type = models.FloatField(default=0)
-    product = models.FloatField(default=0)
-    
-    def __str__(self):
-        return self.product
-    
 class buy_watche(models.Model):
     watch_id = models.PositiveIntegerField(default=0)
     user_id = models.PositiveIntegerField(default=0)

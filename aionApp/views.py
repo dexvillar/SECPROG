@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from .models import user, watche, review, billing_addres, shipping_addres, checkout, sale, buy_watche, login_log, product_log, account_log
+from .models import user, watche, review, billing_addres, shipping_addres, checkout, buy_watche, login_log, product_log, account_log
 from django.db.models import Q, F, Sum
 from django.contrib.auth import authenticate, login
 from django_countries import countries
