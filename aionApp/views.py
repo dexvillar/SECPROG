@@ -421,14 +421,24 @@ def editProfilePage(request):
     addingBAddress.save()
     addingSAddress.save()
     
+    print(request.POST.get('password1', addingUser.password)==addingUser.password)
+    if request.POST.get('password1', addingUser.password)==addingUser.password:
+        encrypt_pass=addingUser.password
+    else:
+        password = request.POST['password1']
+        encrypt_pass = pbkdf2_sha256.encrypt(password, rounds=12000,salt_size=32)
     addingUser.last_name=request.POST.get('last_name', addingUser.last_name)
     addingUser.first_name = request.POST.get('first_name', addingUser.first_name)
     addingUser.middle_initial = request.POST.get('middle_initial', addingUser.middle_initial)
     addingUser.email = request.POST.get('email', addingUser.email)
     addingUser.user_name = request.POST.get('user_name', addingUser.user_name)
+    addingUser.password=encrypt_pass
     addingUser.billing_add=addingBAddress
     addingUser.shipping_add=addingSAddress
     addingUser.save()
+    
+    logUser=account_log(log=str(datetime.datetime.now())+" username= "+str(currentUser)+" aionApp/register.html"+" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email'])+" = SUCCES",username="guest", location="aionApp/register.html", action=" Signed up: "+ str(request.POST['user_name'])+" "+ str(request.POST['email']), result="SUCCES")
+    logUser.save()
     
     userList = user.objects.all()
     
