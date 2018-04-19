@@ -381,10 +381,17 @@ def buyProduct(request, id):
 def checkOutProduct(request):
     currentUser = get_object_or_404(user, user_id=request.session["user"])
     addedProducts = watche.objects.all()
+    error=True
+    
     context = {
         'currentUser': currentUser,
         'addedProducts': addedProducts,
     }
+    
+    card_number = request.POST['card_number']
+    if ccValidation(card_number):
+        return render(request, 'aionApp/checkout.html', {'error':error})
+        
     buyingProduct = checkout(card_number = request.POST['card_number'], security_number = request.POST['security_number'], month = request.POST['month'], year = request.POST['year'], watch_id = request.session["user"], user_id = request.session["user"])
     buyingProduct.save()
     
@@ -589,3 +596,21 @@ def smart(request):
         }
         return render(request, 'aionApp/smart.html', context)
         
+def ccValidation(card_number):
+    sum=0
+    temp=0
+    checksum=0
+    for i in range(16):
+        temp=card_number %10
+        card_number=card_number/10
+        if(i == 0):
+            checksum = temp
+        elif not (i % 2 == 0):
+            temp = temp * 2
+            if temp > 9:
+                temp= temp-9
+                sum=sum+temp;	
+    if checksum == sum % 9:
+        return 1
+    else:
+        return 0

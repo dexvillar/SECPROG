@@ -63,7 +63,11 @@
                         <br>
                         {% csrf_token %}
                         <span class="fontUP">Credit Card Number:</span> 
-                        <div id="align"> <input type="text" class="ccInput" id="cardNum" pattern=".{16,16}" name="card_number"> </div>
+                        <div id="align"> <input type="text" class="ccInput" id="cardNum" pattern=".{16,16}" name="card_number"> 
+                        {% if error %}
+                            <div>Invalid Credit Card Number</div>
+                        {%endif%}
+                        </div>
                         <br> <br>
                         <span class="fontUP">Security Number:</span>
                         <div id="align"> <input type="text" class="ccInput" id="securityNum" pattern=".{3,3}" name="security_number"> </div>
